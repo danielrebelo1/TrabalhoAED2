@@ -6,7 +6,8 @@
 #define UNTITLED_AIRLINE_H
 
 #include <iostream>
-#include <string>
+#include <unordered_set>
+
 
 class Airline {
 private:
@@ -24,8 +25,25 @@ public:
     std::string getName() const;
     std::string getCallSign() const;
     std::string getCountry() const;
-    bool operator==(const Airline &airline)const;
 };
+
+struct HashF {
+    int operator()(const Airline &otherAirline) const {
+        std::string code = otherAirline.getCode();
+        int res = 0;
+        for (int i = 0; i < code.size(); i++) {
+            res = res * 23 + code[i];
+        }
+        return res;
+    }
+
+    bool operator()(const Airline &a1, const Airline &a2) const {
+        return a1.getCode() == a2.getCode();
+    }
+};
+
+typedef std::unordered_set<Airline, HashF, HashF> tabHAirline;
+
 
 
 #endif //UNTITLED_AIRLINE_H

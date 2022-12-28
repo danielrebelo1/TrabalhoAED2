@@ -38,6 +38,4 @@ std::string Airline::getCountry() const{
     return this->country;
 }
 
-bool Airline::operator==(const Airline &airline)const{
-    return code == airline.getCode();
-}
+

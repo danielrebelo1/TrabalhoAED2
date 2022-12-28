@@ -7,8 +7,9 @@ using namespace std;
 
 
 
-FileReader::FileReader(istream &airportFile) {
+FileReader::FileReader(istream &airportFile, istream &airlineFile) {}
 
+tabHAirport FileReader::readAirportsFile(istream &airportFile){
     airportFile.ignore(numeric_limits<streamsize>::max(), '\n');
     while(airportFile.good()){
 
@@ -30,11 +31,35 @@ FileReader::FileReader(istream &airportFile) {
                 longitude = stod(lineVector[5]);
 
         Airport airport = Airport(code, name, city, country, latitude, longitude);
-
-
-
+        airports.insert(airport);
     }
 
-
+    return airports;
 }
+
+tabHAirline FileReader::readAirlinesFile(istream &airlinesFile){
+    airlinesFile.ignore(numeric_limits<streamsize>::max(), '\n');
+    while(airlinesFile.good()){
+
+        string line, data;
+        vector<string> lineVector;
+        getline(airlinesFile, line);
+
+        if(line.empty() || line == "\r") break;
+        stringstream ss(line);
+
+        while(getline(ss, data, ',')) lineVector.push_back(data);
+
+        string code = lineVector[0],
+                name = lineVector[1],
+                callSign = lineVector[2],
+                country = lineVector[3];
+
+        Airline airline = Airline(code, name, callSign, country);
+        airlines.insert(airline);
+    }
+
+    return airlines;
+}
+
 

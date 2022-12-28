@@ -62,6 +62,3 @@ void Airport::setLongitude(double longitude) {
     this->longitude = longitude;
 }
 
-bool Airport::operator==(const Airport &otherAirport) const{
-    return code == otherAirport.getCode();
-}

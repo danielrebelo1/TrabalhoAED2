@@ -16,13 +16,15 @@
 class FileReader {
 
     private:
-       std::unordered_set<Airport> airports;
+       tabHAirport airports;
+       tabHAirline airlines;
+
 
     public:
 
-        FileReader(std::istream &airportFile);
-
-        std::unordered_set<Airport> getAirports() const;
+        FileReader(std::istream &airportFile, std::istream &airlineFile);
+        tabHAirport readAirportsFile(std::istream &airportFile);
+        tabHAirline readAirlinesFile(std::istream &airlineFile);
 
 };
 

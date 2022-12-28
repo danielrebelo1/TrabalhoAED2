@@ -5,6 +5,7 @@
 #ifndef UNTITLED_AIRPORT_H
 #define UNTITLED_AIRPORT_H
 #include <iostream>
+#include <unordered_set>
 
 
 class Airport {
@@ -34,14 +35,26 @@ class Airport {
         void setLatitude(double latitude);
         void setLongitude(double longitude);
 
-        bool operator==(const Airport &otherAirport) const;
-        struct HashFunction{
-            size_t operator()(const Airport& otherAirport) const{
-
-            }
-        };
 
 };
 
+
+struct HashFunction{
+
+    int operator()(const Airport& otherAirport) const{
+        std::string code = otherAirport.getCode();
+        int res = 0;
+        for(int i = 0; i < code.size(); i++){
+            res = res * 13 + code[i];
+        }
+        return res;
+    }
+
+    bool operator()(const Airport &a1, const Airport &a2) const {
+        return a1.getCode() == a2.getCode();
+    }
+};
+
+typedef std::unordered_set<Airport, HashFunction, HashFunction> tabHAirport;
 
 #endif //UNTITLED_AIRPORT_H
