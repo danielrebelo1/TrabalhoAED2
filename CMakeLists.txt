@@ -12,4 +12,11 @@ add_executable(untitled
         Code/FileReader.cpp
         Code/FileReader.h
         Code/City.cpp
-        Code/City.h)
+        Code/City.h
+        Code/Location.h
+        Code/Location.cpp
+        Code/Graph.cpp
+        Code/Graph.h
+        Code/Flight.cpp
+        Code/Flight.h
+        )

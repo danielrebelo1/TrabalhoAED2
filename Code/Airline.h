@@ -6,6 +6,7 @@
 #define UNTITLED_AIRLINE_H
 
 #include <iostream>
+#include "Location.h"
 #include <unordered_set>
 
 
@@ -14,13 +15,16 @@ private:
     std::string code;
     std::string name;
     std::string callSign;
-    std::string country;
+    Location location;
 public:
-    Airline(std::string code, std::string name, std::string callSign, std::string country);
+    Airline(std::string code, std::string name, std::string callSign, Location location);
     void setCode(std::string code) ;
     void setName( std::string name) ;
     void setCallSign(std::string callSign) ;
     void setCountry(std::string country) ;
+    void setLocation(Location location);
+
+    Location getLocation() const;
     std::string getCode() const;
     std::string getName() const;
     std::string getCallSign() const;

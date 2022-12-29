@@ -9,6 +9,7 @@ using namespace std;
 
 FileReader::FileReader(istream &airportFile, istream &airlineFile) {}
 
+
 tabHAirport FileReader::readAirportsFile(istream &airportFile){
     airportFile.ignore(numeric_limits<streamsize>::max(), '\n');
     while(airportFile.good()){
@@ -29,8 +30,9 @@ tabHAirport FileReader::readAirportsFile(istream &airportFile){
 
         double latitude = stod(lineVector[4]),
                 longitude = stod(lineVector[5]);
+        Location location = Location(city, country);
 
-        Airport airport = Airport(code, name, city, country, latitude, longitude);
+        Airport airport = Airport(code, name, location, latitude, longitude);
         airports.insert(airport);
     }
 
@@ -55,11 +57,36 @@ tabHAirline FileReader::readAirlinesFile(istream &airlinesFile){
                 callSign = lineVector[2],
                 country = lineVector[3];
 
-        Airline airline = Airline(code, name, callSign, country);
+        Airline airline = Airline(code, name, callSign, Location(country));
         airlines.insert(airline);
     }
 
     return airlines;
 }
+
+void FileReader::readFlightFile(std::istream &flightFile, Graph &graph) {
+    flightFile.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    while(flightFile.good()){
+        string line, data;
+        vector<string> lineVector;
+        getline(flightFile, line);
+
+        if(line.empty() || line == "\r") break;
+        stringstream ss(line);
+
+        while(getline(ss, data, ',')) lineVector.push_back(data);
+
+        string sourceCode = lineVector[0], targetCode = lineVector[1], airlineCode = lineVector[2];
+
+        int posSource = graph.codeToPos[sourceCode];
+        int posDest = graph.codeToPos[targetCode];
+
+        graph.addEdge(posSource, posDest, airlineCode);
+    }
+
+
+}
+
 
 
