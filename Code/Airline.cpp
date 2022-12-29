@@ -4,11 +4,11 @@
 
 #include "Airline.h"
 
-Airline::Airline(std::string code, std::string name, std::string callSign, std::string country){
+Airline::Airline(std::string code, std::string name, std::string callSign, Location location){
     this->code = code;
     this->name = name;
     this->callSign = callSign;
-    this->country = country;
+    this->location = location;
 }
 
 void Airline::setCode(std::string code){
@@ -21,9 +21,11 @@ void Airline::setName( std::string name){
 void Airline::setCallSign(std::string callSign){
     this->callSign = callSign;
 }
-void Airline::setCountry(std::string country){
-    this->country = country;
+
+void Airline::setLocation(Location location) {
+    this->location = location;
 }
+
 
 std::string Airline::getCode() const{
     return this->code;
@@ -34,8 +36,8 @@ std::string Airline::getName() const{
 std::string Airline::getCallSign() const{
     return this->callSign;
 }
-std::string Airline::getCountry() const{
-    return this->country;
-}
 
+Location Airline::getLocation() const {
+    return this->location;
+}
 
