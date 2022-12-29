@@ -6,9 +6,9 @@
 
 int main() {
     std::ifstream airportsFile , airlinesFile , flightsFile;
-    airportsFile.open("C:\\Users\\Jaime\\Desktop\\projectAED2\\Code\\dataset\\airports.csv");
-    airlinesFile.open("C:\\Users\\Jaime\\Desktop\\projectAED2\\Code\\dataset\\airlines.csv");
-    flightsFile.open("C:\\Users\\Jaime\\Desktop\\projectAED2\\Code\\dataset\\flights.csv");
+    airportsFile.open("Code/dataset/airports.csv");
+    airlinesFile.open("Code/dataset/airlines.csv");
+    flightsFile.open("Code/dataset/flights.csv");
     FileReader fileReader = FileReader(airportsFile,airlinesFile);
     tabHAirport test = fileReader.readAirportsFile(airportsFile);
     tabHAirline test2 = fileReader.readAirlinesFile(airlinesFile);
