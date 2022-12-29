@@ -1,8 +1,0 @@
-# ninja log v5
-5	573	6939552176222653	CMakeFiles/untitled.dir/Code/main.cpp.obj	36dc10df02d7099e
-4	441	6939554245136607	build.ninja	3b4afb160ef81422
-574	782	6939552178234571	untitled.exe	119b480b1ae7e33f
-10	750	6939551776235964	CMakeFiles/untitled.dir/Code/Airline.cpp.obj	416332f154805c7e
-30	622	6939530318918213	CMakeFiles/untitled.dir/Code/City.cpp.obj	8165af4c2e7a24db
-22	754	6939551776285832	CMakeFiles/untitled.dir/Code/Airport.cpp.obj	877b3a48cc4a14ea
-32	1179	6939551780539577	CMakeFiles/untitled.dir/Code/FileReader.cpp.obj	6e976a7263c90df9
