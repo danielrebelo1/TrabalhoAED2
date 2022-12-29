@@ -8,10 +8,12 @@
 #include <unordered_set>
 #include "Airport.h"
 #include "Airline.h"
+#include "Graph.h"
 #include <limits>
 #include <vector>
 #include <sstream>
 #include <iostream>
+#include "Flight.h"
 
 class FileReader {
 
@@ -19,12 +21,11 @@ class FileReader {
        tabHAirport airports;
        tabHAirline airlines;
 
-
     public:
-
         FileReader(std::istream &airportFile, std::istream &airlineFile);
         tabHAirport readAirportsFile(std::istream &airportFile);
         tabHAirline readAirlinesFile(std::istream &airlineFile);
+        void readFlightFile(std::istream &flightFile, Graph &graph);
 
 };
 
