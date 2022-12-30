@@ -19,3 +19,12 @@ void Graph::addNode(Airport airport) {
 void Graph::addEdge(int src, int dest, std::string airlineCode) {
     nodes[src].adj.push_back(Edge{dest, posToCode[dest],airlineCode});
 }
+
+void Graph::dfs(int v){
+    nodes[v].visited = true;
+    for (auto w : nodes[v].adj){
+        if(!nodes[w].visited){
+            dfs(w);
+        }
+    }
+}
