@@ -9,6 +9,8 @@
 #include "unordered_map"
 #include <vector>
 #include <list>
+#include <cmath>
+
 
 struct Edge{
     int dest;
@@ -34,8 +36,11 @@ public:
     void addEdge(int src, int dest, std::string airlineCode = "");
     void dfs(int v);
     void addNode(Airport airport);
+    double harvesine(std::string source, std::string dest);
     std::unordered_map<std::string, int> codeToPos;
     std::unordered_map<int, std::string> posToCode;
+
+
 };
 
 

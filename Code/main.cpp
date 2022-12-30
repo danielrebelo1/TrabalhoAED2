@@ -29,9 +29,9 @@ int main() {
     }
 
     fileReader.readFlightFile(flightsFile, graph);
-
+    double testHarvesine = graph.harvesine("CDG", "LGA");
     
-
+    std::cout << testHarvesine << "\n";
     std::cout << test.size() << std::endl;
     std::cout << test2.size() << std::endl;
     return 0;
