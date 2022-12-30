@@ -20,7 +20,7 @@ void Graph::addEdge(int src, int dest, std::string airlineCode) {
     nodes[src].adj.push_back(Edge{dest, posToCode[dest],airlineCode});
 }
 
-double Graph::harvesine(string source, string dest) {
+double Graph::haversine(string source, string dest) {
     Coordinates coordinatesSource = nodes[codeToPos[source]].airport.getCoordinates();
     Coordinates coordinatesDest = nodes[codeToPos[dest]].airport.getCoordinates();
 

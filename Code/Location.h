@@ -17,9 +17,9 @@ public:
     Location(void);
     Location(std::string city, std::string country);
     Location(std::string country);
-    void setName(std::string name) ;
+    void setCity(std::string city) ;
     void setCountry(std::string country) ;
-    std::string getName() const;
+    std::string getCity() const;
     std::string getCountry() const;
     bool operator==(const Location &city) const;
 };

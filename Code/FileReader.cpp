@@ -5,9 +5,7 @@
 #include "FileReader.h"
 using namespace std;
 
-
-
-FileReader::FileReader(istream &airportFile, istream &airlineFile) {}
+FileReader::FileReader() {}
 
 
 tabHAirport FileReader::readAirportsFile(istream &airportFile){
