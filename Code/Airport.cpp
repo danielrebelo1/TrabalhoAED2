@@ -5,12 +5,11 @@
 #include "Airport.h"
 using namespace std;
 
-Airport::Airport(string code, string name, Location location, double latitude, double longitude){
+Airport::Airport(string code, string name, Location location, Coordinates coordinates){
     this->code = code;
     this->name = name;
     this->location = location;
-    this->latitude = latitude;
-    this->longitude = longitude;
+    this->coordinates = coordinates;
 }
 
 std::string Airport::getCode() const{
@@ -24,12 +23,8 @@ Location Airport::getLocation() const {
     return location;
 }
 
-double Airport::getLatitude() const{
-    return latitude;
-}
-
-double Airport::getLongitude() const{
-    return longitude;
+Coordinates Airport::getCoordinates() const {
+    return coordinates;
 }
 
 void Airport::setCode(string code){
@@ -44,11 +39,7 @@ void Airport::setLocation(Location location) {
     this->location = location;
 }
 
-void Airport::setLatitude(double latitude) {
-    this->latitude =latitude;
-}
+void Airport::setCoordinates(Coordinates coordinates) {this->coordinates = coordinates;}
 
-void Airport::setLongitude(double longitude) {
-    this->longitude = longitude;
-}
+
 

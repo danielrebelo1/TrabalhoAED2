@@ -19,4 +19,4 @@ add_executable(untitled
         Code/Graph.h
         Code/Flight.cpp
         Code/Flight.h
-        )
+        Code/Coordinates.cpp Code/Coordinates.h)

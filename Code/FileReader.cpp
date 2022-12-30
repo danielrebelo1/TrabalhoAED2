@@ -30,9 +30,11 @@ tabHAirport FileReader::readAirportsFile(istream &airportFile){
 
         double latitude = stod(lineVector[4]),
                 longitude = stod(lineVector[5]);
-        Location location = Location(city, country);
 
-        Airport airport = Airport(code, name, location, latitude, longitude);
+        Location location = Location(city, country);
+        Coordinates coordinates = Coordinates(latitude, longitude);
+
+        Airport airport = Airport(code, name, location, coordinates);
         airports.insert(airport);
     }
 

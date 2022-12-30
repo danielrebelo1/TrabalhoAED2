@@ -6,6 +6,7 @@
 #define UNTITLED_AIRPORT_H
 #include <iostream>
 #include "Location.h"
+#include "Coordinates.h"
 #include <unordered_set>
 
 
@@ -15,23 +16,20 @@ class Airport {
         std::string code;
         std::string name;
         Location location;
-        double latitude;
-        double longitude;
+        Coordinates coordinates;
 
     public:
-        Airport(std::string code, std::string name, Location location, double latitude, double longitude);
+        Airport(std::string code, std::string name, Location location, Coordinates coordinates);
 
         std::string getCode() const;
         std::string getName() const;
         Location getLocation() const;
-        double getLatitude() const;
-        double getLongitude() const;
+        Coordinates getCoordinates() const;
 
         void setCode(std::string code);
         void setName(std::string);
         void setLocation(Location location);
-        void setLatitude(double latitude);
-        void setLongitude(double longitude);
+        void setCoordinates(Coordinates coordinates);
 
 
 };
