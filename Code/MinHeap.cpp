@@ -21,9 +21,10 @@ void MinHeap::swap(int pos1, int pos2) {
 
 void MinHeap::insert(const int &key, const int &value) {
     heapElements.push_back(heapElement{key, value});
-    currentSize++;
     pos[currentSize] = key; //criamos a nossa associaçao entre a posicao no nosso array heapElements e a key no array dos nodes do grafo
     upHeap(currentSize);
+    currentSize++;
+
 }
 
 void MinHeap::decreaseKey(const int &key, const int &value) {
@@ -32,7 +33,7 @@ void MinHeap::decreaseKey(const int &key, const int &value) {
 }
 
 void MinHeap::upHeap(int pos) {
-    while(pos > 0 && heapElements[pos].value < heapElements[PARENT(pos)].value){
+    while(pos > 1 && heapElements[pos].value < heapElements[PARENT(pos)].value){
         swap(pos, PARENT(pos));
         pos = PARENT(pos);
     }
@@ -53,7 +54,10 @@ int MinHeap::removeMin() {
     if(currentSize != 0){
         int min = heapElements[0].key;
         pos.erase(min);
-        currentSize--;
+        heapElements[0] = heapElements[--currentSize];
+        heapElements.pop_back();
         downHeap(0);
+        return min;
     }
+
 }

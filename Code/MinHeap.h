@@ -4,9 +4,9 @@
 
 #ifndef UNTITLED_MINHEAP_H
 #define UNTITLED_MINHEAP_H
-#define LEFT(i) (2*(i))
-#define RIGHT(i) (2*(i)+1)
-#define PARENT(i) ((i)/2)
+#define LEFT(i) (2*(i) + 1)
+#define RIGHT(i) (2*(i)+ 2)
+#define PARENT(i) ((i - 1)/2)
 #include <vector>
 #include <unordered_map>
 #include <iostream>
@@ -16,7 +16,6 @@ class MinHeap {
     struct heapElement{
         int key; // index of the node in the graph
         int value; // distance to source norde
-        //int prev;  // index of the previous node in the graph
     };
 
     std::vector<heapElement> heapElements;

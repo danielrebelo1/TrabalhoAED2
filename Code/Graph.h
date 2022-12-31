@@ -11,7 +11,7 @@
 #include <vector>
 #include <list>
 #include <cmath>
-#define INF (INT16_MIN/2)
+#define INF (INT16_MAX/2)
 
 struct Edge{
     int dest;

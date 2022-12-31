@@ -28,7 +28,7 @@ void Manager::init() {
         index++;
     }
     fileReader.readFlightFile(flightsFile, graph);
-
+    graph.dijkstra(2);
 }
 
 tabHAirport Manager::getAirports(){
