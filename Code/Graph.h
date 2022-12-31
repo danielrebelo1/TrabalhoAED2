@@ -46,6 +46,7 @@ public:
     std::unordered_map<std::string, int> codeToPos;
     std::unordered_map<int, std::string> posToCode;
     int getWeight(int src, Edge edge);
+    std::string getMaxConnections();
 
 };
 

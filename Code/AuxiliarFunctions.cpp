@@ -3,8 +3,6 @@
 //
 
 #include "AuxiliarFunctions.h"
-#include <string>
-#include <limits>
 
 using namespace std;
 
@@ -22,4 +20,14 @@ string searchEngine(){
     getline(std::cin , search);
     tolowerString(search);
     return search;
+}
+
+// template <typename T>
+
+bool inVector(vector<string> v, string elem) {
+
+    for (size_t i = 0; i < v.size(); i++){
+        if (elem == v[i]) return true;
+    }
+    return false;
 }

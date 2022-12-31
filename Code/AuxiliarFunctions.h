@@ -6,9 +6,14 @@
 #define UNTITLED_AUXILIARFUNCTIONS_H
 
 #include <iostream>
-
+#include <string>
+#include <limits>
+#include <vector>
 
 std::string searchEngine();
+
+// template <typename T>
+bool inVector(std::vector<std::string> v, std::string elem);
 
 
 

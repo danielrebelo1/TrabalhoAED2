@@ -11,9 +11,9 @@ Manager::Manager() {}
 void Manager::init() {
     std::ifstream airportsFile , airlinesFile , flightsFile;
 
-    airportsFile.open("Code/dataset/airportsTest.csv");
-    airlinesFile.open("Code/dataset/airlinesTest.csv");
-    flightsFile.open("Code/dataset/flightsTest.csv");
+    airportsFile.open("Code/dataset/airports.csv");
+    airlinesFile.open("Code/dataset/airlines.csv");
+    flightsFile.open("Code/dataset/flights.csv");
     FileReader fileReader;
 
     airports = fileReader.readAirportsFile(airportsFile);
@@ -64,6 +64,11 @@ tabHAirline Manager::airlines_filter_by_country(std::string country){
         }
     }
     return airlinesCountry;
+}
+
+string Manager::airportWithMostConnections(){
+    tabHAirport airportMC;
+    return graph.getMaxConnections();
 }
 
 tabHAirline Manager::getAirlines(){

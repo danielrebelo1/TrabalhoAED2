@@ -3,6 +3,7 @@
 //
 
 #include "Graph.h"
+#include "AuxiliarFunctions.h"
 using namespace std;
 
 Graph::Graph() {}
@@ -96,4 +97,23 @@ list<Node> Graph::dijkstraPathNodes(int a, int b) {
         path.push_front(nodes[v]);
     }
     return path;
+}
+
+string Graph::getMaxConnections(){
+    int c = 0 , temp;
+    string code = "";
+    for ( Node node : nodes) {
+        vector<string> airportCodes;
+        for (Edge e: node.adj) {
+            if (!inVector(airportCodes, e.destName)) {
+                airportCodes.push_back(e.destName);
+            }
+        }
+        if (airportCodes.size() > c) {
+            c = airportCodes.size();
+            code = node.airport.getCode();
+        }
+        temp = codeToPos[code];
+    }
+    return code;
 }
