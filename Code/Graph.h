@@ -6,11 +6,12 @@
 #define UNTITLED_GRAPH_H
 #include <iostream>
 #include "Airport.h"
+#include "MinHeap.h"
 #include "unordered_map"
 #include <vector>
 #include <list>
 #include <cmath>
-
+#define INF (INT16_MAX/2)
 
 struct Edge{
     int dest;
@@ -22,6 +23,9 @@ struct Node{
     Airport airport;
     std::list<Edge> adj;
     bool visited;
+    int dist;
+    int pred;
+    std::string airlineUsed; //airline que conecta este node ao seu predecessor no algoritmo de dijkstra
 };
 
 
@@ -37,9 +41,11 @@ public:
     void dfs(int v);
     void addNode(Airport airport);
     double haversine(std::string source, std::string dest);
+    void dijkstra(int src);
+    std::list<Node> dijkstraPathNodes(int a, int b);
     std::unordered_map<std::string, int> codeToPos;
     std::unordered_map<int, std::string> posToCode;
-
+    int getWeight(int src, Edge edge);
 
 };
 

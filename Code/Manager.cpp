@@ -4,16 +4,16 @@
 
 #include <fstream>
 #include "Manager.h"
-
+using namespace std;
 
 Manager::Manager() {}
 
 void Manager::init() {
     std::ifstream airportsFile , airlinesFile , flightsFile;
 
-    airportsFile.open("Code/dataset/airports.csv");
-    airlinesFile.open("Code/dataset/airlines.csv");
-    flightsFile.open("Code/dataset/flights.csv");
+    airportsFile.open("Code/dataset/airportsTest.csv");
+    airlinesFile.open("Code/dataset/airlinesTest.csv");
+    flightsFile.open("Code/dataset/flightsTest.csv");
     FileReader fileReader;
 
     airports = fileReader.readAirportsFile(airportsFile);
@@ -29,6 +29,7 @@ void Manager::init() {
     }
     fileReader.readFlightFile(flightsFile, graph);
 
+    list<Node> list = graph.dijkstraPathNodes(2,0);
 }
 
 tabHAirport Manager::getAirports(){
