@@ -4,7 +4,7 @@
 
 #include <fstream>
 #include "Manager.h"
-
+using namespace std;
 
 Manager::Manager() {}
 
@@ -28,7 +28,8 @@ void Manager::init() {
         index++;
     }
     fileReader.readFlightFile(flightsFile, graph);
-    graph.dijkstra(2);
+
+    list<Node> list = graph.dijkstraPathNodes(2,0);
 }
 
 tabHAirport Manager::getAirports(){

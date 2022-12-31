@@ -28,8 +28,10 @@ void MinHeap::insert(const int &key, const int &value) {
 }
 
 void MinHeap::decreaseKey(const int &key, const int &value) {
-    heapElements[pos[key]].value = value;
-    upHeap(pos[key]);
+    if(hasKey(key) && value <= heapElements[pos[key]].value){
+        heapElements[pos[key]].value = value;
+        upHeap(pos[key]);
+    }
 }
 
 void MinHeap::upHeap(int pos) {
@@ -60,4 +62,8 @@ int MinHeap::removeMin() {
         return min;
     }
 
+}
+
+bool MinHeap::hasKey(const int &k) {
+    return pos.find(k) != pos.end();
 }

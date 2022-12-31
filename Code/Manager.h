@@ -6,6 +6,7 @@
 #define UNTITLED_MANAGER_H
 
 #include "FileReader.h"
+#include <list>
 
 class Manager {
 

@@ -19,7 +19,7 @@ class MinHeap {
     };
 
     std::vector<heapElement> heapElements;
-    int currentSize;
+    int currentSize = 0;
     int maxSize;
     void swap(int pos1, int pos2);
 
@@ -32,6 +32,7 @@ class MinHeap {
         void decreaseKey(const int &key, const int &value);
         void upHeap(int pos);
         void downHeap(int pos);
+        bool hasKey(const int &key);
         std::unordered_map<int, int> pos;
 
 };

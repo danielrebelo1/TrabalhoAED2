@@ -84,3 +84,16 @@ void Graph::dijkstra(int src) {
     }
 
 }
+
+list<Node> Graph::dijkstraPathNodes(int a, int b) {
+    list<Node> path;
+    dijkstra(a);
+    if(nodes[b].dist==INF) return path;
+    path.push_front(nodes[b]);
+    int v = b;
+    while (v!=a){
+        v=nodes[v].pred;
+        path.push_front(nodes[v]);
+    }
+    return path;
+}
