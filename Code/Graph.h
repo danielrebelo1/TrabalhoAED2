@@ -41,11 +41,11 @@ public:
     void dfs(int v);
     void addNode(Airport airport);
     double haversine(std::string source, std::string dest);
-    void dijkstra(int src);
-    std::list<Node> dijkstraPathNodes(int a, int b);
+    void dijkstra(int src, int opt);
+    std::list<Node> dijkstraPathNodes(int a, int b, int opt);
     std::unordered_map<std::string, int> codeToPos;
     std::unordered_map<int, std::string> posToCode;
-    int getWeight(int src, Edge edge);
+    int getWeight(int src, Edge edge, int opt);
 
 };
 
