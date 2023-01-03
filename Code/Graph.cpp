@@ -41,8 +41,15 @@ double Graph::haversine(string source, string dest) {
     return rad * c;
 }
 
-int Graph::getWeight(int src, Edge edge) {
-    if(nodes[src].airport.getCode() != edge.airlineCode) return 1;
+int Graph::getWeight(int src, Edge edge, int opt) {
+    if(opt == 1){
+        if(nodes[src].airport.getCode() != edge.airlineCode) return 1;
+        else return 0;
+    }
+    if(opt == 2){
+        return(haversine(posToCode[src], posToCode[edge.dest]));
+    }
+
     return 0;
 
     /*A medida que vamos metendo novos criterios de pesquisa o peso pode ser diferente. Por exemplo se quisermos o caminho
@@ -52,7 +59,7 @@ int Graph::getWeight(int src, Edge edge) {
 
 }
 
-void Graph::dijkstra(int src) {
+void Graph::dijkstra(int src, int opt) {
     MinHeap q(n);
 
     for(int v = 0; v < n; v++){
@@ -70,7 +77,7 @@ void Graph::dijkstra(int src) {
         nodes[u].visited = true;
         for(Edge edge : nodes[u].adj){
             int v = edge.dest;
-            int weight = getWeight(u, edge);
+            int weight = getWeight(u, edge, opt);
             string airlineUsed = edge.airlineCode;
 
             if(!nodes[v].visited && (nodes[u].dist + weight) < nodes[v].dist){
@@ -85,9 +92,9 @@ void Graph::dijkstra(int src) {
 
 }
 
-list<Node> Graph::dijkstraPathNodes(int a, int b) {
+list<Node> Graph::dijkstraPathNodes(int a, int b, int opt) {
     list<Node> path;
-    dijkstra(a);
+    dijkstra(a , opt);
     if(nodes[b].dist==INF) return path;
     path.push_front(nodes[b]);
     int v = b;
