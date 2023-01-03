@@ -45,8 +45,12 @@ public:
     std::list<Node> dijkstraPathNodes(int a, int b, int opt);
     std::unordered_map<std::string, int> codeToPos;
     std::unordered_map<int, std::string> posToCode;
-    std::string getMaxConnections();
+    std::string getMaxConnections(int opt, std::string country = "");
     int getWeight(int src, Edge edge, int opt);
+    int getFlights(std::string &code);
+    int getNrAirlines(std::string &code);
+    int getNrDestinations(std::string &code);
+    int getNrDestinationsCountries(std::string &code);
 
 };
 

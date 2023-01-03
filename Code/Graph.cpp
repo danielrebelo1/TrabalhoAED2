@@ -2,6 +2,7 @@
 // Created by Jaime on 29/12/2022.
 //
 
+#include <set>
 #include "Graph.h"
 #include "AuxiliarFunctions.h"
 using namespace std;
@@ -106,21 +107,89 @@ list<Node> Graph::dijkstraPathNodes(int a, int b, int opt) {
     return path;
 }
 
-string Graph::getMaxConnections(){
-    int c = 0 ;
+string Graph::getMaxConnections(int opt, string loc){
+    int c = 0;
     string code = "";
-    for ( Node node : nodes) {
-        vector<string> airportCodes;
-        for (Edge e: node.adj) {
-            if (!inVector(airportCodes, e.destName)) {
-                airportCodes.push_back(e.destName);
+    if(opt == 1) {                                                   //se quisermos o aeroporto com o maior numero de destinos diferentes
+        if (loc == "") {
+            for (Node node: nodes) {
+                std::unordered_set<std::string> airportCodes;
+                for (Edge e: node.adj) {
+                    airportCodes.insert(e.destName);
+                }
+                if (airportCodes.size() > c) {
+                    c = airportCodes.size();
+                    code = node.airport.getCode();
+                }
+            }
+        } else {
+            for (Node node: nodes) {
+                std::unordered_set<std::string> airportCodes;
+                if (node.airport.getLocation().getCountry() == loc || node.airport.getLocation().getCity() == loc) {
+                    for (Edge e: node.adj) {
+                        airportCodes.insert(e.destName);
+                    }
+                    if (airportCodes.size() > c) {
+                        c = airportCodes.size();
+                        code = node.airport.getCode();
+                    }
+                }
             }
         }
-        if (airportCodes.size() > c) {
-            c = airportCodes.size();
-            code = node.airport.getCode();
+    }
+    else if(opt == 2){                                               //se quisermos o aeroporto com mais voos
+        if(loc == ""){
+            for(Node &node : nodes){
+                if(node.adj.size() > c){
+                    c = node.adj.size();
+                    code = node.airport.getCode();
+                }
+            }
         }
-        temp = codeToPos[code];
+        else{
+            for(Node node : nodes){
+                if(node.airport.getLocation().getCountry() == loc || node.airport.getLocation().getCity() == loc){ // nao sei se é a melhor approach por poderem haver paises c mesmo nome de cidades
+                    if(node.adj.size() > c){
+                        c = node.adj.size();
+                        code = node.airport.getCode();
+                    }
+                }
+            }
+        }
     }
     return code;
+}
+
+
+
+int Graph::getFlights(std::string &code){
+    int pos = codeToPos[code];
+    return (int) nodes[pos].adj.size();
+}
+
+int Graph::getNrAirlines(std::string &code){
+    int pos = codeToPos[code];
+    set<string> airlinesAirport;
+    for (Edge e : nodes[pos].adj){
+        airlinesAirport.insert(e.airlineCode);
+    }
+    return (int) airlinesAirport.size();
+}
+
+int Graph::getNrDestinations(std::string &code){
+    int pos = codeToPos[code];
+    set<string> destinations;
+    for (Edge e : nodes[pos].adj){
+        destinations.insert(e.destName);
+    }
+    return (int) destinations.size();
+}
+
+int Graph::getNrDestinationsCountries(std::string &code){
+    int pos = codeToPos[code];
+    set<string> countries;
+    for (Edge e : nodes[pos].adj){
+        countries.insert(nodes[e.dest].airport.getLocation().getCountry());
+    }
+    return (int) countries.size();
 }

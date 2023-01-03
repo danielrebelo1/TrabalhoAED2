@@ -102,6 +102,21 @@ airlineMap Manager::airlines_filter_by_country(std::string country){
     return airlinesCountry;
 }
 
-string Manager::airportWithMostConnections(){
-    return graph.getMaxConnections(); // podemos também retornar o aeroporto fazendo simplesmente airportMap[code]
+string Manager::airportWithMostConnections(int opt, string country){
+    return graph.getMaxConnections(opt, country); // podemos também retornar o aeroporto fazendo simplesmente airportMap[code]
+}
+
+int Manager::getNumberFlights(std::string &airportCode){
+    return graph.getFlights(airportCode);
+}
+
+int Manager::getNumberAirlines(std::string &airportCode){
+    return graph.getNrAirlines(airportCode);
+}
+
+int Manager::getNumberDestinations(std::string &airportCode){
+    return graph.getNrDestinations(airportCode);
+}
+int Manager::getNumberDestinationsCountries(std::string airportCode){
+    return graph.getNrDestinationsCountries(airportCode);
 }
