@@ -15,7 +15,7 @@ class MinHeap {
 
     struct heapElement{
         int key; // index of the node in the graph
-        int value; // distance to source norde
+        int value; // distance to source node
     };
 
     std::vector<heapElement> heapElements;

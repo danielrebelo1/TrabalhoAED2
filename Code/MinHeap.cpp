@@ -61,7 +61,6 @@ int MinHeap::removeMin() {
         downHeap(0);
         return min;
     }
-
 }
 
 bool MinHeap::hasKey(const int &k) {

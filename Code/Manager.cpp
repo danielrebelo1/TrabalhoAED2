@@ -33,7 +33,8 @@ void Manager::init() {
     }
     fileReader.readFlightFile(flightsFile, graph);
 
-    list<Node> list = graph.dijkstraPathNodes(2,0);
+    std::list<Node> list = graph.dijkstraPathNodes(2,4 , 1);
+    std::list<Node> list2 = graph.dijkstraPathNodes(2,4,2);
 }
 
 tabHAirport Manager::getAirports(){
