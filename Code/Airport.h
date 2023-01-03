@@ -8,6 +8,7 @@
 #include "Location.h"
 #include "Coordinates.h"
 #include <unordered_set>
+#include <unordered_map>
 
 
 class Airport {
@@ -37,8 +38,7 @@ class Airport {
 
 struct HashFunction{
 
-    int operator()(const Airport& otherAirport) const{
-        std::string code = otherAirport.getCode();
+    int operator()(const std::string &code) const{
         int res = 0;
         for(int i = 0; i < code.size(); i++){
             res = res * 13 + code[i];
@@ -46,11 +46,11 @@ struct HashFunction{
         return res;
     }
 
-    bool operator()(const Airport &a1, const Airport &a2) const {
-        return a1.getCode() == a2.getCode();
+    bool operator()(const std::string &code1 , const std::string &code2) const {
+        return code1 == code2;
     }
 };
 
-typedef std::unordered_set<Airport, HashFunction, HashFunction> tabHAirport;
+typedef std::unordered_map<std::string,Airport,HashFunction> airportMap;
 
 #endif //UNTITLED_AIRPORT_H

@@ -107,7 +107,7 @@ list<Node> Graph::dijkstraPathNodes(int a, int b, int opt) {
 }
 
 string Graph::getMaxConnections(){
-    int c = 0 , temp;
+    int c = 0 ;
     string code = "";
     for ( Node node : nodes) {
         vector<string> airportCodes;

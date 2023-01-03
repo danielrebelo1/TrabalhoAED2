@@ -8,7 +8,8 @@ using namespace std;
 FileReader::FileReader() {}
 
 
-tabHAirport FileReader::readAirportsFile(istream &airportFile){
+
+airportMap FileReader::readAirportsFile(istream &airportFile){
     airportFile.ignore(numeric_limits<streamsize>::max(), '\n');
     while(airportFile.good()){
 
@@ -33,45 +34,14 @@ tabHAirport FileReader::readAirportsFile(istream &airportFile){
         Coordinates coordinates = Coordinates(latitude, longitude);
 
         Airport airport = Airport(code, name, location, coordinates);
-        airports.insert(airport);
+        airports.insert({code,airport});
     }
 
     return airports;
 }
 
-unordered_map<std::string,Airport> FileReader::readAirportsFile2(istream &airportFile){
-    airportFile.ignore(numeric_limits<streamsize>::max(), '\n');
-    while(airportFile.good()){
 
-        string line, data;
-        vector<string> lineVector;
-        getline(airportFile, line);
-
-        if(line.empty() || line == "\r") break;
-        stringstream ss(line);
-
-        while(getline(ss, data, ',')) lineVector.push_back(data);
-
-        string code = lineVector[0],
-                name = lineVector[1],
-                city = lineVector[2],
-                country = lineVector[3];
-
-        double latitude = stod(lineVector[4]),
-                longitude = stod(lineVector[5]);
-
-        Location location = Location(city, country);
-        Coordinates coordinates = Coordinates(latitude, longitude);
-
-        Airport airport = Airport(code, name, location, coordinates);
-        airports2.insert({code,airport});
-    }
-
-    return airports2;
-}
-
-
-tabHAirline FileReader::readAirlinesFile(istream &airlinesFile){
+airlineMap FileReader::readAirlinesFile(istream &airlinesFile){
     airlinesFile.ignore(numeric_limits<streamsize>::max(), '\n');
     while(airlinesFile.good()){
 
@@ -90,35 +60,11 @@ tabHAirline FileReader::readAirlinesFile(istream &airlinesFile){
                 country = lineVector[3];
 
         Airline airline = Airline(code, name, callSign, Location(country));
-        airlines.insert(airline);
+        airlines.insert({code, airline});
+
     }
 
     return airlines;
-}
-
-unordered_map<string,Airline> FileReader::readAirlinesFile2(istream &airlinesFile){
-    airlinesFile.ignore(numeric_limits<streamsize>::max(), '\n');
-    while(airlinesFile.good()){
-
-        string line, data;
-        vector<string> lineVector;
-        getline(airlinesFile, line);
-
-        if(line.empty() || line == "\r") break;
-        stringstream ss(line);
-
-        while(getline(ss, data, ',')) lineVector.push_back(data);
-
-        string code = lineVector[0],
-                name = lineVector[1],
-                callSign = lineVector[2],
-                country = lineVector[3];
-
-        Airline airline = Airline(code, name, callSign, Location(country));
-        airlineMap.insert({code,airline});
-    }
-
-    return airlineMap;
 }
 
 

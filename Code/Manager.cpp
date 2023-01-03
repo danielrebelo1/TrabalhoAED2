@@ -18,14 +18,14 @@ void Manager::init() {
     FileReader fileReader;
 
     // airports = fileReader.readAirportsFile(airportsFile);
-    airportMap = fileReader.readAirportsFile2(airportsFile);
+    airports = fileReader.readAirportsFile(airportsFile);
     // airlines = fileReader.readAirlinesFile(airlinesFile);
-    airlineMap = fileReader.readAirlinesFile2(airlinesFile);
-    int numAirports = airportMap.size();
+    airlines = fileReader.readAirlinesFile(airlinesFile);
+    int numAirports = airports.size();
     graph = Graph(numAirports, true);
     int index = 0;
 
-    for(pair<std::string,Airport> p : airportMap){
+    for(pair<std::string,Airport> p : airports){
         graph.addNode(p.second);
         graph.codeToPos[p.second.getCode()] = index;
         graph.posToCode[index] = p.second.getCode();
@@ -37,34 +37,24 @@ void Manager::init() {
     std::list<Node> list2 = graph.dijkstraPathNodes(2,4,2);
 }
 
-tabHAirport Manager::getAirports(){
+airportMap Manager::getAirports(){
     return airports;
 }
-tabHAirline Manager::getAirlines(){
+airlineMap Manager::getAirlines(){
     return airlines;
 }
 Graph Manager::getGraph(){
     return graph;
 }
 
-tabHAirport Manager::airports_filter_by_country(std::string country){
-    tabHAirport airportsCountry;
-    for (Airport airport : airports){
-        if (airport.getLocation().getCountry() == country){
-            airportsCountry.insert(airport);
-        }
-    }
-    return airportsCountry;
-}
-
-std::unordered_map<std::string,Airport> Manager::airports_filter_by_country2(std::string country){
-    std::unordered_map<string,Airport> airportsCountry;
-    auto it = airportMap.begin();
+airportMap Manager::airports_filter_by_country(std::string country){
+    airportMap airportsCountry;
+    auto it = airports.begin();
     bool noMoreFound = true;
     while (noMoreFound){
-        it = find_if(it,airportMap.end(),[&country]
+        it = find_if(it,airports.end(),[&country]
                 (auto p) {return p.second.getLocation().getCountry() == country;});
-        if (it != airportMap.end()){
+        if (it != airports.end()){
             airportsCountry.insert(*it);
             it++;
         }
@@ -75,25 +65,15 @@ std::unordered_map<std::string,Airport> Manager::airports_filter_by_country2(std
     return airportsCountry;
 }
 
-tabHAirport Manager::airports_filter_by_city(std::string city){
-    tabHAirport airportsCity;
-    for (Airport airport : airports){
-        if (airport.getLocation().getCity() == city){
-            airportsCity.insert(airport);
-        }
-    }
-    return airportsCity;
-}
 
-
-std::unordered_map<std::string,Airport> Manager::airports_filter_by_city2(std::string city){
-    std::unordered_map<std::string,Airport> airportsCity;
-    auto it = airportMap.begin();
+airportMap Manager::airports_filter_by_city(std::string city){
+    airportMap airportsCity;
+    auto it = airports.begin();
     bool noMoreFound = true;
     while (noMoreFound){
-        it = find_if(it,airportMap.end(),[&city]
+        it = find_if(it,airports.end(),[&city]
         (auto p) {return p.second.getLocation().getCity() == city;});
-        if (it != airportMap.end()){
+        if (it != airports.end()){
             airportsCity.insert(*it);
             it++;
         }
@@ -104,14 +84,14 @@ std::unordered_map<std::string,Airport> Manager::airports_filter_by_city2(std::s
     return airportsCity;
 }
 
-std::unordered_map<std::string,Airline> Manager::airlines_filter_by_country(std::string country){
-    std::unordered_map<std::string,Airline> airlinesCountry;
+airlineMap Manager::airlines_filter_by_country(std::string country){
+    airlineMap airlinesCountry;
     bool noMoreFound = true;
-    auto it = airlineMap.begin();
+    auto it = airlines.begin();
     while (noMoreFound){
-        it = find_if(it,airlineMap.end(),[&country]
+        it = find_if(it,airlines.end(),[&country]
                 (auto p) {return p.second.getLocation().getCountry() == country;});
-        if (it != airlineMap.end()){
+        if (it != airlines.end()){
             airlinesCountry.insert(*it);
             it++;
         }

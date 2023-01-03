@@ -20,18 +20,14 @@ class FileReader {
 
     private:
 
-       tabHAirport airports;
-       tabHAirline airlines;
-       std::unordered_map<std::string,Airport> airports2;
-       std::unordered_map<std::string,Airline> airlineMap;
+       airportMap airports;
+       airlineMap airlines;
 
     public:
         FileReader();
-        tabHAirport readAirportsFile(std::istream &airportFile);
-        tabHAirline readAirlinesFile(std::istream &airlineFile);
+        airportMap readAirportsFile(std::istream &airportFile);
+        airlineMap readAirlinesFile(std::istream &airlinesFile);
         void readFlightFile(std::istream &flightFile, Graph &graph);
-        std::unordered_map<std::string,Airport> readAirportsFile2(std::istream &airportFile);
-        std::unordered_map<std::string,Airline> readAirlinesFile2(std::istream &airlinesFile);
 
 };
 
