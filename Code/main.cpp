@@ -8,6 +8,7 @@
 int main() {
     Manager manager;
     manager.init();
-    std::cout << manager.airportWithMostConnections();
+    // std::cout << manager.airportWithMostConnections();
+    manager.airlines_filter_by_country("France");
     return 0;
 }

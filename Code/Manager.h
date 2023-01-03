@@ -12,6 +12,8 @@ class Manager {
 
     tabHAirport airports;
     tabHAirline airlines;
+    std::unordered_map<std::string,Airport> airportMap;
+    std::unordered_map<std::string,Airline> airlineMap;
     Graph graph;
 
 public:
@@ -21,8 +23,10 @@ public:
     tabHAirline getAirlines();
     Graph getGraph();
     tabHAirport airports_filter_by_country(std::string country);
+    std::unordered_map<std::string,Airport> airports_filter_by_country2(std::string country);
     tabHAirport airports_filter_by_city(std::string city);
-    tabHAirline airlines_filter_by_country(std::string country);
+    std::unordered_map<std::string,Airport> airports_filter_by_city2(std::string city);
+    std::unordered_map<std::string,Airline> airlines_filter_by_country(std::string country);
     std::string airportWithMostConnections();
 };
 
