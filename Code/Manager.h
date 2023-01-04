@@ -28,6 +28,7 @@ public:
     int getNumberAirlines(std::string &airportCode);
     int getNumberDestinations(std::string &airportCode);
     int getNumberDestinationsCountries(std::string airportCode);
+    std::vector<int> calculateGlobalStatsNetwork();
 };
 
 

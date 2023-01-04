@@ -120,3 +120,9 @@ int Manager::getNumberDestinations(std::string &airportCode){
 int Manager::getNumberDestinationsCountries(std::string airportCode){
     return graph.getNrDestinationsCountries(airportCode);
 }
+
+std::vector<int> Manager::calculateGlobalStatsNetwork(){
+    int nrAirports = airports.size() , nrFlights = 0 , nrAirlines = airlines.size();
+    vector<int> v;
+    return v;
+}
