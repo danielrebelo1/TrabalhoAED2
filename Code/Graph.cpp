@@ -3,6 +3,7 @@
 //
 
 #include <set>
+#include <algorithm>
 #include "Graph.h"
 #include "AuxiliarFunctions.h"
 using namespace std;
@@ -162,7 +163,7 @@ string Graph::getMaxConnections(int opt, string loc){
 
 
 
-int Graph::getFlights(std::string &code){
+int Graph::getFlightsAirport(std::string code){
     int pos = codeToPos[code];
     return (int) nodes[pos].adj.size();
 }
@@ -192,4 +193,29 @@ int Graph::getNrDestinationsCountries(std::string &code){
         countries.insert(nodes[e.dest].airport.getLocation().getCountry());
     }
     return (int) countries.size();
+}
+
+int Graph::getNrTotalFlights(){
+    int nr = 0;
+    for (Node &node : nodes){
+        nr += node.adj.size();
+    }
+    return nr;
+}
+
+int Graph::getFlightsAirline(std::string airlineCode){
+    int nr = 0;
+    for (Node &node : nodes){
+        nr += count_if(node.adj.begin(),node.adj.end(),[&airlineCode] (const Edge e) {return e.airlineCode == airlineCode;});
+    }
+    return nr;
+}
+
+int Graph::calculateAirlinesAirport(std::string airportCode){
+    set<string> aa;
+    int pos = codeToPos[airportCode];
+    for (Edge e : nodes[pos].adj){
+        aa.insert(e.airlineCode);
+    }
+    return (int)aa.size();
 }

@@ -107,7 +107,7 @@ string Manager::airportWithMostConnections(int opt, string country){
 }
 
 int Manager::getNumberFlights(std::string &airportCode){
-    return graph.getFlights(airportCode);
+    return graph.getFlightsAirport(airportCode);
 }
 
 int Manager::getNumberAirlines(std::string &airportCode){
@@ -122,7 +122,27 @@ int Manager::getNumberDestinationsCountries(std::string airportCode){
 }
 
 std::vector<int> Manager::calculateGlobalStatsNetwork(){
-    int nrAirports = airports.size() , nrFlights = 0 , nrAirlines = airlines.size();
+    int nrAirports = airports.size() , nrFlights = graph.getNrTotalFlights() , nrAirlines = airlines.size();
     vector<int> v;
+    v.push_back(nrAirports);
+    v.push_back(nrFlights);
+    v.push_back(nrAirlines);
     return v;
+}
+
+int Manager::calculateDeparturesCountry(std::string country){
+    int  nrDepartures = 0;
+    airportMap am = airports_filter_by_country(country);
+    for (auto p : am){
+        nrDepartures += graph.getFlightsAirport(p.second.getCode());
+    }
+    return nrDepartures;
+}
+
+int Manager::calculateFlightsAirline(std::string airlineCode){
+    return graph.getFlightsAirline(airlineCode);
+}
+
+int Manager::getNumberAirlinesAirport(std::string airportCode) {
+    return graph.calculateAirlinesAirport(airportCode);
 }
