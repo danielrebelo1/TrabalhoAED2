@@ -2,14 +2,16 @@
 #include <fstream>
 
 #include "Manager.h"
+#include "Menu.h"
 #include "AuxiliarFunctions.h"
 
 
 int main() {
     Manager manager;
     manager.init();
-    std::string city;
-    std::cin >> city;
-    airportMap am = manager.airports_filter_by_city(city);
+    Menu m;
+    //manager.airportWithMostConnections(1,"Portugal");
+    manager.checkAirlineExists("TAP");
+    m.menuController();
     return 0;
 }
