@@ -201,7 +201,7 @@ void Manager::airportReport(std::string airportCode) {
         cout << "The " << airport.getName() << " airport is an international airport in " << airport.getLocation().getCity() << "," << airport.getLocation().getCountry() << "." << endl;
         cout << "This airport has " << getNumberFlights(airportCode) << " flights to " << getNumberDestinations(airportCode)
         << " cities in " << getNumberDestinationsCountries(airportCode) << " countries." << endl;
-        cout << "On top of that, there exists " << getNumberAirlinesAirport(airportCode) << " airlines operating in tihs airport." << endl;
+        cout << "On top of that, there exists " << getNumberAirlinesAirport(airportCode) << " airlines operating in it." << endl;
         cout << "These are: " << endl;
         airlineMap am = airlines_filter_by_airport(airportCode);
         int x = 0;

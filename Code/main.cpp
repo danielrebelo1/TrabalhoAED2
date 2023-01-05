@@ -8,6 +8,8 @@
 int main() {
     Manager manager;
     manager.init();
-    manager.airports_filter_by_city("Paris");
+    std::string city;
+    std::cin >> city;
+    airportMap am = manager.airports_filter_by_city(city);
     return 0;
 }
