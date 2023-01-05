@@ -177,7 +177,7 @@ bool Manager::checkAirportExists(std::string airportCode) {
         airports.at(airportCode);
     }
     catch (exception e) {
-        cout << "No airport with such code." << endl;
+        cout << endl << "Nenhum aeroporto com esse código. Tente novamente: ";
         return false;
     }
     return true;
@@ -198,7 +198,7 @@ bool Manager::checkAirlineExists(std::string airlineCode) {
 void Manager::airportReport(std::string airportCode) {
     if (checkAirportExists(airportCode)){
         Airport airport = airports.at(airportCode);
-        cout << "The " << airport.getName() << " airport is an international airport in " << airport.getLocation().getCity() << "," << airport.getLocation().getCountry() << "." << endl;
+        cout << endl << "The " << airport.getName() << " airport is an international airport in " << airport.getLocation().getCity() << "," << airport.getLocation().getCountry() << "." << endl;
         cout << "This airport has " << getNumberFlights(airportCode) << " flights to " << getNumberDestinations(airportCode)
         << " cities in " << getNumberDestinationsCountries(airportCode) << " countries." << endl;
         cout << "On top of that, there exists " << getNumberAirlinesAirport(airportCode) << " airlines operating in tihs airport." << endl;
