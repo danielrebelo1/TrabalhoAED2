@@ -12,6 +12,7 @@
 #include <queue>
 #include <list>
 #include <cmath>
+#include <set>
 #define INF (INT16_MAX/2)
 
 struct Edge{
@@ -51,11 +52,15 @@ public:
     int getWeight(int src, Edge edge);
     int getFlightsAirport(std::string code);
     int getNrAirlines(std::string &code);
+    int getWeight(int src, Edge edge, int opt);
+    int getDeparturesAirport(std::string code);
     int getNrDestinations(std::string &code);
     int getNrDestinationsCountries(std::string &code);
     int getNrTotalFlights();
     int getFlightsAirline(std::string airlineCode);
     int calculateAirlinesAirport(std::string airportCode);
+    int getArrivalsAirport(std::string code);
+    std::set<std::string> getAirlinesAirport(std::string airportCode);
 };
 
 

@@ -2,7 +2,6 @@
 // Created by Jaime on 29/12/2022.
 //
 
-#include <set>
 #include <algorithm>
 #include "Graph.h"
 #include "AuxiliarFunctions.h"
@@ -193,18 +192,20 @@ string Graph::getMaxConnections(int opt, string loc){
     return code;
 }
 
-int Graph::getFlightsAirport(std::string code){
+
+int Graph::getDeparturesAirport(std::string code){
     int pos = codeToPos[code];
     return (int) nodes[pos].adj.size();
 }
 
-int Graph::getNrAirlines(std::string &code){
-    int pos = codeToPos[code];
-    set<string> airlinesAirport;
+
+int Graph::calculateAirlinesAirport(std::string airportCode){
+    set<string> aa;
+    int pos = codeToPos[airportCode];
     for (Edge e : nodes[pos].adj){
-        airlinesAirport.insert(e.airlineCode);
+        aa.insert(e.airlineCode);
     }
-    return (int) airlinesAirport.size();
+    return (int)aa.size();
 }
 
 int Graph::getNrDestinations(std::string &code){
@@ -241,11 +242,23 @@ int Graph::getFlightsAirline(std::string airlineCode){
     return nr;
 }
 
-int Graph::calculateAirlinesAirport(std::string airportCode){
-    set<string> aa;
-    int pos = codeToPos[airportCode];
-    for (Edge e : nodes[pos].adj){
-        aa.insert(e.airlineCode);
+
+int Graph::getArrivalsAirport(std::string code){
+    int pos = codeToPos[code] , arrivals;
+    for (Node &node : nodes){
+        arrivals += count_if(node.adj.begin(),node.adj.end(),[&pos](Edge e){ return e.dest == pos;});
     }
-    return (int)aa.size();
+    return arrivals;
+}
+
+set<string> Graph::getAirlinesAirport(std::string airportCode){
+    int pos = codeToPos[airportCode];
+    set<string> res;
+    for (Edge e : nodes[pos].adj){
+        res.insert(e.airlineCode);
+    }
+    vector<string> vec(res.begin(),res.end());
+    std::sort(vec.begin(), vec.end());
+    set<string> s(vec.begin(),vec.end());
+    return s;
 }
