@@ -5,12 +5,11 @@
 #include "FileReader.h"
 using namespace std;
 
+FileReader::FileReader() {}
 
 
-FileReader::FileReader(istream &airportFile, istream &airlineFile) {}
 
-
-tabHAirport FileReader::readAirportsFile(istream &airportFile){
+airportMap FileReader::readAirportsFile(istream &airportFile){
     airportFile.ignore(numeric_limits<streamsize>::max(), '\n');
     while(airportFile.good()){
 
@@ -30,16 +29,19 @@ tabHAirport FileReader::readAirportsFile(istream &airportFile){
 
         double latitude = stod(lineVector[4]),
                 longitude = stod(lineVector[5]);
-        Location location = Location(city, country);
 
-        Airport airport = Airport(code, name, location, latitude, longitude);
-        airports.insert(airport);
+        Location location = Location(city, country);
+        Coordinates coordinates = Coordinates(latitude, longitude);
+
+        Airport airport = Airport(code, name, location, coordinates);
+        airports.insert({code,airport});
     }
 
     return airports;
 }
 
-tabHAirline FileReader::readAirlinesFile(istream &airlinesFile){
+
+airlineMap FileReader::readAirlinesFile(istream &airlinesFile){
     airlinesFile.ignore(numeric_limits<streamsize>::max(), '\n');
     while(airlinesFile.good()){
 
@@ -58,11 +60,13 @@ tabHAirline FileReader::readAirlinesFile(istream &airlinesFile){
                 country = lineVector[3];
 
         Airline airline = Airline(code, name, callSign, Location(country));
-        airlines.insert(airline);
+        airlines.insert({code, airline});
+
     }
 
     return airlines;
 }
+
 
 void FileReader::readFlightFile(std::istream &flightFile, Graph &graph) {
     flightFile.ignore(numeric_limits<streamsize>::max(), '\n');

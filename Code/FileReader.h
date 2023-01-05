@@ -6,25 +6,27 @@
 #define UNTITLED_FILEREADER_H
 
 #include <unordered_set>
-#include "Airport.h"
-#include "Airline.h"
-#include "Graph.h"
 #include <limits>
 #include <vector>
 #include <sstream>
 #include <iostream>
+
+#include "Airline.h"
+#include "Graph.h"
 #include "Flight.h"
+#include "Airport.h"
 
 class FileReader {
 
     private:
-       tabHAirport airports;
-       tabHAirline airlines;
+
+       airportMap airports;
+       airlineMap airlines;
 
     public:
-        FileReader(std::istream &airportFile, std::istream &airlineFile);
-        tabHAirport readAirportsFile(std::istream &airportFile);
-        tabHAirline readAirlinesFile(std::istream &airlineFile);
+        FileReader();
+        airportMap readAirportsFile(std::istream &airportFile);
+        airlineMap readAirlinesFile(std::istream &airlinesFile);
         void readFlightFile(std::istream &flightFile, Graph &graph);
 
 };

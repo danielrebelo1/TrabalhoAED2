@@ -6,14 +6,14 @@
 
 Location::Location() {}
 
-Location::Location(std::string name, std::string country){
-    this->city = name;
+Location::Location(std::string city, std::string country){
+    this->city = city;
     this->country = country;
 }
 
 Location::Location(std::string country) {this->city = ""; this->country = country;}
 
-void Location::setName(std::string city) {
+void Location::setCity(std::string city) {
     this->city = city;
 }
 
@@ -21,7 +21,7 @@ void Location::setCountry(std::string country){
     this->country = country;
 }
 
-std::string Location::getName() const{
+std::string Location::getCity() const {
     return this->city;
 }
 
@@ -30,6 +30,6 @@ std::string Location::getCountry() const{
 }
 
 bool Location::operator==(const Location &location) const{
-    return city == location.getName();
+    return city == location.getCity();
 }
 
