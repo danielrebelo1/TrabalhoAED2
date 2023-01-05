@@ -31,8 +31,6 @@ class Airport {
         void setName(std::string);
         void setLocation(Location location);
         void setCoordinates(Coordinates coordinates);
-
-
 };
 
 

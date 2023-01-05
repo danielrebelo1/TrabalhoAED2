@@ -99,50 +99,83 @@ airlineMap Manager::airlines_filter_by_country(std::string country){
             noMoreFound = false;
         }
     }
+    if (airlinesCountry.empty()) { cout << "There are no airlines from the selected country;" << endl; return airlinesCountry; };
+    cout << "There are " << airlinesCountry.size() << " airlines from " << country << endl;
+    cout << "These are:" << endl;
+    int x = 0;
+    for (auto a : airlinesCountry){
+        cout << ++x << ". " << a.second.getName() << "    " << a.second.getLocation().getCity() << endl;
+    }
     return airlinesCountry;
 }
 
-string Manager::airportWithMostConnections(int opt, string country){
-    return graph.getMaxConnections(opt, country); // podemos também retornar o aeroporto fazendo simplesmente airportMap[code]
+void Manager::airportWithMostConnections(int opt, string country){
+    string code = graph.getMaxConnections(opt, country);// podemos também retornar o aeroporto fazendo simplesmente airportMap[code]
+    cout << "The airport with the most connections is " << airports.at(code).getName() << " from " << airports.at(code).getLocation().getCity() << "," << airports.at(code).getLocation().getCountry() << "." << endl;
 }
 
-int Manager::getNumberFlights(std::string &airportCode){
-    return graph.getFlightsAirport(airportCode);
+void Manager::getNumberFlights(std::string &airportCode){
+    cout << "This airport has " << graph.getFlightsAirport(airportCode) << " flights";
+    return;
 }
 
-int Manager::getNumberAirlines(std::string &airportCode){
-    return graph.getNrAirlines(airportCode);
+void Manager::getNumberAirlines(std::string &airportCode){
+    cout << "There are " << graph.getNrAirlines(airportCode) << " airlines operating on this airport";
+    return;
 }
 
-int Manager::getNumberDestinations(std::string &airportCode){
-    return graph.getNrDestinations(airportCode);
+void Manager::getNumberDestinations(std::string &airportCode){
+    cout << airports.at(airportCode).getName() << " has connections to " << graph.getNrDestinations(airportCode) << " cities";
 }
-int Manager::getNumberDestinationsCountries(std::string airportCode){
-    return graph.getNrDestinationsCountries(airportCode);
+void Manager::getNumberDestinationsCountries(std::string airportCode){
+    cout  << airports.at(airportCode).getName() << " has connections to " << graph.getNrDestinationsCountries(airportCode) << " countries";
 }
 
-std::vector<int> Manager::calculateGlobalStatsNetwork(){
+void Manager::calculateGlobalStatsNetwork(){
     int nrAirports = airports.size() , nrFlights = graph.getNrTotalFlights() , nrAirlines = airlines.size();
-    vector<int> v;
-    v.push_back(nrAirports);
-    v.push_back(nrFlights);
-    v.push_back(nrAirlines);
-    return v;
+    cout << "This network consists of " << nrAirports << " airports , " << nrAirlines << " airlines and " << nrFlights  << " flights." << endl;
+    return;
 }
 
-int Manager::calculateDeparturesCountry(std::string country){
-    int  nrDepartures = 0;
+void Manager::calculateDeparturesCountry(std::string country){
+    int nrDepartures = 0;
     airportMap am = airports_filter_by_country(country);
+    if (am.empty()) {cout << "No airports in that country" << endl;}
     for (auto p : am){
         nrDepartures += graph.getFlightsAirport(p.second.getCode());
     }
-    return nrDepartures;
+    cout << "Number of departures in " << country << ": " << nrDepartures;
+    return;
 }
 
-int Manager::calculateFlightsAirline(std::string airlineCode){
-    return graph.getFlightsAirline(airlineCode);
+void Manager::calculateFlightsAirline(std::string airlineCode){
+    cout << "This airline has " << graph.getFlightsAirline(airlineCode) << " flights";
+    return;
 }
 
-int Manager::getNumberAirlinesAirport(std::string airportCode) {
-    return graph.calculateAirlinesAirport(airportCode);
+void Manager::getNumberAirlinesAirport(std::string airportCode) {
+    cout << "This airline operates in " << graph.calculateAirlinesAirport(airportCode) << " airports";
+    return;
+}
+
+bool Manager::checkAirportExists(std::string airportCode) {
+    try {
+        airports.at(airportCode);
+    }
+    catch (exception e) {
+        cout << "No airport with such code." << endl;
+        return false;
+    }
+    return true;
+}
+
+bool Manager::checkAirlineExists(std::string airlineCode) {
+    try {
+        airlines.at(airlineCode);
+    }
+    catch (exception e) {
+        cout << "No airline with such code." << endl;
+        return false;
+    }
+    return true;
 }

@@ -8,10 +8,7 @@
 int main() {
     Manager manager;
     manager.init();
-    // std::cout << manager.airportWithMostConnections();
-    // airlineMap a = manager.airlines_filter_by_country("France");
-    // std::cout << manager.getAirports().size() << "    " << manager.getAirlines().size() << "  " << a.size() << std::endl;
-    //std::string x = manager.airportWithMostConnections(1,"Italy");
-    std::cout << manager.getNumberDestinationsCountries("VIL");
+    //manager.airportWithMostConnections(1,"Portugal");
+    manager.checkAirlineExists("TAP");
     return 0;
 }

@@ -23,15 +23,17 @@ public:
     airportMap airports_filter_by_country(std::string country);
     airportMap airports_filter_by_city(std::string city);
     airlineMap airlines_filter_by_country(std::string country);
-    std::string airportWithMostConnections(int opt, std::string country);
-    int getNumberFlights(std::string &airportCode);
-    int getNumberAirlines(std::string &airportCode);
-    int getNumberDestinations(std::string &airportCode);
-    int getNumberDestinationsCountries(std::string airportCode);
-    std::vector<int> calculateGlobalStatsNetwork();
-    int calculateDeparturesCountry(std::string country);
-    int calculateFlightsAirline(std::string airlineCode);
-    int getNumberAirlinesAirport(std::string airportCode);
+    void airportWithMostConnections(int opt, std::string country);
+    void getNumberFlights(std::string &airportCode);
+    void getNumberAirlines(std::string &airportCode);
+    void getNumberDestinations(std::string &airportCode);
+    void getNumberDestinationsCountries(std::string airportCode);
+    void calculateGlobalStatsNetwork();
+    void calculateDeparturesCountry(std::string country);
+    void calculateFlightsAirline(std::string airlineCode);
+    void getNumberAirlinesAirport(std::string airportCode);
+    bool checkAirportExists(std::string airportCode);
+    bool checkAirlineExists(std::string airlineCode);
 
 };
 
