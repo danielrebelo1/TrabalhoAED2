@@ -44,15 +44,8 @@ double Graph::haversine(string source, string dest) {
     return rad * c;
 }
 
-int Graph::getWeight(int src, Edge edge, int opt) {
-    if(opt == 1){
-        if(nodes[src].airport.getCode() != edge.airlineCode) return 1;
-        else return 0;
-    }
-    if(opt == 2){
-        return(haversine(posToCode[src], posToCode[edge.dest]));
-    }
-
+int Graph::getWeight(int src, Edge edge) {
+    return(haversine(posToCode[src], posToCode[edge.dest]));
     return 0;
 
     /*A medida que vamos metendo novos criterios de pesquisa o peso pode ser diferente. Por exemplo se quisermos o caminho
@@ -62,7 +55,46 @@ int Graph::getWeight(int src, Edge edge, int opt) {
 
 }
 
-void Graph::dijkstra(int src, int opt) {
+vector<string> Graph::bfs(int start, int end) {
+    for (int v=1; v<=n; v++) nodes[v].visited = false;
+
+    vector<string> path;
+    queue<int> q; // queue of unvisited nodes
+    q.push(start);
+    nodes[start]. visited = true;
+    nodes[start].dist = 0;
+
+
+    while (!q.empty()) { // while there are still unvisited nodes
+        int u = q.front(); q.pop();
+        for (auto e : nodes[u].adj) {
+            int w = e.dest;
+            if (!nodes[w].visited) {
+                q.push(w);
+                nodes[w].visited = true;
+                nodes[w].dist = nodes[u].dist + 1;
+                nodes[w].pred = u; // set the predecessor of w to be u
+
+
+                if(w == end){
+                    int current = end;
+                    while(current != start){
+                        path.push_back(posToCode[current]);
+                        current = nodes[current].pred;
+                    }
+                    path.push_back(posToCode[start]);
+                    reverse(path.begin(), path.end());
+                    return path;
+                }
+            }
+            q.push(w);
+        }
+    }
+    return path;
+}
+
+
+void Graph::dijkstra(int src) {
     MinHeap q(n);
 
     for(int v = 0; v < n; v++){
@@ -80,7 +112,7 @@ void Graph::dijkstra(int src, int opt) {
         nodes[u].visited = true;
         for(Edge edge : nodes[u].adj){
             int v = edge.dest;
-            int weight = getWeight(u, edge, opt);
+            int weight = getWeight(u, edge);
             string airlineUsed = edge.airlineCode;
 
             if(!nodes[v].visited && (nodes[u].dist + weight) < nodes[v].dist){
@@ -95,9 +127,9 @@ void Graph::dijkstra(int src, int opt) {
 
 }
 
-list<Node> Graph::dijkstraPathNodes(int a, int b, int opt) {
+list<Node> Graph::dijkstraPathNodes(int a, int b) {
     list<Node> path;
-    dijkstra(a , opt);
+    dijkstra(a);
     if(nodes[b].dist==INF) return path;
     path.push_front(nodes[b]);
     int v = b;
@@ -160,8 +192,6 @@ string Graph::getMaxConnections(int opt, string loc){
     }
     return code;
 }
-
-
 
 int Graph::getFlightsAirport(std::string code){
     int pos = codeToPos[code];
