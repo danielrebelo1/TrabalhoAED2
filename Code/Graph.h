@@ -11,6 +11,7 @@
 #include <vector>
 #include <list>
 #include <cmath>
+#include <set>
 #define INF (INT16_MAX/2)
 
 struct Edge{
@@ -47,13 +48,14 @@ public:
     std::unordered_map<int, std::string> posToCode;
     std::string getMaxConnections(int opt, std::string country = "");
     int getWeight(int src, Edge edge, int opt);
-    int getFlightsAirport(std::string code);
-    int getNrAirlines(std::string &code);
+    int getDeparturesAirport(std::string code);
     int getNrDestinations(std::string &code);
     int getNrDestinationsCountries(std::string &code);
     int getNrTotalFlights();
     int getFlightsAirline(std::string airlineCode);
     int calculateAirlinesAirport(std::string airportCode);
+    int getArrivalsAirport(std::string code);
+    std::set<std::string> getAirlinesAirport(std::string airportCode);
 };
 
 

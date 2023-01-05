@@ -8,7 +8,6 @@
 int main() {
     Manager manager;
     manager.init();
-    //manager.airportWithMostConnections(1,"Portugal");
-    manager.checkAirlineExists("TAP");
+    manager.airports_filter_by_city("Paris");
     return 0;
 }
