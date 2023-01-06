@@ -180,7 +180,7 @@ bool Manager::checkAirportExists(std::string airportCode) {
         airports.at(airportCode);
     }
     catch (exception e) {
-        cout << "No airport with such code." << endl;
+        cout << endl << "Nenhum aeroporto com esse código. Tente novamente: ";
         return false;
     }
     return true;

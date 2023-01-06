@@ -7,6 +7,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include "Manager.h"
 
 class Menu {
 public:
@@ -15,11 +16,11 @@ public:
     int AboutUsMenu();
     int flightMenu();
     int findChoiceMenu();
-    std::string findByCode();
-    std::string findbyCity();
+    std::string findByCode(Manager& manager);
+    void findbyCity(Manager& manager);
     int infoChoiceMenu();
     int nrFlights();
-    void menuController();
+    void menuController(Manager& manager);
 };
 
 

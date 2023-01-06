@@ -12,103 +12,102 @@ int Menu::auxMenu(int maxOption, int minOption){
     do{
         cin >> op;
         if( op > maxOption || op < minOption)
-            cout << "\nNúmero inválido. Introduza um valor válido: ";
+            cout << "\nInvalid number. Insert a valid number: ";
     } while(op > maxOption || op < minOption);
     return op;
 }
 
 int Menu::mainMenu() {
     cout << "\n";
-    cout << "MENU PRINCIPAL\n\n";
-    cout << "1.Consultar rota" << '\n' << "2.Consultar informações" << '\n' << "3.Sobre nós" << '\n' << "0.Sair" << "\n\n";
-    cout << "Escolha opção: ";
+    cout << "MAIN MENU\n\n";
+    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.About us" << '\n' << "0.Quit" << "\n\n";
+    cout << "Choose an option: ";
     return auxMenu(7, 0);
 }
 
 int Menu::AboutUsMenu(){
-    cout << "\nPlataforma de ajuda ao uso de transportes aéreos criada em prol da disciplina de Algoritmos e Estrutura de Dados\n" << endl;
+    cout << "\nHelp platform for the use of air transports created in favor of the Algorithms and Data Structure course\n" << endl;
     cout << "Meet the team: \n";
-    cout << left << setw(16) <<  "Carlos Daniel Rebelo\t" << "Número estudante: " << setw(9) << "202108885\n";
-    cout << left << setw(20)  << "Hélder Costa\t" << setw(20) << "Número estudante: " << setw(9) << "202108719\n";
-    cout << left << setw(20)  << "Jaime Fonseca\t" << setw(20) << "Número estudante: " << setw(9) << "202108789\n";
-    cout << "0.Voltar" << endl;
+    cout << left << setw(16) <<  "Carlos Daniel Rebelo\t" << "Student number: " << setw(9) << "202108885\n";
+    cout << left << setw(20)  << "Hélder Costa\t" << setw(20) << "Student number: " << setw(9) << "202108719\n";
+    cout << left << setw(20)  << "Jaime Fonseca\t" << setw(20) << "Student number: " << setw(9) << "202108789\n";
+    cout << "0.Return to main menu\n" << endl;
     return auxMenu(0,0);
 }
 
 int Menu::flightMenu(){
     string origAir, destAir;
-    cout << endl << "MENU DE AJUDA PARA SELEÇÃO DE VOOS\n" << endl;
-    cout << "Qual é o aeroporto de origem ? "; cin >> origAir; cout << endl;
+    cout << endl << "ROUTE SELECTION HELP MENU\n" << endl;
+    cout << "Flight origin: "; cin >> origAir; cout << endl;
     //find  airport ?
-    cout << "Qual é o aeroporto de destino ? "; cin >> destAir; cout << endl;
+    cout << "Flight destination: "; cin >> destAir; cout << endl;
     //find airport ?
     //correr função e adicionar print se necessário
-    cout << "1.Novo trajeto\n" << "0.Voltar\n" << endl;
-    cout << "Escolha uma opção: ";
+    cout << "1.New route\n" << "0.Return to main menu\n" << endl;
+    cout << "Choose an option: ";
     return auxMenu(1,0);
 
 }
 
 int Menu::findChoiceMenu(){
-    cout << endl << "Escolha a forma como pretende procurar pelo aeroporto:\n";
-    cout << endl << "1.Procurar por código de aeroporto\n";
-    cout << "2.Procurar por cidade\n";
-    cout << "0.Voltar";
-    cout <<endl << "Escolha uma opção: ";
+    cout << endl << "How do you want to search for the airport:\n";
+    cout << endl << "1.Search by airport code\n";
+    cout << "2.Search by city\n";
+    cout << "0.Return to main menu\n";
+    cout <<endl << "Choose an option: ";
     return auxMenu(2,0);
 
 }
 
-string Menu::findByCode(){
+string Menu::findByCode(Manager& manager){
     string airport;
-    cout << endl << "Insira o código do aeroporto: ";
+    cout << endl << "Insert airport code: ";
     cin >> airport;
+    while(!manager.checkAirportExists(airport)){
+        cin >>airport;
+    }
+    cout << endl << "Airport found!\n" << manager.getAirports().at(airport).getCode() << " - " << manager.getAirports().at(airport).getName() << endl;
+
     return airport;
 }
 
-string Menu::findbyCity(){
+void Menu::findbyCity(Manager& manager){
     string city, r;
     int i = 1;
-    Manager m;
     airportMap airports;
-    cout << "Insira a cidade pretendida:" << endl;
+    cout <<endl << "Insert the city: ";
     cin >> city;
-    airports = m.airports_filter_by_city(city);
-    cout << airports.size();
+    airports = manager.airports_filter_by_city(city);
     for (auto a: airports){
-        //r += i + ". " + a.second.getCode() + " - " + a.second.getName();
-        cout << a.second.getName() << endl;
+        r += to_string(i) + ". " + a.second.getCode() + " - " + a.second.getName() + "\n";
+        i++;
     }
-    //cout << endl << "***print dos aeroportos***\n";
-    return r ;
+    cout <<  r ;
 }
 
 int Menu::infoChoiceMenu(){
-    cout << endl << "\nEscolha a informação que pretende:";
-    cout << endl << "1.Quantos voos saem deste aeroporto\n";
-    cout<< "2.Quantas companhias aéreas diferentes têm voos a sair deste aeroporto\n";
-    cout<< "3.Quantos destinos diferentes com partida deste aeroporto\n";
-    cout<< "4.Quantos países diferentes têm voos com este aeroporto como destino\n";
-    cout<< "5.Quantos países são atingiveis usando X voos\n";
-    cout<< "6.Quantas cidades são atingiveis usando X voos\n";
-    cout<< "7.Quantos aeroportos são atingiveis usando X voos\n";
-    cout<< "8.Escolher novo aeroporto\n";
-    cout<< "0.Voltar ao menu principal\n";
-    cout << "Escolha uma opção: ";
-    return auxMenu(8,0);
+    cout << "\nChoose the desired information:";
+    cout << endl << "1.Airport Report\n";
+    cout<< "2.How many countries can you get to with X flights\n";
+    cout<< "3.How many cities can you get to with X flights\n";
+    cout<< "4.How many airports can you get to with X flights\n";
+    cout<< "5.Choose new airport\n";
+    cout<< "0.Return to main menu\n";
+    cout << "Choose an option: ";
+    return auxMenu(5,0);
 
 }
 
 int Menu::nrFlights(){
     int x;
-    cout << endl << "Escolha o número de voos pretendido: ";
+    cout << endl << "Choose the number of desired flights: ";
     cin >> x;
     return x;
 }
 
-void Menu::menuController() {
+void Menu::menuController(Manager& manager) {
     int op;
-    cout << endl << "Bem-vindo à plataforma de apoio ao uso de transportes aéreos!\n";
+    cout << endl << "Welcome to the support platform for the use of air transports!\n";
     do {
         int temp;
         op = mainMenu();
@@ -123,21 +122,21 @@ void Menu::menuController() {
 
                 case 2:{
                     int control;
-                    string airport;
+                    string str, airport;
                     do{
                         control = 1;
                         do{
                             temp2 = findChoiceMenu();
                             switch(temp2){
                                 case 1:{
-                                    airport = findByCode();
+                                    airport = findByCode(manager);
                                     temp2 = 0;
                                     break;
                                 }
 
                                 case 2:{
-                                    airport = findbyCity();
-                                    cout << airport;
+                                    findbyCity(manager);
+                                    airport = findByCode(manager);
                                     temp2 = 0;
                                     break;
                                 }
@@ -149,64 +148,43 @@ void Menu::menuController() {
                                 }
                             }
                         } while (temp2 != 0);
-                        if(control != 0) //cout << endl << airport;
+                        if(control != 0)
                         while(control != 0) {
                             temp = infoChoiceMenu();
                             switch (temp) {
                                 int x;
                                 case 1: {
-                                    cout << endl << "***voos a sair deste aeroporto***";
-                                    cout << endl << "Pressione Enter para continuar.\n";
+                                    manager.airportReport(airport);
+                                    cout << endl << "Press Enter to continue.\n";
                                     system("pause > nul");
                                     break;
                                 }
 
                                 case 2: {
-                                    cout << "\n***companhias aereas diferentes***";
-                                    cout << endl << "Pressione Enter para continuar.\n";
+                                    x = nrFlights();
+                                    cout << "\n***países atingiveis***\n";
+                                    cout << endl << "Press Enter to continue.\n";
                                     system("pause > nul");
                                     break;
                                 }
 
                                 case 3: {
-                                    cout << "\n***destinos diferentes***";
-                                    cout << endl << "Pressione Enter para continuar.\n";
+                                    x = nrFlights();
+                                    cout << "\n***cidades atingiveis***";
+                                    cout << endl << "Press Enter to continue.\n";
                                     system("pause > nul");
                                     break;
                                 }
 
                                 case 4: {
-                                    cout << "\n***países diferentes***";
-                                    cout << endl << "Pressione Enter para continuar.\n";
+                                    x = nrFlights();
+                                    cout << "\n***aeroportos atingiveis***";
+                                    cout << endl << "Press Enter to continue.\n";
                                     system("pause > nul");
                                     break;
                                 }
 
                                 case 5: {
-                                    x = nrFlights();
-                                    cout << "\n***países atingiveis***\n";
-                                    cout << endl << "Pressione Enter para continuar.\n";
-                                    system("pause > nul");
-                                    break;
-                                }
-
-                                case 6: {
-                                    x = nrFlights();
-                                    cout << "\n***cidades atingiveis***";
-                                    cout << endl << "Pressione Enter para continuar.\n";
-                                    system("pause > nul");
-                                    break;
-                                }
-
-                                case 7: {
-                                    x = nrFlights();
-                                    cout << "\n***aeroportos atingiveis***";
-                                    cout << endl << "Pressione Enter para continuar.\n";
-                                    system("pause > nul");
-                                    break;
-                                }
-
-                                case 8: {
                                     control = 0;
                                     temp = 10;
                                     break;
@@ -239,7 +217,7 @@ void Menu::menuController() {
 
     } while (op != 0);
     cout << "\n";
-    cout << "Obrigado por usar a nossa plataforma! :) " << endl;
+    cout << "Thank you for using our platform! :) " << endl;
 
 }
 

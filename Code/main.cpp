@@ -8,7 +8,6 @@
 int main() {
     Manager manager;
     manager.init();
-
     manager.cityReport("Lisbon");
     return 0;
 }
