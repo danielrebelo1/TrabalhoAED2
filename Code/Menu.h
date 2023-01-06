@@ -18,6 +18,8 @@ public:
     int findChoiceMenu();
     std::string findByCode(Manager& manager);
     std::string findbyCity(Manager& manager);
+    std::string findbyCountry(Manager& manager);
+    int typeInfoChoiceMenu();
     int infoChoiceMenu();
     int nrFlights();
     void menuController(Manager& manager);
