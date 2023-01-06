@@ -187,7 +187,7 @@ int Menu::topAirportsMenu(){
     cout << "2. Top-k airports with most airlines" << endl;
     cout << "0. Return to information menu" << endl;
     cout << "Choose an option: ";
-    return auxMenu(3,0);
+    return auxMenu(2,0);
 }
 
 int Menu::choiceK(){
@@ -283,18 +283,22 @@ void Menu::menuController(Manager& manager) {
                                                 int x = subMenu();
                                                 if(x == 1){
                                                     airport = manager.getGraph().getMaxConnections(2);
-                                                    cout << endl << airport << "-" << manager.getAirports().at(airport).getName() << "\n";
-                                                    cout << "Located in: " << manager.getAirports().at(airport).getLocation().getCity() << ", "
-                                                         << manager.getAirports().at(airport).getLocation().getCountry() << endl;
+                                                    manager.airportReport(airport);
                                                 }
                                                 else{
                                                     string loc;
                                                     cout << endl << "What is the country/city ?";
-                                                    cin >> loc;
+                                                    cin.sync();
+                                                    cin.clear();
+                                                    getline(cin, loc);
                                                     airport = manager.getGraph().getMaxConnections(2,loc);
-                                                    cout << endl << airport << "-" << manager.getAirports().at(airport).getName() << "\n";
-                                                    cout << "Located in: " << manager.getAirports().at(airport).getLocation().getCity() << ", "
-                                                         << manager.getAirports().at(airport).getLocation().getCountry() << endl;
+                                                    if(!manager.checkAirportExists(airport)){
+                                                        temp3 = 0;
+                                                        control = 0;
+                                                    }
+                                                    else
+                                                        manager.airportReport(airport);
+
                                                 }
                                                 break;
                                             }
@@ -304,18 +308,20 @@ void Menu::menuController(Manager& manager) {
                                                 int x = subMenu();
                                                 if(x == 1){
                                                     airport = manager.getGraph().getMaxConnections(1);
-                                                    cout << endl << airport << "-" << manager.getAirports().at(airport).getName() << "\n";
-                                                    cout << "Located in: " << manager.getAirports().at(airport).getLocation().getCity() << ", "
-                                                         << manager.getAirports().at(airport).getLocation().getCountry() << endl;
+                                                    manager.airportReport(airport);
                                                 }
                                                 else{
                                                     string loc;
                                                     cout << endl << "What is the country/city\n";
-                                                    cin >> loc;
+                                                    cin.sync();
+                                                    cin.clear();
+                                                    getline(cin, loc);
                                                     airport =  manager.getGraph().getMaxConnections(1,loc);
-                                                    cout << endl <<  airport << "-" << manager.getAirports().at(airport).getName() << "\n";
-                                                    cout << "Located in: " << manager.getAirports().at(airport).getLocation().getCity() << ", "
-                                                         << manager.getAirports().at(airport).getLocation().getCountry() << endl;
+                                                    if(!manager.checkAirportExists(airport)){
+                                                        temp3 = 0, control = 0;
+                                                    }
+                                                    else
+                                                        manager.airportReport(airport);
                                                 }
                                                 break;
                                             }
@@ -386,49 +392,7 @@ void Menu::menuController(Manager& manager) {
                                     }
                                     break;
                                 }
-
-                                case 3:{
-                                    cout << "Globally or in a specific country/city?\n"; //code smell em baixo quando criarmos a aux class podemos corrigir
-                                    int x = subMenu();
-                                    if(x == 1){
-                                        string res = manager.getGraph().getMaxConnections(2);
-                                        cout << res << "-" << manager.getAirports().at(res).getName() << "\n";
-                                        cout << "Located in: " << manager.getAirports().at(res).getLocation().getCity() << ", "
-                                                << manager.getAirports().at(res).getLocation().getCountry();
-                                    }
-                                    else{
-                                        string loc;
-                                        cout << "What is the country/city?\n";
-                                        cin >> loc;
-                                        string res = manager.getGraph().getMaxConnections(2,loc);
-                                        cout << res << "-" << manager.getAirports().at(res).getName() << "\n";
-                                        cout << "Located in: " << manager.getAirports().at(res).getLocation().getCity() << ", "
-                                             << manager.getAirports().at(res).getLocation().getCountry();
-                                    }
-                                    break;
-                                }
-
-                                case 4:{
-                                    cout << "Globally or in a specific country/city\n";
-                                    int x = subMenu();
-                                    if(x == 1){
-                                        string res = manager.getGraph().getMaxConnections(1);
-                                        cout << res << "-" << manager.getAirports().at(res).getName() << "\n";
-                                        cout << "Located in: " << manager.getAirports().at(res).getLocation().getCity() << ", "
-                                             << manager.getAirports().at(res).getLocation().getCountry();
-                                    }
-                                    else{
-                                        string loc;
-                                        cout << "What is your country/city\n";
-                                        cin >> loc;
-                                        string res =  manager.getGraph().getMaxConnections(1,loc);
-                                        cout << res << "-" << manager.getAirports().at(res).getName() << "\n";
-                                        cout << "Located in: " << manager.getAirports().at(res).getLocation().getCity() << ", "
-                                             << manager.getAirports().at(res).getLocation().getCountry();
-                                    }
-                                    break;
-                                }
-
+                                
                                 case 0:{
                                     control = 0;
                                     temp = 0;
