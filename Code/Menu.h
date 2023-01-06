@@ -21,6 +21,8 @@ public:
     int infoChoiceMenu();
     int nrFlights();
     void menuController(Manager& manager);
+    int topAirportsMenu();
+    int choiceK();
 };
 
 

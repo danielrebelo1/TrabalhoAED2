@@ -16,9 +16,9 @@ Manager::Manager() {}
 void Manager::init() {
     std::ifstream airportsFile , airlinesFile , flightsFile;
 
-    airportsFile.open("Code/dataset/airportsTest.csv");
-    airlinesFile.open("Code/dataset/airlinesTest.csv");
-    flightsFile.open("Code/dataset/flightsTest.csv");
+    airportsFile.open("Code/dataset/airports.csv");
+    airlinesFile.open("Code/dataset/airlines.csv");
+    flightsFile.open("Code/dataset/flights.csv");
     FileReader fileReader;
 
     // airports = fileReader.readAirportsFile(airportsFile);
@@ -140,7 +140,7 @@ int Manager::getNumberFlights(std::string airportCode){
     return getDepartures(airportCode) + getArrivals(airportCode);
 }
 
-int Manager::getNumberAirlinesAirport(std::string &airportCode){
+int Manager::getNumberAirlinesAirport(std::string airportCode){
     return graph.calculateAirlinesAirport(airportCode);
 }
 
@@ -276,4 +276,27 @@ int Manager::getConnectedComponents() {
 
 int Manager::getArticulationPoints() {
     return (int)graph.getArticulationPoints().size();
+}
+
+void Manager::printAirports(int k,int opt){
+    vector<pair<string,int>> v;
+    switch(opt){
+        case 1:
+        {
+            for (pair<string,Airport> pa : airports){
+                v.push_back(make_pair(pa.second.getCode(), getNumberAirlinesAirport(pa.second.getCode())));
+            }
+            sort(v.begin(),v.end(),[] ( pair<string,int> &p1 , pair<string,int> &p2) {return p1.second > p2.second;});
+            v.resize(k);
+            int i = 1;
+            for (auto elem : v){
+                Airport a = airports.at(elem.first);
+                cout << i++ << ". " << a.getName() << " - " << elem.second << " - " << a.getLocation().getCity() << " - " << a.getLocation().getCountry() << endl;
+            }
+            break;
+        }
+        case 2:
+            break;
+    }
+
 }

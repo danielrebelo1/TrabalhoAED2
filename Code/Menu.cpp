@@ -3,6 +3,7 @@
 //
 
 #include <map>
+#include <algorithm>
 #include "Menu.h"
 #include "Manager.h"
 
@@ -54,9 +55,10 @@ int Menu::findChoiceMenu(){
     cout << endl << "How do you want to search for the airport:\n";
     cout << endl << "1.Search by airport code\n";
     cout << "2.Search by city\n";
+    cout << "3.Top-k Airports\n";
     cout << "0.Return to main menu\n";
     cout <<endl << "Choose an option: ";
-    return auxMenu(2,0);
+    return auxMenu(3,0);
 
 }
 
@@ -82,8 +84,9 @@ string Menu::findbyCity(Manager& manager){
     if (airports.empty()) { cout << "No airport in " << city << "." ;
         return "";}
     map<int,string> m;
+    cout << "Airports in " << city << endl;
     for (auto a: airports){
-        cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << endl;
+        cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << " - " << a.second.getLocation().getCountry() << endl;
         m.insert({i,a.second.getCode()});
         i++;
     }
@@ -125,6 +128,20 @@ int Menu::nrFlights(){
     cin >> x;
     return x;
 }
+
+int Menu::topAirportsMenu(){
+    cout << "1. Top-k airports with most flights" << endl;
+    cout << "2. Top-k airports with most airlines" << endl;
+    cout << "0. Return to main menu" << endl;
+    cout << "Choose an option: ";
+    return auxMenu(3,0);
+}
+
+int Menu::choiceK(){
+    cout << "Type a value for k: ";
+    return auxMenu(3019,1);
+}
+
 
 void Menu::menuController(Manager& manager) {
     int op;
@@ -180,6 +197,16 @@ void Menu::menuController(Manager& manager) {
                                     // airport = findByCode(manager);
                                     if (airport == ""){ control = 0; temp = 0;}
                                     else {temp2 = 0;}
+                                    break;
+                                }
+
+                                case 3:{
+                                    int choice = topAirportsMenu();
+                                    switch(choice){
+                                        case 1:
+                                            int k = choiceK();
+                                            manager.printAirports(k,1);
+                                    }
                                     break;
                                 }
 
