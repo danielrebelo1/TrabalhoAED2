@@ -255,7 +255,6 @@ void Menu::menuController(Manager& manager) {
 
                                             case 2: {
                                                 airport = findbyCity(manager);
-                                                // airport = findByCode(manager);
                                                 if (airport == "") {
                                                     control = 0;
                                                     temp = 0;

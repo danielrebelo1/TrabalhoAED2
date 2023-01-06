@@ -122,6 +122,7 @@ void Graph::dijkstra(int src) {
         nodes[v].dist = INF;            //atributo final da distancia de cada node à source
         q.insert(v, INF);     //criaçao da nossa priority qeue. Valores por default no algoritmo definidos para "Infinito"
         nodes[v].visited = false;
+        nodes[v].airlineUsed = "";
     }
 
     nodes[src].dist = 0;                 //distancia do node source à source e veidentemente 0
@@ -159,6 +160,7 @@ vector<Node> Graph::dijkstraPathNodes(int a, int b) {
         path.push_back(nodes[v]);
     }
     reverse(path.begin(), path.end());
+    path[path.size() - 1].airlineUsed = "";
     return path;
 }
 
