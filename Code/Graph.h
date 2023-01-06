@@ -9,6 +9,7 @@
 #include "MinHeap.h"
 #include "unordered_map"
 #include <vector>
+#include <queue>
 #include <list>
 #include <cmath>
 #include <set>
@@ -40,13 +41,17 @@ public:
     Graph(int nodes, bool dir = false);
     void addEdge(int src, int dest, std::string airlineCode = "");
     void dfs(int v);
+    std::vector<std::string> bfs(int start, int end);
     void addNode(Airport airport);
     double haversine(std::string source, std::string dest);
-    void dijkstra(int src, int opt);
-    std::list<Node> dijkstraPathNodes(int a, int b, int opt);
+    void dijkstra(int src);
+    std::list<Node> dijkstraPathNodes(int a, int b);
     std::unordered_map<std::string, int> codeToPos;
     std::unordered_map<int, std::string> posToCode;
     std::string getMaxConnections(int opt, std::string country = "");
+    int getWeight(int src, Edge edge);
+    int getFlightsAirport(std::string code);
+    int getNrAirlines(std::string &code);
     int getWeight(int src, Edge edge, int opt);
     int getDeparturesAirport(std::string code);
     int getNrDestinations(std::string &code);
