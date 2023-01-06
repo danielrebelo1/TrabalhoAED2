@@ -6,7 +6,6 @@
 #define UNTITLED_MANAGER_H
 
 #include "FileReader.h"
-#include "AuxiliarFunctions.cpp"
 #include <list>
 #include <iomanip>
 

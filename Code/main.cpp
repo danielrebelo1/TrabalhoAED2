@@ -8,6 +8,7 @@
 int main() {
     Manager manager;
     manager.init();
-    manager.cityReport("Lisbon");
+    Menu m;
+    m.menuController(manager);
     return 0;
 }
