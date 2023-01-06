@@ -21,8 +21,6 @@ add_executable(untitled
         Code/Coordinates.h
         Code/Manager.cpp
         Code/Manager.h
-        Code/AuxiliarFunctions.cpp
-        Code/AuxiliarFunctions.h
         Code/Menu.cpp
         Code/Menu.h
         Code/MinHeap.h
