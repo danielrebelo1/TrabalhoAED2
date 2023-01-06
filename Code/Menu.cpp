@@ -2,6 +2,7 @@
 // Created by helde on 04/01/2023.
 //
 
+#include <map>
 #include "Menu.h"
 #include "Manager.h"
 
@@ -71,18 +72,38 @@ string Menu::findByCode(Manager& manager){
     return airport;
 }
 
-void Menu::findbyCity(Manager& manager){
+string Menu::findbyCity(Manager& manager){
     string city, r;
     int i = 1;
-    airportMap airports;
-    cout <<endl << "Insert the city: ";
-    cin >> city;
-    airports = manager.airports_filter_by_city(city);
+    cout << endl << "Insert the city: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, city);
+    airportMap airports = manager.airports_filter_by_city(city);
+    if (airports.empty()) { cout << "No airport in " << city << "." ;
+        return "";}
+    map<int,string> m;
     for (auto a: airports){
-        r += to_string(i) + ". " + a.second.getCode() + " - " + a.second.getName() + "\n";
+        cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << endl;
+        m.insert({i,a.second.getCode()});
         i++;
     }
-    cout <<  r ;
+    int input;
+    while (true){
+    cout << "Choose(0 to return to previous menu): ";
+    try{
+        cin >> input;
+        if (input >= 0 && input <= m.size()) break;
+    }
+    catch (exception e){ cout << "Invalid input" << endl;}
+    }
+
+    switch (input) {
+        case 0:
+            return "";
+        default:
+            return m.at(input);
+    }
+
 }
 
 int Menu::infoChoiceMenu(){
@@ -135,9 +156,10 @@ void Menu::menuController(Manager& manager) {
                                 }
 
                                 case 2:{
-                                    findbyCity(manager);
-                                    airport = findByCode(manager);
-                                    temp2 = 0;
+                                    airport = findbyCity(manager);
+                                    // airport = findByCode(manager);
+                                    if (airport == ""){ control = 0; temp = 0;}
+                                    else {temp2 = 0;}
                                     break;
                                 }
 
