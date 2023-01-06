@@ -10,6 +10,6 @@ int main() {
     manager.init();
     Menu m;
     std::cout << manager.getArticulationPoints();
-    //m.menuController(manager);
+    m.menuController(manager);
     return 0;
 }

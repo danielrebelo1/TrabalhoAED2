@@ -40,6 +40,9 @@ public:
     bool checkCityExists(std::string city);
     void airportReport(std::string airportCode);
     void cityReport(std::string city);
+    void printPath(std::vector<Node> airports );
+    void printPath(std::list<Node> airports);
+
     std::string tolowerString(std::string str);
     int getConnectedComponents();
     int getArticulationPoints();

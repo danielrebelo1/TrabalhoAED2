@@ -16,9 +16,9 @@ Manager::Manager() {}
 void Manager::init() {
     std::ifstream airportsFile , airlinesFile , flightsFile;
 
-    airportsFile.open("Code/dataset/airports.csv");
-    airlinesFile.open("Code/dataset/airlines.csv");
-    flightsFile.open("Code/dataset/flights.csv");
+    airportsFile.open("Code/dataset/airportsTest.csv");
+    airlinesFile.open("Code/dataset/airlinesTest.csv");
+    flightsFile.open("Code/dataset/flightsTest.csv");
     FileReader fileReader;
 
     // airports = fileReader.readAirportsFile(airportsFile);
@@ -37,8 +37,6 @@ void Manager::init() {
     }
     fileReader.readFlightFile(flightsFile, graph);
 
-    vector<string> list = graph.bfs(2, 4);
-    std::list<Node> list2 = graph.dijkstraPathNodes(2,4);
 }
 
 airportMap Manager::getAirports(){
@@ -149,6 +147,7 @@ int Manager::getNumberAirlinesAirport(std::string &airportCode){
 int Manager::getNumberDestinations(std::string airportCode){
     return graph.getNrDestinations(airportCode);
 }
+
 int Manager::getNumberDestinationsCountries(std::string airportCode){
     return graph.getNrDestinationsCountries(airportCode);
 }
@@ -263,6 +262,14 @@ string Manager::tolowerString(string s){
     return newstr;
 }
 
+void Manager::printPath(vector<Node> airports) {
+    for(Node node : airports){
+        cout << node.airport.getCode() << " " << node.airport.getName() << "\n";
+        if(node.airlineUsed != "")
+           cout << "Using airline: " << node.airlineUsed << "(" << airlines.at(node.airlineUsed).getName()
+                << ")" << ", you go to" << "\n";
+    }
+}
 int Manager::getConnectedComponents() {
     return graph.dfs_cc();
 }
