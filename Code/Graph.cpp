@@ -21,6 +21,28 @@ void Graph::addEdge(int src, int dest, std::string airlineCode) {
     nodes[src].adj.push_back(Edge{dest, posToCode[dest],airlineCode});
 }
 
+void Graph::dfs(int v) {
+    nodes[v].visited = true;
+    for (auto e : nodes[v].adj) {
+        int w = e.dest;
+        if (!nodes[w].visited)
+            dfs(w);
+    }
+}
+
+
+int Graph::dfs_cc(){
+    int counter = 0 , temp = 1;
+    for (Node &node : nodes) node.visited = false;
+    for (int i = 0; i < n; i++){
+        if (!nodes[i].visited){
+            dfs(i);
+            counter++;
+        }
+    }
+    return counter;
+}
+
 double Graph::haversine(string source, string dest) {
     Coordinates coordinatesSource = nodes[codeToPos[source]].airport.getCoordinates();
     Coordinates coordinatesDest = nodes[codeToPos[dest]].airport.getCoordinates();
@@ -262,4 +284,41 @@ set<string> Graph::getAirlinesAirport(std::string airportCode){
     std::sort(vec.begin(), vec.end());
     set<string> s(vec.begin(),vec.end());
     return s;
+}
+
+void Graph::dfs_articulationPoints(int i,int order,vector<int> &vec){
+    nodes[i].visited = true;
+    nodes[i].num = nodes[i].low = order++;
+    int children = 0;
+    bool articulation = false;
+    for (Edge e : nodes[i].adj) {
+        int w = e.dest;
+        if (!nodes[w].visited) {
+            children++;
+            dfs_articulationPoints(w, order, vec);
+            nodes[i].low = min(nodes[i].low, nodes[w].low);
+            if (nodes[w].low >= nodes[i].num) articulation = true;
+        }
+        else
+            nodes[i].low = min(nodes[i].low, nodes[w].num);
+    }
+
+    if ((nodes[i].num == 1 && children > 1) || (nodes[i].num > 1 && articulation))
+        vec.push_back(i);
+}
+
+vector<int> Graph::getArticulationPoints() {
+    vector<int> vec;
+    for (Node &node : nodes) {
+        node.visited = false;
+        node.low = 0;
+        node.num = 0;
+    }
+    int order = 1;
+    for (int i = 0; i < n; i++){
+        if(!nodes[i].visited){
+            dfs_articulationPoints(i,order,vec);
+        }
+    }
+    return vec;
 }

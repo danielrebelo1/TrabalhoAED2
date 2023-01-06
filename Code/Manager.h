@@ -44,6 +44,8 @@ public:
     void printPath(std::list<Node> airports);
 
     std::string tolowerString(std::string str);
+    int getConnectedComponents();
+    int getArticulationPoints();
 };
 
 

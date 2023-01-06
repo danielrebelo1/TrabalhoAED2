@@ -27,6 +27,8 @@ struct Node{
     bool visited;
     int dist;
     int pred;
+    int low;
+    int num;
     std::string airlineUsed; //airline que conecta este node ao seu predecessor no algoritmo de dijkstra
 };
 
@@ -42,6 +44,7 @@ public:
     void addEdge(int src, int dest, std::string airlineCode = "");
     void dfs(int v);
     std::vector<Node> bfs(int start, int end);
+    int dfs_cc();
     void addNode(Airport airport);
     double haversine(std::string source, std::string dest);
     void dijkstra(int src);
@@ -58,6 +61,8 @@ public:
     int calculateAirlinesAirport(std::string airportCode);
     int getArrivalsAirport(std::string code);
     std::set<std::string> getAirlinesAirport(std::string airportCode);
+    std::vector<int> getArticulationPoints();
+    void dfs_articulationPoints(int i,int order,std::vector<int> &vec);
 };
 
 
