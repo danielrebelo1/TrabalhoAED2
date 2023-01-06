@@ -6,6 +6,7 @@
 #define UNTITLED_MANAGER_H
 
 #include "FileReader.h"
+#include "AuxiliarFunctions.cpp"
 #include <list>
 #include <iomanip>
 
@@ -40,7 +41,7 @@ public:
     bool checkCityExists(std::string city);
     void airportReport(std::string airportCode);
     void cityReport(std::string city);
-
+    std::string tolowerString(std::string str);
 };
 
 

@@ -5,8 +5,11 @@
 #include <fstream>
 #include <algorithm>
 #include <set>
+#include <map>
 #include "Manager.h"
 using namespace std;
+
+
 
 Manager::Manager() {}
 
@@ -205,9 +208,18 @@ void Manager::airportReport(std::string airportCode) {
     if (checkAirportExists(airportCode)){
         Airport airport = airports.at(airportCode);
         cout << "The " << airport.getName() << " airport is an international airport in " << airport.getLocation().getCity() << "," << airport.getLocation().getCountry() << "." << endl;
-        cout << "This airport has " << getNumberFlights(airportCode) << " flights to " << getNumberDestinations(airportCode)
+        cout << "This airport has " << getNumberFlights(airportCode) << " flights , " << getDepartures(airportCode) <<" of these are departures and " <<
+        getArrivals(airportCode) << " are arrivals, to " << getNumberDestinations(airportCode)
         << " cities in " << getNumberDestinationsCountries(airportCode) << " countries." << endl;
         cout << "On top of that, there exists " << getNumberAirlinesAirport(airportCode) << " airlines operating in it." << endl;
+        cout << "Do you wish to list all airlines operating on this airport?(Y/n): ";
+        string input;
+        cin >> input;
+        while (tolowerString(input) != "n" && tolowerString(input) != "y") {
+            cout << "Enter a valid response: Y for yes or N for no (not case sensitive):  " << endl;
+            cin >> input;
+        }
+        if (tolowerString(input) == "n") return;
         cout << "These are: " << endl;
         airlineMap am = airlines_filter_by_airport(airportCode);
         int x = 0;
@@ -223,8 +235,30 @@ void Manager::cityReport(std::string city){
         airportMap am = airports_filter_by_city(city);
         cout << "The beautiful city of " << city << " in " << am.begin()->second.getLocation().getCountry() << " has " << am.size() << " airports." << endl;
         cout << "These are:" << endl;
+        map<int,string> m;
+        int x = 1;
         for (auto p : am){
-            cout << p.second.getName() << endl;
+            cout << x << ". " << p.second.getName() << endl;
+            m.insert({x,p.second.getCode()});
         }
+
+        cout << "Enter the airport number above for an airport report or enter 0 to leave this menu: ";
+        int input;
+        cin >> input;
+        while (input > m.size()) {
+            cout << "Index not valid.Try again: " << endl;
+            cin >> input;
+        }
+        if (input == 0) return;
+        airportReport(m.at(input));
     }
+
+}
+
+string Manager::tolowerString(string s){
+    string newstr;
+    for (char &c : s){
+        newstr.push_back(tolower(c));
+    }
+    return newstr;
 }

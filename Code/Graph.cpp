@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include "Graph.h"
-#include "AuxiliarFunctions.h"
 using namespace std;
 
 Graph::Graph() {}
@@ -244,7 +243,7 @@ int Graph::getFlightsAirline(std::string airlineCode){
 
 
 int Graph::getArrivalsAirport(std::string code){
-    int pos = codeToPos[code] , arrivals;
+    int pos = codeToPos[code] , arrivals = 0;
     for (Node &node : nodes){
         arrivals += count_if(node.adj.begin(),node.adj.end(),[&pos](Edge e){ return e.dest == pos;});
     }
