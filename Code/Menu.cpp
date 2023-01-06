@@ -10,11 +10,16 @@ using namespace std;
 
 int Menu::auxMenu(int maxOption, int minOption){
     int op;
-    do{
-        cin >> op;
-        if( op > maxOption || op < minOption)
-            cout << "\nInvalid number. Insert a valid number: ";
-    } while(op > maxOption || op < minOption);
+    while (true) {
+        std::cin >> op;
+        if (std::cin.fail() || (op > maxOption || op < minOption)) {  // input is not an integer
+            std::cout << "Please enter a valid integer: " ;
+            std::cin.clear();  // clear the error flag
+            std::cin.ignore(10000, '\n');  // ignore the invalid input
+        } else {
+            break;  // input is valid, break the loop
+        }
+    }
     return op;
 }
 
@@ -23,7 +28,7 @@ int Menu::mainMenu() {
     cout << "MAIN MENU\n\n";
     cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.About us" << '\n' << "0.Quit" << "\n\n";
     cout << "Choose an option: ";
-    return auxMenu(7, 0);
+    return auxMenu(3, 0);
 }
 
 int Menu::AboutUsMenu(){

@@ -9,7 +9,7 @@ int main() {
     Manager manager;
     manager.init();
     Menu m;
-    std::cout << manager.getArticulationPoints();
-    //m.menuController(manager);
+    // std::cout << manager.getArticulationPoints();
+    m.menuController(manager);
     return 0;
 }
