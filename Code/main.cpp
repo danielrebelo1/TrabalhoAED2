@@ -11,7 +11,7 @@ int main() {
     manager.init();
     Menu m;
     //manager.airportWithMostConnections(1,"Portugal");
-    manager.checkAirlineExists("TAP");
-    m.menuController();
+    manager.airportReport("OPO");
+    // m.menuController();
     return 0;
 }

@@ -194,6 +194,12 @@ bool Manager::checkAirlineExists(std::string airlineCode) {
     return true;
 }
 
+bool Manager::checkCityExists(std::string city) {
+    auto it = std::find_if(airports.begin(), airports.end(),[&city](pair<string,Airport> ap){return ap.second.getLocation().getCity() == city;});
+    if (it == airports.end()){ cout << "No such city in database." << endl; return false;}
+    return true;
+}
+
 
 void Manager::airportReport(std::string airportCode) {
     if (checkAirportExists(airportCode)){
@@ -205,8 +211,20 @@ void Manager::airportReport(std::string airportCode) {
         cout << "These are: " << endl;
         airlineMap am = airlines_filter_by_airport(airportCode);
         int x = 0;
+        cout << setw(30) << "Airline" << setw(30) << "Country" << endl;
         for (auto p : am){
-            cout << ++x << ". " << p.second.getName() << "-----" << p.second.getLocation().getCountry() << endl;
+            cout << ++x << ". " << setw(30) << p.second.getName() << setw(30) << p.second.getLocation().getCountry() << endl;
+        }
+    }
+}
+
+void Manager::cityReport(std::string city){
+    if (checkCityExists(city)){
+        airportMap am = airports_filter_by_city(city);
+        cout << "The beautiful city of " << city << " in " << am.begin()->second.getLocation().getCountry() << " has " << am.size() << " airports." << endl;
+        cout << "These are:" << endl;
+        for (auto p : am){
+            cout << p.second.getName() << endl;
         }
     }
 }

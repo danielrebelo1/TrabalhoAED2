@@ -71,11 +71,13 @@ string Menu::findbyCity(){
     int i = 1;
     Manager m;
     airportMap airports;
-    cout <<endl << "Insira a cidade pretendida: ";
+    cout << "Insira a cidade pretendida:" << endl;
     cin >> city;
     airports = m.airports_filter_by_city(city);
+    cout << airports.size();
     for (auto a: airports){
-        r += i + ". " + a.second.getCode() + " - " + a.second.getName();
+        //r += i + ". " + a.second.getCode() + " - " + a.second.getName();
+        cout << a.second.getName() << endl;
     }
     //cout << endl << "***print dos aeroportos***\n";
     return r ;
