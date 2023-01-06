@@ -42,16 +42,11 @@ int Menu::AboutUsMenu(){
 }
 
 int Menu::flightMenu(){
-    string origAir, destAir;
     cout << endl << "ROUTE SELECTION HELP MENU\n" << endl;
-    cout << "Flight origin: "; cin >> origAir; cout << endl;
-    //find  airport ?
-    cout << "Flight destination: "; cin >> destAir; cout << endl;
-    //find airport ?
     //correr função e adicionar print se necessário
-    cout << "1.New route\n" << "0.Return to main menu\n" << endl;
+    cout << "1.Route with less flights\n" << "2.Route with less distance\n" <<  "0.Return to main menu\n" << endl;
     cout << "Choose an option: ";
-    return auxMenu(1,0);
+    return auxMenu(2,0);
 
 }
 
@@ -142,7 +137,27 @@ void Menu::menuController(Manager& manager) {
 
             switch (op) {
                 case 1:{
+                    string origin, dest;
+                    cout << "What is the flight origin: \n"; cin >> origin;
+                    cout << "What is the flight destination: \n"; cin >> dest;
                     temp = flightMenu();
+                    do{
+                        switch(temp){
+                            case 1:{
+                                vector<Node> res = manager.getGraph().bfs(manager.getGraph().codeToPos[origin], manager.getGraph().codeToPos[dest]);
+                                manager.printPath(res);
+                                temp = 0;
+                                break;
+                            }
+                            case 2:{
+                                vector<Node> res = manager.getGraph().dijkstraPathNodes(manager.getGraph().codeToPos[origin], manager.getGraph().codeToPos[dest]);
+                                manager.printPath(res);
+                                temp = 0;
+                                break;
+                            }
+
+                        }
+                    }while(temp != 0);
                     break;
                 }
 
