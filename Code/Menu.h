@@ -20,6 +20,7 @@ public:
     std::string findbyCity(Manager& manager);
     int infoChoiceMenu();
     int nrFlights();
+    int subMenu();
     void menuController(Manager& manager);
 };
 
