@@ -98,11 +98,10 @@ string Menu::findbyCity(Manager& manager){
     cout << endl << "Insert the city: ";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, city);
+    if (!manager.checkCityExists(city)) {return "";}
     airportMap airports = manager.airports_filter_by_city(city);
-    if (airports.empty()) { cout << "No airport in " << city << "." ;
-        return "";}
     map<int,string> m;
-    cout << "Airports in " << city << endl;
+    cout << "Airports in " << airports.begin()->second.getLocation().getCity() << endl;
     for (auto a: airports){
         cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << " - " << a.second.getLocation().getCountry() << endl;
         m.insert({i,a.second.getCode()});
@@ -133,11 +132,10 @@ string Menu::findbyCountry(Manager& manager){
     cout << endl << "Insert country:";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, country);
+    if (!manager.checkCountryExists(country)) {return "";}
     airportMap airports = manager.airports_filter_by_country(country);
-    if (airports.empty()) { cout << "No airport in " << country << ".\n" ;
-        return "";}
     map <int,string> m;
-    cout << "Airports in " << country << endl;
+    cout << "Airports in " << airports.begin()->second.getLocation().getCountry() << endl;
     for (auto a: airports){
         cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << " in " << a.second.getLocation().getCity() << endl;
         m.insert({i,a.second.getCode()});
