@@ -53,10 +53,10 @@ int Graph::getWeight(int src, Edge edge) {
 
 }
 
-vector<string> Graph::bfs(int start, int end) {
+vector<Node> Graph::bfs(int start, int end) {
     for (int v=1; v<=n; v++) nodes[v].visited = false;
 
-    vector<string> path;
+    vector<Node> path;
     queue<int> q; // queue of unvisited nodes
     q.push(start);
     nodes[start]. visited = true;
@@ -72,15 +72,16 @@ vector<string> Graph::bfs(int start, int end) {
                 nodes[w].visited = true;
                 nodes[w].dist = nodes[u].dist + 1;
                 nodes[w].pred = u; // set the predecessor of w to be u
+                nodes[u].airlineUsed = e.airlineCode;
 
 
                 if(w == end){
                     int current = end;
                     while(current != start){
-                        path.push_back(posToCode[current]);
+                        path.push_back(nodes[current]);
                         current = nodes[current].pred;
                     }
-                    path.push_back(posToCode[start]);
+                    path.push_back(nodes[start]);
                     reverse(path.begin(), path.end());
                     return path;
                 }
@@ -117,7 +118,7 @@ void Graph::dijkstra(int src) {
                 nodes[v].dist = nodes[u].dist + weight;
                 q.decreaseKey(v, nodes[v].dist);  //atualizar o valor da distancia para corrigir a sua posicao na minHeap
                 nodes[v].pred = u;
-                nodes[v].airlineUsed = airlineUsed;
+                nodes[u].airlineUsed = airlineUsed;
             }
 
         }
@@ -125,16 +126,17 @@ void Graph::dijkstra(int src) {
 
 }
 
-list<Node> Graph::dijkstraPathNodes(int a, int b) {
-    list<Node> path;
+vector<Node> Graph::dijkstraPathNodes(int a, int b) {
+    vector<Node> path;
     dijkstra(a);
     if(nodes[b].dist==INF) return path;
-    path.push_front(nodes[b]);
+    path.push_back(nodes[b]);
     int v = b;
     while (v!=a){
         v=nodes[v].pred;
-        path.push_front(nodes[v]);
+        path.push_back(nodes[v]);
     }
+    reverse(path.begin(), path.end());
     return path;
 }
 
