@@ -262,3 +262,11 @@ string Manager::tolowerString(string s){
     }
     return newstr;
 }
+
+int Manager::getConnectedComponents() {
+    return graph.dfs_cc();
+}
+
+int Manager::getArticulationPoints() {
+    return (int)graph.getArticulationPoints().size();
+}

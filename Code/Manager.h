@@ -41,6 +41,8 @@ public:
     void airportReport(std::string airportCode);
     void cityReport(std::string city);
     std::string tolowerString(std::string str);
+    int getConnectedComponents();
+    int getArticulationPoints();
 };
 
 
