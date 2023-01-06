@@ -29,7 +29,7 @@ public:
     int getDepartures(std::string airportCode);
     int getArrivals(std::string airportCode);
     int getNumberFlights(std::string airportCode);
-    int getNumberAirlinesAirport(std::string &airportCode);
+    int getNumberAirlinesAirport(std::string airportCode);
     int getNumberDestinations(std::string airportCode);
     int getNumberDestinationsCountries(std::string airportCode);
     void calculateGlobalStatsNetwork();
@@ -42,10 +42,10 @@ public:
     void cityReport(std::string city);
     void printPath(std::vector<Node> airports );
     void printPath(std::list<Node> airports);
-
     std::string tolowerString(std::string str);
     int getConnectedComponents();
     int getArticulationPoints();
+    void printAirports(int k,int opt);
 };
 
 

@@ -16,12 +16,16 @@ public:
     int AboutUsMenu();
     int flightMenu();
     int findChoiceMenu();
+    int subMenu();
     std::string findByCode(Manager& manager);
     std::string findbyCity(Manager& manager);
+    std::string findbyCountry(Manager& manager);
+    int typeInfoChoiceMenu();
     int infoChoiceMenu();
     int nrFlights();
-    int subMenu();
     void menuController(Manager& manager);
+    int topAirportsMenu();
+    int choiceK();
 };
 
 

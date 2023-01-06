@@ -140,7 +140,7 @@ int Manager::getNumberFlights(std::string airportCode){
     return getDepartures(airportCode) + getArrivals(airportCode);
 }
 
-int Manager::getNumberAirlinesAirport(std::string &airportCode){
+int Manager::getNumberAirlinesAirport(std::string airportCode){
     return graph.calculateAirlinesAirport(airportCode);
 }
 
@@ -179,7 +179,7 @@ bool Manager::checkAirportExists(std::string airportCode) {
         airports.at(airportCode);
     }
     catch (exception e) {
-        cout << endl << "Nenhum aeroporto com esse código. Tente novamente: ";
+        cout << endl << "No airport with that code. Try again: ";
         return false;
     }
     return true;
@@ -206,7 +206,7 @@ bool Manager::checkCityExists(std::string city) {
 void Manager::airportReport(std::string airportCode) {
     if (checkAirportExists(airportCode)){
         Airport airport = airports.at(airportCode);
-        cout << "The " << airport.getName() << " airport is an international airport in " << airport.getLocation().getCity() << "," << airport.getLocation().getCountry() << "." << endl;
+        cout << endl << "The " << airport.getName() << " airport is an international airport in " << airport.getLocation().getCity() << "," << airport.getLocation().getCountry() << "." << endl;
         cout << "This airport has " << getNumberFlights(airportCode) << " flights , " << getDepartures(airportCode) <<" of these are departures and " <<
         getArrivals(airportCode) << " are arrivals, to " << getNumberDestinations(airportCode)
         << " cities in " << getNumberDestinationsCountries(airportCode) << " countries." << endl;
@@ -226,6 +226,8 @@ void Manager::airportReport(std::string airportCode) {
         for (auto p : am){
             cout << ++x << ". " << setw(30) << p.second.getName() << setw(30) << p.second.getLocation().getCountry() << endl;
         }
+        cout << endl << "Press Enter to continue.\n";
+        system("pause > nul");
     }
 }
 
@@ -276,4 +278,30 @@ int Manager::getConnectedComponents() {
 
 int Manager::getArticulationPoints() {
     return (int)graph.getArticulationPoints().size();
+}
+
+void Manager::printAirports(int k,int opt){
+    vector<pair<string,int>> v;
+    switch(opt){
+        case 1:
+        {
+            for (pair<string,Airport> pa : airports){
+                v.push_back(make_pair(pa.second.getCode(), getNumberAirlinesAirport(pa.second.getCode())));
+            }
+            sort(v.begin(),v.end(),[] ( pair<string,int> &p1 , pair<string,int> &p2) {return p1.second > p2.second;});
+            v.resize(k);
+            int i = 1;
+            cout << endl;
+            for (auto elem : v){
+                Airport a = airports.at(elem.first);
+                cout << i++ << ". " << a.getName() << " - " << elem.second << " - " << a.getLocation().getCity() << " - " << a.getLocation().getCountry() << endl;
+            }
+            cout << endl << "Press Enter to continue.\n";
+            system("pause > nul");
+            break;
+        }
+        case 2:
+            break;
+    }
+
 }
