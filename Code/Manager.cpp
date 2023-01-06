@@ -54,8 +54,8 @@ airportMap Manager::airports_filter_by_country(std::string country){
     auto it = airports.begin();
     bool noMoreFound = true;
     while (noMoreFound){
-        it = find_if(it,airports.end(),[&country]
-                (auto p) {return p.second.getLocation().getCountry() == country;});
+        it = find_if(it,airports.end(),[&country, this]
+                (auto p) {return tolowerString(p.second.getLocation().getCountry()) == tolowerString(country);});
         if (it != airports.end()){
             airportsCountry.insert(*it);
             it++;
@@ -73,8 +73,8 @@ airportMap Manager::airports_filter_by_city(std::string city){
     auto it = airports.begin();
     bool noMoreFound = true;
     while (noMoreFound){
-        it = find_if(it,airports.end(),[&city]
-        (auto p) {return p.second.getLocation().getCity() == city;});
+        it = find_if(it,airports.end(),[&city,this]
+        (auto p) {return tolowerString(p.second.getLocation().getCity()) == tolowerString(city);});
         if (it != airports.end()){
             airportsCity.insert(*it);
             it++;
@@ -196,8 +196,25 @@ bool Manager::checkAirlineExists(std::string airlineCode) {
     return true;
 }
 
+bool Manager::checkCountryExists(std::string country) {
+    auto it = std::find_if(airports.begin(), airports.end(),[&country, this](pair<string,Airport> ap){return tolowerString(ap.second.getLocation().getCountry()) == tolowerString(country);});
+    if (it == airports.end()){ cout << "No such country in database." << endl; return false;}
+    return true;
+}
+
+string Manager::tolowerString(string s){
+    string newstr;
+    for (auto c : s){
+        newstr.push_back(tolower(c));
+    }
+    return newstr;
+}
+
 bool Manager::checkCityExists(std::string city) {
-    auto it = std::find_if(airports.begin(), airports.end(),[&city](pair<string,Airport> ap){return ap.second.getLocation().getCity() == city;});
+    tolowerString(city);
+    auto it = std::find_if(airports.begin(), airports.end(),[&city, this](pair<string,Airport> ap){
+        return tolowerString(ap.second.getLocation().getCity()) == tolowerString(city);
+    });
     if (it == airports.end()){ cout << "No such city in database." << endl; return false;}
     return true;
 }
@@ -254,14 +271,6 @@ void Manager::cityReport(std::string city){
         airportReport(m.at(input));
     }
 
-}
-
-string Manager::tolowerString(string s){
-    string newstr;
-    for (char &c : s){
-        newstr.push_back(tolower(c));
-    }
-    return newstr;
 }
 
 void Manager::printPath(vector<Node> airports) {

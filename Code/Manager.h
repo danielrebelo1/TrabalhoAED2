@@ -37,6 +37,7 @@ public:
     void calculateFlightsAirline(std::string airlineCode);
     bool checkAirportExists(std::string airportCode);
     bool checkAirlineExists(std::string airlineCode);
+    bool checkCountryExists(std::string country);
     bool checkCityExists(std::string city);
     void airportReport(std::string airportCode);
     void cityReport(std::string city);
