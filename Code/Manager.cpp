@@ -377,7 +377,7 @@ int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
     }
 
     if(opt == 3)
-        return airports.size();
+        return helper.size();
 
     return locations.size();
 }
