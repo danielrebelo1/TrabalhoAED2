@@ -37,6 +37,7 @@ void Manager::init() {
     }
     fileReader.readFlightFile(flightsFile, graph);
 
+
 }
 
 airportMap Manager::getAirports(){
@@ -355,4 +356,28 @@ void Manager::printConnectedComponents(){
             "Connected components are important in a flight network because they can help to identify the different groups of airports that are connected to one another and the routes that are possible between them. In this case, there are " << getConnectedComponents() << ". This information can be useful for a variety of purposes, such as planning flights or analyzing the efficiency of a flight network." << endl;
     string inp;
     while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
+}
+
+int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
+    vector<Node> airports = graph.bfsMD(graph.codeToPos[src], maxFlights);
+    vector<string> locations;
+    if(opt == 1){
+        for(const Node node : airports){
+            auto itr = find_if(locations.begin(), locations.end(), [&node](const string &s){return node.airport.getLocation().getCountry() == s;});
+            if(itr == locations.end())
+                locations.push_back(node.airport.getLocation().getCountry());
+        }
+    }
+    if(opt == 2){
+        for(const Node node : airports){
+            auto itr = find_if(locations.begin(), locations.end(), [&node](const string &s){return node.airport.getLocation().getCity() == s;});
+            if(itr == locations.end())
+                locations.push_back(node.airport.getLocation().getCity());
+        }
+    }
+
+    if(opt == 3)
+        return airports.size();
+
+    return locations.size();
 }
