@@ -9,6 +9,7 @@ int main() {
     Manager manager;
     manager.init();
     Menu m;
-    m.menuController(manager);
+    manager.printAirports(2,1);
+    //m.menuController(manager);
     return 0;
 }

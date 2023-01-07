@@ -301,15 +301,19 @@ void Manager::printAirports(int k,int opt){
             v.resize(k);
             int i = 1;
             cout << endl;
+            cout << left << setw(25) << "    Airport" << setw(23) << setfill(' ') << "Number of Flights" << setw(20) << "City" << setw(20) << "Country" << endl;
             for (auto elem : v){
                 Airport a = airports.at(elem.first);
-                cout << i++ << ". " << a.getName() << " - " << elem.second << " - " << a.getLocation().getCity() << " - " << a.getLocation().getCountry() << endl;
+                cout << i++ << ". " << left << setw(25) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
             }
-            cout << endl << "Press Enter to continue.\n";
-            system("pause > nul");
+            string inp;
+            while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
             break;
         }
         case 2:
+        {
+
+        }
             break;
     }
 
