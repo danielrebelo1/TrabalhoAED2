@@ -55,9 +55,11 @@ int Menu::typeInfoChoiceMenu(){
     cout << endl << "INFORMATION MENU\n";
     cout << endl << "1.Get information about a specific airport\n";
     cout << "2.Top-k airports\n";
+    cout << "3.Network articulation points" << endl;
+    cout << "4.Network connected components/routes" << endl;
     cout << "0.Return to main menu\n";
     cout << endl << "Choose an option: ";
-    return auxMenu(2,0);
+    return auxMenu(4,0);
 }
 
 int Menu::findChoiceMenu(){
@@ -227,7 +229,6 @@ void Menu::menuController(Manager& manager) {
                                 temp = 0;
                                 break;
                             }
-
                         }
                     }while(temp != 0);
                     break;
@@ -383,10 +384,32 @@ void Menu::menuController(Manager& manager) {
                                 case 2:{
                                     int choice = topAirportsMenu();
                                     switch(choice){
+
                                         case 1:
+                                        {
                                             int k = choiceK();
                                             manager.printAirports(k,1);
+                                            break;
+                                        }
+
+                                        case 2:
+                                        {
+                                            int k = choiceK();
+                                            manager.printAirports(k,2);
+                                            break;
+                                        }
+
                                     }
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    manager.printArticulationPoints();
+                                    break;
+                                }
+                                case 4:
+                                {
+                                    manager.printConnectedComponents();
                                     break;
                                 }
                                 

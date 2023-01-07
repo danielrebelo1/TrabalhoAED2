@@ -47,6 +47,8 @@ public:
     int getConnectedComponents();
     int getArticulationPoints();
     void printAirports(int k,int opt);
+    void printArticulationPoints();
+    void printConnectedComponents();
 };
 
 
