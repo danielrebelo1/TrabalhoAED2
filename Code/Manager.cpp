@@ -359,17 +359,17 @@ void Manager::printConnectedComponents(){
 }
 
 int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
-    vector<Node> airports = graph.bfsMD(graph.codeToPos[src], maxFlights);
+    vector<Node> helper = graph.bfsMD(graph.codeToPos[src], maxFlights);
     vector<string> locations;
     if(opt == 1){
-        for(const Node node : airports){
+        for(const Node node : helper){
             auto itr = find_if(locations.begin(), locations.end(), [&node](const string &s){return node.airport.getLocation().getCountry() == s;});
             if(itr == locations.end())
                 locations.push_back(node.airport.getLocation().getCountry());
         }
     }
     if(opt == 2){
-        for(const Node node : airports){
+        for(const Node node : helper){
             auto itr = find_if(locations.begin(), locations.end(), [&node](const string &s){return node.airport.getLocation().getCity() == s;});
             if(itr == locations.end())
                 locations.push_back(node.airport.getLocation().getCity());
