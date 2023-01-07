@@ -18,11 +18,6 @@
 
 class FileReader {
 
-    private:
-
-       airportMap airports;
-       airlineMap airlines;
-
     public:
         FileReader();
         airportMap readAirportsFile(std::istream &airportFile);

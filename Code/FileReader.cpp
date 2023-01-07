@@ -11,6 +11,7 @@ FileReader::FileReader() {}
 
 airportMap FileReader::readAirportsFile(istream &airportFile){
     airportFile.ignore(numeric_limits<streamsize>::max(), '\n');
+    airportMap airports;
     while(airportFile.good()){
 
         string line, data;
@@ -43,6 +44,7 @@ airportMap FileReader::readAirportsFile(istream &airportFile){
 
 airlineMap FileReader::readAirlinesFile(istream &airlinesFile){
     airlinesFile.ignore(numeric_limits<streamsize>::max(), '\n');
+    airlineMap airlines;
     while(airlinesFile.good()){
 
         string line, data;

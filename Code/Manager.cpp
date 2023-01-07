@@ -21,11 +21,9 @@ void Manager::init() {
     flightsFile.open("Code/dataset/flights.csv");
     FileReader fileReader;
 
-    // airports = fileReader.readAirportsFile(airportsFile);
     airports = fileReader.readAirportsFile(airportsFile);
-    // airlines = fileReader.readAirlinesFile(airlinesFile);
     airlines = fileReader.readAirlinesFile(airlinesFile);
-    int numAirports = airports.size();
+    int numAirports = (int) airports.size();
     graph = Graph(numAirports, true);
     int index = 0;
 
