@@ -265,6 +265,7 @@ void Menu::menuController(Manager& manager) {
                                                 else {
                                                 control = 1;
                                                 break;}
+                                                break;
                                             }
 
                                             case 3: {
@@ -276,6 +277,7 @@ void Menu::menuController(Manager& manager) {
                                                 else {
                                                 control = 1;
                                                 break;}
+                                                break;
                                             }
 
                                             case 4:{
