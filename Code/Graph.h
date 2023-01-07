@@ -44,6 +44,7 @@ public:
     void addEdge(int src, int dest, std::string airlineCode = "");
     void dfs(int v);
     std::vector<Node> bfs(int start, int end);
+    std::vector<Node> bfsMD(int start, int maxDistance);
     int dfs_cc();
     void addNode(Airport airport);
     double haversine(std::string source, std::string dest);

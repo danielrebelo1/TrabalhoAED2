@@ -10,5 +10,6 @@ int main() {
     manager.init();
     Menu m;
     m.menuController(manager);
+
     return 0;
 }
