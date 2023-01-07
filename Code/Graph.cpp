@@ -76,7 +76,7 @@ int Graph::getWeight(int src, Edge edge) {
 }
 
 vector<Node> Graph::bfs(int start, int end) {
-    for (int v=1; v<=n; v++) nodes[v].visited = false;
+    for (int v=0; v<n; v++) nodes[v].visited = false;
 
     vector<Node> path;
     queue<int> q; // queue of unvisited nodes
@@ -114,6 +114,38 @@ vector<Node> Graph::bfs(int start, int end) {
     return path;
 }
 
+vector<Node> Graph::bfsMD(int start, int maxDistance) {
+    for (int i=0; i<n; i++) {
+        nodes[i].visited = false;
+        nodes[i].dist = 0;
+    }
+    vector<Node> path;
+
+    queue<int> j;
+    j.push(start);
+    nodes[start].visited = true;
+    nodes[start].dist = 0;
+
+    while (!j.empty()) {
+        int u = j.front(); j.pop();
+        for (auto e : nodes[u].adj) {
+            int w = e.dest;
+            if (!nodes[w].visited) {
+                j.push(w);
+                nodes[w].visited = true;
+                nodes[w].dist = nodes[u].dist + 1;
+            }
+        }
+    }
+
+    for(int i = 0; i < n; i++){
+        if(nodes[i].dist <= maxDistance)
+            path.push_back(nodes[i]);
+    }
+    return path;
+
+}
+
 
 void Graph::dijkstra(int src) {
     MinHeap q(n);
@@ -122,6 +154,7 @@ void Graph::dijkstra(int src) {
         nodes[v].dist = INF;            //atributo final da distancia de cada node à source
         q.insert(v, INF);     //criaçao da nossa priority qeue. Valores por default no algoritmo definidos para "Infinito"
         nodes[v].visited = false;
+        nodes[v].airlineUsed = "";
     }
 
     nodes[src].dist = 0;                 //distancia do node source à source e veidentemente 0
@@ -159,6 +192,7 @@ vector<Node> Graph::dijkstraPathNodes(int a, int b) {
         path.push_back(nodes[v]);
     }
     reverse(path.begin(), path.end());
+    path[path.size() - 1].airlineUsed = "";
     return path;
 }
 

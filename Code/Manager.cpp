@@ -37,6 +37,7 @@ void Manager::init() {
     }
     fileReader.readFlightFile(flightsFile, graph);
 
+
 }
 
 airportMap Manager::getAirports(){
@@ -147,8 +148,8 @@ airportMap Manager::airports_filter_by_city(std::string city){
     auto it = airports.begin();
     bool noMoreFound = true;
     while (noMoreFound){
-        it = find_if(it,airports.end(),[&city]
-        (auto p) {return p.second.getLocation().getCity() == city;});
+        it = find_if(it,airports.end(),[&city,this]
+        (auto p) {return tolowerString(p.second.getLocation().getCity()) == tolowerString(city);});
         if (it != airports.end()){
             airportsCity.insert(*it);
             it++;
@@ -271,8 +272,25 @@ bool Manager::checkAirlineExists(std::string airlineCode) {
     return true;
 }
 
+bool Manager::checkCountryExists(std::string country) {
+    auto it = std::find_if(airports.begin(), airports.end(),[&country, this](pair<string,Airport> ap){return tolowerString(ap.second.getLocation().getCountry()) == tolowerString(country);});
+    if (it == airports.end()){ cout << "No such country in database." << endl; return false;}
+    return true;
+}
+
+string Manager::tolowerString(string s){
+    string newstr;
+    for (auto c : s){
+        newstr.push_back(tolower(c));
+    }
+    return newstr;
+}
+
 bool Manager::checkCityExists(std::string city) {
-    auto it = std::find_if(airports.begin(), airports.end(),[&city](pair<string,Airport> ap){return ap.second.getLocation().getCity() == city;});
+    tolowerString(city);
+    auto it = std::find_if(airports.begin(), airports.end(),[&city, this](pair<string,Airport> ap){
+        return tolowerString(ap.second.getLocation().getCity()) == tolowerString(city);
+    });
     if (it == airports.end()){ cout << "No such city in database." << endl; return false;}
     return true;
 }
@@ -331,14 +349,6 @@ void Manager::cityReport(std::string city){
 
 }
 
-string Manager::tolowerString(string s){
-    string newstr;
-    for (char &c : s){
-        newstr.push_back(tolower(c));
-    }
-    return newstr;
-}
-
 void Manager::printPath(vector<Node> airports) {
     for(Node node : airports){
         cout << node.airport.getCode() << " " << node.airport.getName() << "\n";
@@ -361,22 +371,88 @@ void Manager::printAirports(int k,int opt){
         case 1:
         {
             for (pair<string,Airport> pa : airports){
+                v.push_back(make_pair(pa.second.getCode(), getNumberFlights(pa.second.getCode())));
+            }
+            sort(v.begin(),v.end(),[] ( pair<string,int> &p1 , pair<string,int> &p2) {return p1.second > p2.second;});
+            v.resize(k);
+            int i = 1;
+            cout << endl;
+            cout << left << setw(40) << "    Airport" << setw(23) << setfill(' ') << "Number of Flights" << setw(20) << "City" << setw(20) << "Country" << endl;
+            for (auto elem : v){
+                Airport a = airports.at(elem.first);
+                cout << i++ << ". " << left << setw(40) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
+            }
+            string inp;
+            while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
+            break;
+        }
+        case 2:
+        {
+            for (pair<string,Airport> pa : airports){
                 v.push_back(make_pair(pa.second.getCode(), getNumberAirlinesAirport(pa.second.getCode())));
             }
             sort(v.begin(),v.end(),[] ( pair<string,int> &p1 , pair<string,int> &p2) {return p1.second > p2.second;});
             v.resize(k);
             int i = 1;
             cout << endl;
+            cout << left << setw(25) << "    Airport" << setw(23) << setfill(' ') << "Number of Airlines" << setw(20) << "City" << setw(20) << "Country" << endl;
             for (auto elem : v){
                 Airport a = airports.at(elem.first);
-                cout << i++ << ". " << a.getName() << " - " << elem.second << " - " << a.getLocation().getCity() << " - " << a.getLocation().getCountry() << endl;
+                cout << i++ << ". " << left << setw(25) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
             }
-            cout << endl << "Press Enter to continue.\n";
-            system("pause > nul");
+            string inp;
+            while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
             break;
         }
-        case 2:
             break;
     }
 
+}
+
+void Manager::printArticulationPoints(){
+    cout << endl << "Articulation points (also known as cut vertices) are an important concept in graph theory and can be used to analyze a variety of different types of networks, including flight networks.\n"
+                    "\n"
+                    "In a flight network, articulation points can help to identify the key airports that play a central role in connecting different parts of the network. For example, consider a flight network that consists of a series of airports connected by flights. Some airports may be connected to multiple other airports, while others may only be connected to a few. In this network there are " << getArticulationPoints() << " articulation points\n"
+                    "\n"
+                    "An airport that is an articulation point in the flight network is one that, if removed, would cause the network to become disconnected. In other words, it is an airport that plays a crucial role in connecting different groups of airports.\n"
+                    "\n"
+                    "Articulation points are important in a flight network because they can help to identify the airports that are most critical to the connectivity of the network. This information can be useful for a variety of purposes, such as identifying potential bottlenecks or points of failure in the network. For example, if an airport that is an articulation point in the network were to be closed for some reason, it could have a significant impact on the ability of the network to function properly. Understanding the role of articulation points in a flight network can help to inform decisions about how to maintain and improve the network's connectivity.";
+    string inp;
+    while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
+}
+
+void Manager::printConnectedComponents(){
+    cout << "Connected components are an important concept in graph theory and can be used to analyze a variety of different types of networks, including flight networks.\n"
+            "\n"
+            "In a flight network, connected components can help to identify the different routes that are possible between airports. For example, consider a flight network that consists of a series of airports connected by flights. Some airports may be connected to multiple other airports, while others may only be connected to a few.\n"
+            "\n"
+            "The connected components of the flight network can help to identify the different routes that are possible between airports. For example, if there is a connected component consisting of airports A, B, C, and D, it means that there is a series of flights connecting these airports and it is possible to fly from any of these airports to any of the others. On the other hand, if there is a separate connected component consisting of airports E and F, it means that it is not possible to fly directly between airports A, B, C, and D and airports E and F.\n"
+            "\n"
+            "Connected components are important in a flight network because they can help to identify the different groups of airports that are connected to one another and the routes that are possible between them. In this case, there are " << getConnectedComponents() << ". This information can be useful for a variety of purposes, such as planning flights or analyzing the efficiency of a flight network." << endl;
+    string inp;
+    while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
+}
+
+int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
+    vector<Node> helper = graph.bfsMD(graph.codeToPos[src], maxFlights);
+    vector<string> locations;
+    if(opt == 1){
+        for(const Node node : helper){
+            auto itr = find_if(locations.begin(), locations.end(), [&node](const string &s){return node.airport.getLocation().getCountry() == s;});
+            if(itr == locations.end())
+                locations.push_back(node.airport.getLocation().getCountry());
+        }
+    }
+    if(opt == 2){
+        for(const Node node : helper){
+            auto itr = find_if(locations.begin(), locations.end(), [&node](const string &s){return node.airport.getLocation().getCity() == s;});
+            if(itr == locations.end())
+                locations.push_back(node.airport.getLocation().getCity());
+        }
+    }
+
+    if(opt == 3)
+        return helper.size();
+
+    return locations.size();
 }
