@@ -62,6 +62,8 @@ int Menu::typeInfoChoiceMenu(){
     return auxMenu(4,0);
 }
 
+
+
 int Menu::findChoiceMenu(){
     cout << endl << "How do you want to search for the airport:\n";
     cout << endl << "1.Search by airport code\n";
@@ -343,6 +345,7 @@ void Menu::menuController(Manager& manager) {
                                                 case 2: {
                                                     x = nrFlights();
                                                     cout << "\n***países atingiveis***\n";
+                                                    cout << manager.maxFlightsStats(airport, x,1);
                                                     cout << endl << "Press Enter to continue.\n";
                                                     system("pause > nul");
                                                     break;
@@ -350,7 +353,8 @@ void Menu::menuController(Manager& manager) {
 
                                                 case 3: {
                                                     x = nrFlights();
-                                                    cout << "\n***cidades atingiveis***";
+                                                    cout << "\n***cidades atingiveis***\n";
+                                                    cout << manager.maxFlightsStats(airport, x, 2);
                                                     cout << endl << "Press Enter to continue.\n";
                                                     system("pause > nul");
                                                     break;
@@ -358,7 +362,8 @@ void Menu::menuController(Manager& manager) {
 
                                                 case 4: {
                                                     x = nrFlights();
-                                                    cout << "\n***aeroportos atingiveis***";
+                                                    cout << "\n***aeroportos atingiveis***\n";
+                                                    cout << manager.maxFlightsStats(airport, x, 3);
                                                     cout << endl << "Press Enter to continue.\n";
                                                     system("pause > nul");
                                                     break;
