@@ -24,9 +24,34 @@ class FileReader {
        airlineMap airlines;
 
     public:
+        /**
+         * Default constructor for the FileReader class.
+         * Complexity: O(1)
+         */
         FileReader();
+
+        /**
+         * Reader for the airports info file.
+         * Complexity: O(n²)
+         * @param airportFile Airports info file
+         * @return Map containing all airports
+         */
         airportMap readAirportsFile(std::istream &airportFile);
+
+        /**
+         * Reader for the airlines info file.
+         * Complexity: O(n²)
+         * @param airlinesFile Airlines info file
+         * @return Map containing all airlines
+         */
         airlineMap readAirlinesFile(std::istream &airlinesFile);
+
+        /**
+         * Reader for the flights info file.
+         * Complexity: O(n²)
+         * @param flightFile Flights info file
+         * @param graph Graph in which the flights are saved
+         */
         void readFlightFile(std::istream &flightFile, Graph &graph);
 
 };
