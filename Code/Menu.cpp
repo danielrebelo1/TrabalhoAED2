@@ -133,9 +133,12 @@ string Menu::findbyCountry(Manager& manager){
     cout << endl << "Insert country:";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, country);
-    airportMap airports = manager.airports_filter_by_country(country);
-    if (airports.empty()) { cout << "No airport in " << country << ".\n" ;
-        return "";}
+
+    string airport = manager.get_airport_by_country(country);
+    if (airport == "") {return "";}
+    return airport;
+
+    /*
     map <int,string> m;
     cout << "Airports in " << country << endl;
     for (auto a: airports){
@@ -143,6 +146,7 @@ string Menu::findbyCountry(Manager& manager){
         m.insert({i,a.second.getCode()});
         i++;
     }
+
     int input;
     while (true){
         cout << "Choose(0 to return to previous menu): ";
@@ -160,6 +164,7 @@ string Menu::findbyCountry(Manager& manager){
             cout << endl << "Airport found!\n" << manager.getAirports().at(m.at(input)).getCode() << " - " << manager.getAirports().at(m.at(input)).getName() << endl;
             return m.at(input);
     }
+     */
 }
 
 int Menu::infoChoiceMenu(){
@@ -257,7 +262,6 @@ void Menu::menuController(Manager& manager) {
 
                                             case 2: {
                                                 airport = findbyCity(manager);
-                                                // airport = findByCode(manager);
                                                 if (airport == "") {
                                                     control = 0;
                                                     temp = 0;
@@ -272,6 +276,7 @@ void Menu::menuController(Manager& manager) {
                                                 if (airport == "") {
                                                     control = 0;
                                                     temp = 0;
+                                                    break;
                                                 }
                                                 else {
                                                 control = 1;

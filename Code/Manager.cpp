@@ -49,13 +49,87 @@ Graph Manager::getGraph(){
     return graph;
 }
 
+std::string Manager::get_airport_by_country(std::string country){
+    airportMap airportsCountry;
+    auto it = airports.begin();
+    bool noMoreFound = true;
+    bool airportSelected = false;
+    while (noMoreFound){
+        it = find_if(it,airports.end(),[&country]
+                (auto p) {return p.second.getLocation().getCountry() == country;});
+        if (it != airports.end()){
+            airportsCountry.insert(*it);
+            it++;
+        }
+        else{
+            noMoreFound = false;
+        }
+    }
+
+    if(airportsCountry.empty()){
+        cout << endl << "No airports in " << country << endl;
+        return "";
+    }
+
+    int i = 1;
+    map <int,string> m;
+    cout << endl << "Airports in " << country << endl;
+    int input;
+    while(!airportSelected) {
+        int j = 1;
+        cout << endl;
+        for (auto a: airportsCountry) {
+            cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << " in "
+                 << a.second.getLocation().getCity() << endl;
+            m.insert({i, a.second.getCode()});
+            airportsCountry.erase(a.first);
+            i++;j++;
+            if(j == 11)break;
+        }
+        while (true) {
+            if (!airportsCountry.empty()) {
+                cout << "Choose(0 to return to previous menu/ -1 for next page): ";
+                try {
+                    cin >> input;
+                    if ((input >= 0 && input <= m.size()) || (input == -1)) break;
+                }
+                catch (exception e) { cout << "Invalid input" << endl; }
+            }
+
+            else if(airportsCountry.empty()){
+                cout << "Choose(0 to return to previous menu): ";
+                try {
+                    cin >> input;
+                    if (input >= 0 && input <= m.size()) break;
+                }
+                catch (exception e) { cout << "Invalid input" << endl; }
+            }
+        }
+
+        switch (input) {
+            case 0:
+                return "";
+
+            case -1:{
+                break;
+            }
+
+            default:
+                cout << endl << "Airport found!\n" << getAirports().at(m.at(input)).getCode() << " - "
+                     << getAirports().at(m.at(input)).getName() << endl;
+                airportSelected = true;
+        }
+    }
+    return getAirports().at(m.at(input)).getCode();
+}
+
 airportMap Manager::airports_filter_by_country(std::string country){
     airportMap airportsCountry;
     auto it = airports.begin();
     bool noMoreFound = true;
     while (noMoreFound){
-        it = find_if(it,airports.end(),[&country]
-                (auto p) {return p.second.getLocation().getCountry() == country;});
+        it = find_if(it,airports.end(),[&country, this]
+                (auto p) {return tolowerString(p.second.getLocation().getCountry()) == tolowerString(country);});
         if (it != airports.end()){
             airportsCountry.insert(*it);
             it++;
@@ -102,6 +176,7 @@ airlineMap Manager::airlines_filter_by_country(std::string country){
         }
     }
     if (airlinesCountry.empty()) { cout << "There are no airlines from the selected country;" << endl; return airlinesCountry; };
+
     cout << "There are " << airlinesCountry.size() << " airlines from " << country << endl;
     cout << "These are:" << endl;
     int x = 0;

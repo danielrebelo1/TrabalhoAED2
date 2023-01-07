@@ -21,6 +21,7 @@ public:
     airportMap getAirports();
     airlineMap getAirlines();
     Graph getGraph();
+    std::string get_airport_by_country(std::string country);
     airportMap airports_filter_by_country(std::string country);
     airportMap airports_filter_by_city(std::string city);
     airlineMap airlines_filter_by_country(std::string country);
