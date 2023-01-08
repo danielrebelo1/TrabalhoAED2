@@ -10,6 +10,9 @@ var searchData=
   ['checkcountryexists_23',['checkCountryExists',['../classManager.html#af604e6d3b85a684ec60c96f537cc2ca8',1,'Manager']]],
   ['checksameairport_24',['checkSameAirport',['../classManager.html#abf125c5956fbef8998032c23e389f978',1,'Manager']]],
   ['choicek_25',['choiceK',['../classMenu.html#a8031c73cda0be57f100e8d3ff876fee2',1,'Menu']]],
-  ['cityreport_26',['cityReport',['../classManager.html#ae2f769993d4177c8afbab7ab43a77f77',1,'Manager']]],
-  ['coordinates_27',['Coordinates',['../classCoordinates.html',1,'Coordinates'],['../classCoordinates.html#a89dd10af87d803fd51dfd9987f32e8cd',1,'Coordinates::Coordinates()'],['../classCoordinates.html#a008a2acb31c4606eac1969bc5f1892f0',1,'Coordinates::Coordinates(double latitude, double longitude)']]]
+  ['cityreport_26',['cityReport',['../classManager.html#a780c9522069333cb70d02359bb54a9da',1,'Manager']]],
+  ['cityreportmenu_27',['cityReportMenu',['../classMenu.html#abbe4b3ba4e15b456ee2a8d05fc54e7d0',1,'Menu']]],
+  ['coordinates_28',['Coordinates',['../classCoordinates.html',1,'Coordinates'],['../classCoordinates.html#a89dd10af87d803fd51dfd9987f32e8cd',1,'Coordinates::Coordinates()'],['../classCoordinates.html#a008a2acb31c4606eac1969bc5f1892f0',1,'Coordinates::Coordinates(double latitude, double longitude)']]],
+  ['countryreport_29',['countryReport',['../classManager.html#ad68ec4973e486a0aa97159f9de639507',1,'Manager']]],
+  ['countryreportmenu_30',['countryReportMenu',['../classMenu.html#adc7aef993368c621153e4c95c0607d0a',1,'Menu']]]
 ];

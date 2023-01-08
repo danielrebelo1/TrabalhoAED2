@@ -55,7 +55,7 @@ bool \mbox{\hyperlink{classManager_ab942c3fc9c5ca2d026ba6ed726a09159}{check\+Cit
 \item 
 void \mbox{\hyperlink{classManager_afff3efe215b692273a3b9ff4c01abdd7}{airport\+Report}} (std\+::string airport\+Code)
 \item 
-void \mbox{\hyperlink{classManager_ae2f769993d4177c8afbab7ab43a77f77}{city\+Report}} (std\+::string city)
+void \mbox{\hyperlink{classManager_a780c9522069333cb70d02359bb54a9da}{city\+Report}} (std\+::string \&city)
 \item 
 void \mbox{\hyperlink{classManager_ac856dba9d911dd2e141c893d4755406b}{print\+Path}} (std\+::vector$<$ \mbox{\hyperlink{structNode}{Node}} $>$ airports)
 \item 
@@ -76,6 +76,8 @@ void \mbox{\hyperlink{classManager_a04be495b75d2e81549316d4cd53e147f}{print\+Dia
 bool \mbox{\hyperlink{classManager_abf125c5956fbef8998032c23e389f978}{check\+Same\+Airport}} (std\+::string origin, std\+::string dest)
 \item 
 std\+::string \mbox{\hyperlink{classManager_a91616bed38df30ca031cb787140e72a4}{toupper\+String}} (std\+::string s)
+\item 
+void \mbox{\hyperlink{classManager_ad68ec4973e486a0aa97159f9de639507}{country\+Report}} (std\+::string \&country)
 \end{DoxyCompactItemize}
 
 
@@ -269,15 +271,26 @@ Checks if two airports are the same. Complexity\+: O(1)
 \begin{DoxyReturn}{Returns}
 True or false. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classManager_ae2f769993d4177c8afbab7ab43a77f77}\label{classManager_ae2f769993d4177c8afbab7ab43a77f77}} 
+\mbox{\Hypertarget{classManager_a780c9522069333cb70d02359bb54a9da}\label{classManager_a780c9522069333cb70d02359bb54a9da}} 
 \index{Manager@{Manager}!cityReport@{cityReport}}
 \index{cityReport@{cityReport}!Manager@{Manager}}
 \doxysubsubsection{\texorpdfstring{cityReport()}{cityReport()}}
-{\footnotesize\ttfamily void Manager\+::city\+Report (\begin{DoxyParamCaption}\item[{std\+::string}]{city }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Manager\+::city\+Report (\begin{DoxyParamCaption}\item[{std\+::string \&}]{city }\end{DoxyParamCaption})}
 
 Prints the report of a city with various details. Complexity\+: O(n) 
 \begin{DoxyParams}{Parameters}
 {\em city} & City\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classManager_ad68ec4973e486a0aa97159f9de639507}\label{classManager_ad68ec4973e486a0aa97159f9de639507}} 
+\index{Manager@{Manager}!countryReport@{countryReport}}
+\index{countryReport@{countryReport}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{countryReport()}{countryReport()}}
+{\footnotesize\ttfamily void Manager\+::country\+Report (\begin{DoxyParamCaption}\item[{std\+::string \&}]{country }\end{DoxyParamCaption})}
+
+Prints the report on a certain country Complexity\+: O(n) 
+\begin{DoxyParams}{Parameters}
+{\em country} & Country on which to report \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classManager_aa6c230385e803cfbcf95c348ce929721}\label{classManager_aa6c230385e803cfbcf95c348ce929721}} 
