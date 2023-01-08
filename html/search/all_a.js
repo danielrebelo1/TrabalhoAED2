@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['setcallsign_27',['setCallSign',['../classAirline.html#a53f32b3f30c8ff3cb245a7a52c955b72',1,'Airline']]],
-  ['setcode_28',['setCode',['../classAirline.html#a7f75b066fc5bc5d1f93f5ef48afe7a15',1,'Airline::setCode()'],['../classAirport.html#a568da108ee1d4addb0057ddad4d3f5a0',1,'Airport::setCode(std::string code)']]],
-  ['setcoordinates_29',['setCoordinates',['../classAirport.html#a4d86a5ee6b472b85bd185ff15b00a4f0',1,'Airport']]],
-  ['setlatitude_30',['setLatitude',['../classCoordinates.html#a69a1ec46081d4c3dcb333328223fdf3e',1,'Coordinates']]],
-  ['setlocation_31',['setLocation',['../classAirline.html#a8854f4653d5a4dc12bc351fa36d14e26',1,'Airline::setLocation()'],['../classAirport.html#abfbc6c264f5086360a6dd3a8545d1944',1,'Airport::setLocation()']]],
-  ['setlongitude_32',['setLongitude',['../classCoordinates.html#a5948696a115aad6c6ce9be1ab79864de',1,'Coordinates']]],
-  ['setname_33',['setName',['../classAirline.html#a99f12cf83277abbf5a8a3f2690ab052b',1,'Airline::setName()'],['../classAirport.html#a610597cc090c9f4d2fc46ebcecd6f5d3',1,'Airport::setName()']]]
+  ['mainmenu_90',['mainMenu',['../classMenu.html#af2479c56ab20abe25b90ad64fc092426',1,'Menu']]],
+  ['manager_91',['Manager',['../classManager.html',1,'Manager'],['../classManager.html#a1658ff9f18e38ccd9cb8b0b371b9c20b',1,'Manager::Manager()']]],
+  ['maxflightsstats_92',['maxFlightsStats',['../classManager.html#a318e361811de000f5d6ed80a929cd899',1,'Manager']]],
+  ['menu_93',['Menu',['../classMenu.html',1,'']]],
+  ['menucontroller_94',['menuController',['../classMenu.html#ae19aec628c43c05c33bbf9bdf441e5f3',1,'Menu']]],
+  ['minheap_95',['MinHeap',['../classMinHeap.html',1,'MinHeap'],['../classMinHeap.html#a1494d56ef51882cddcfa2e31316d150a',1,'MinHeap::MinHeap()'],['../classMinHeap.html#a9ae9f828559fb27315dff47cd8b8a798',1,'MinHeap::MinHeap(int maxSize)']]]
 ];

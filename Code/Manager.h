@@ -268,10 +268,34 @@ public:
      */
     void printConnectedComponents();
 
+    /**
+     * Prints the graph's diameter.
+     * Complexity: O(n²)
+     */
     void printDiameter();
 
+    /**
+     * Checks if two airports are the same.
+     * Complexity: O(1)
+     * @param origin Airport 1
+     * @param dest Airport 2
+     * @return True or false.
+     */
     bool checkSameAirport(std::string origin, std::string dest);
+
+    /**
+     * Transform a string to all upper case.
+     * Complexity: O(n)
+     * @param s String to be transformed
+     * @return Transformed string
+     */
     std::string toupperString(std::string s);
+
+    /**
+     * Prints the report on a certain country
+     * Complexity: O(n)
+     * @param country Country on which to report
+     */
     void countryReport(std::string &country);
 };
 

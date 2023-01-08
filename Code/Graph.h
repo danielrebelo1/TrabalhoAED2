@@ -225,6 +225,12 @@ public:
      */
     void dfs_articulationPoints(int i,int order,std::vector<int> &vec);
 
+
+    /**
+     * Gets the graph diameter.
+     * Complexity: O(n²)
+     * @return Graph's diameter
+     */
     int diameter();
 
 };

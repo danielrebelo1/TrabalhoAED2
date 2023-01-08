@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['manager_20',['Manager',['../classManager.html',1,'']]],
-  ['menu_21',['Menu',['../classMenu.html',1,'']]],
-  ['minheap_22',['MinHeap',['../classMinHeap.html',1,'']]]
+  ['hashf_82',['HashF',['../structHashF.html',1,'']]],
+  ['hashfunction_83',['HashFunction',['../structHashFunction.html',1,'']]],
+  ['haskey_84',['hasKey',['../classMinHeap.html#af47137027a13ba827398975caf0afe5e',1,'MinHeap']]],
+  ['haversine_85',['haversine',['../classGraph.html#ad89454357c5bdad301e3ba9cd18d9061',1,'Graph']]]
 ];
