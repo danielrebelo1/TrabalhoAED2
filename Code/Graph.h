@@ -224,6 +224,9 @@ public:
      * @param vec Vector containing all the articulation points
      */
     void dfs_articulationPoints(int i,int order,std::vector<int> &vec);
+
+    int diameter();
+
 };
 
 

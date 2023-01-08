@@ -267,6 +267,9 @@ public:
      * Complexity: O(n)
      */
     void printConnectedComponents();
+
+    void printDiameter();
+
     bool checkSameAirport(std::string origin, std::string dest);
     std::string toupperString(std::string s);
 };

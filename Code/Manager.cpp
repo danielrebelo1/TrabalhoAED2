@@ -419,6 +419,11 @@ void Manager::printConnectedComponents(){
     while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
 }
 
+void Manager::printDiameter() {
+    cout << "The diameter of a graph is the length of the shortest path between the most distanced nodes" << endl;
+    cout << "The diameter of the network is: " << graph.diameter();
+}
+
 int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
     vector<Node> helper = graph.bfsMD(graph.codeToPos[src], maxFlights);
     vector<string> locations;
