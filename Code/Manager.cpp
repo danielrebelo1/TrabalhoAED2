@@ -49,27 +49,10 @@ Graph Manager::getGraph(){
 }
 
 std::string Manager::get_airport_by_country(std::string country){
-    airportMap airportsCountry;
-    auto it = airports.begin();
-    bool noMoreFound = true;
+    if (!checkCountryExists(country)){cout << endl << "No airports in such country" << endl;
+        return "";}
+    airportMap airportsCountry = airports_filter_by_country(country);
     bool airportSelected = false;
-    while (noMoreFound){
-        it = find_if(it,airports.end(),[&country]
-                (auto p) {return p.second.getLocation().getCountry() == country;});
-        if (it != airports.end()){
-            airportsCountry.insert(*it);
-            it++;
-        }
-        else{
-            noMoreFound = false;
-        }
-    }
-
-    if(airportsCountry.empty()){
-        cout << endl << "No airports in " << country << endl;
-        return "";
-    }
-
     int i = 1;
     map <int,string> m;
     cout << endl << "Airports in " << country << endl;
@@ -87,7 +70,8 @@ std::string Manager::get_airport_by_country(std::string country){
         }
         while (true) {
             if (!airportsCountry.empty()) {
-                cout << "Choose(0 to return to previous menu/ -1 for next page): ";
+                cout << endl << "Return to main menu -> 0 || Next page -> -1 || Choose an airport -> 1-10  " << endl;
+                cout << "Choose an airport or 0 to return to previous menu): ";
                 try {
                     cin >> input;
                     if ((input >= 0 && input <= m.size()) || (input == -1)) break;
@@ -96,7 +80,7 @@ std::string Manager::get_airport_by_country(std::string country){
             }
 
             else if(airportsCountry.empty()){
-                cout << "Choose(0 to return to previous menu): ";
+                cout << "Choose an airport or 0 to return to previous menu): ";
                 try {
                     cin >> input;
                     if (input >= 0 && input <= m.size()) break;
@@ -249,13 +233,8 @@ void Manager::calculateFlightsAirline(std::string airlineCode){
 }
 
 bool Manager::checkAirportExists(std::string airportCode) {
-    try {
-        airports.at(airportCode);
-    }
-    catch (exception e) {
-        cout << endl << "No airport with that code. Try again: ";
-        return false;
-    }
+    auto it = std::find_if(airports.begin(), airports.end(),[&airportCode, this](pair<string,Airport> ap){return tolowerString(ap.second.getCode()) == tolowerString(airportCode);});
+    if (it == airports.end()){ cout << "No such airport in database." << endl; return false;}
     return true;
 }
 
@@ -453,4 +432,8 @@ int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
         return helper.size();
 
     return locations.size();
+}
+
+bool Manager::checkSameAirport(string origin, string dest){
+    return airports.at(origin).getCode() == airports.at(dest).getCode();
 }

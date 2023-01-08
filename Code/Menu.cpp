@@ -91,7 +91,11 @@ string Menu::findByCode(Manager& manager){
     while(!manager.checkAirportExists(airport)){
         cin >>airport;
     }
-    cout << endl << "Airport found!\n" << manager.getAirports().at(airport).getCode() << " - " << manager.getAirports().at(airport).getName() << endl;
+    string s;
+    for (char c : airport){
+        s.push_back(::toupper(c));
+    }
+    cout << endl << "Airport found!\n" << manager.getAirports().at(s).getCode() << " - " << manager.getAirports().at(s).getName() << endl;
 
     return airport;
 }
@@ -113,7 +117,7 @@ string Menu::findbyCity(Manager& manager){
     }
     int input;
     while (true){
-    cout << "Choose(0 to return to previous menu): ";
+    cout << "Choose airport or 0 to return to previous menu: ";
     try{
         cin >> input;
         if (input >= 0 && input <= m.size()) break;
@@ -176,6 +180,25 @@ int Menu::choiceK(){
     return auxMenu(3019,1);
 }
 
+int Menu::airportChoiceMenu1(){
+    cout << endl << "Select airport of origin" << endl;
+    cout << "1. Select airport by code" << endl;
+    cout << "2. Select airport by city" << endl;
+    cout << "3. Select airport by country" << endl;
+    cout << "0. Return to main menu" << endl;
+    cout << "Choose an option: ";
+    return auxMenu(3,0);
+}
+
+int Menu::airportChoiceMenu2(){
+    cout << endl << "Select airport of destination" << endl;
+    cout << "1. Select airport by code" << endl;
+    cout << "2. Select airport by city" << endl;
+    cout << "3. Select airport by country" << endl;
+    cout << "0. Return to main menu" << endl;
+    cout << "Choose an option: ";
+    return auxMenu(3,0);
+}
 
 void Menu::menuController(Manager& manager) {
     int op;
@@ -184,13 +207,69 @@ void Menu::menuController(Manager& manager) {
         int temp;
         op = mainMenu();
         do {
-            int temp2;
+            int temp2 , ex;
 
             switch (op) {
                 case 1:{
                     string origin, dest;
-                    cout << "What is the flight origin:"; cin >> origin;
-                    cout << "What is the flight destination:"; cin >> dest;
+                    //cout << "What is the flight origin:"; cin >> origin;
+                    //cout << "What is the flight destination:"; cin >> dest;
+                    int control = airportChoiceMenu1();
+                    do{
+                        switch (control) {
+                            case 1:
+                            {
+                                origin = findByCode(manager);
+                                control = 0;
+                                break;
+                            }
+                            case 2:
+                            {
+                                origin = findbyCity(manager);
+                                control = 0;
+                                break;
+                            }
+                            case 3:
+                            {
+                                origin = findbyCountry(manager);
+                                control = 0;
+                                break;
+                            }
+                            case 0 : {
+                                ex = 0; temp = 0;
+                            };
+                        }
+                    }while(control != 0);
+                    if(!ex) break;
+                    int var = airportChoiceMenu2();
+                    int ex = 1;
+                    do{
+                        switch (var) {
+                            case 1:
+                            {
+                                dest = findByCode(manager);
+                                var = 0;
+                                break;
+                            }
+                            case 2:
+                            {
+                                dest = findbyCity(manager);
+                                var = 0;
+                                break;
+                            }
+                            case 3:
+                            {
+                                dest = findbyCountry(manager);
+                                var = 0;
+                                break;
+                            }
+                            case 0 : {
+                                ex = 0; temp = 0;
+                            };
+                        }
+                    }while(var != 0);
+                    if (!ex) break;
+                    if (manager.checkSameAirport(origin,dest)) { cout << endl << "Cant travel to same airport" << endl; break; }
                     temp = flightMenu();
                     do{
                         switch(temp){
@@ -257,7 +336,7 @@ void Menu::menuController(Manager& manager) {
                                                 else {
                                                 control = 1;
                                                 break;}
-                                                break;
+                                                // break;
                                             }
 
                                             case 4:{
@@ -298,12 +377,13 @@ void Menu::menuController(Manager& manager) {
                                                     cin.sync();
                                                     cin.clear();
                                                     getline(cin, loc);
-                                                    airport =  manager.getGraph().getMaxConnections(1,loc);
                                                     if(!manager.checkAirportExists(airport)){
                                                         temp3 = 0, control = 0;
                                                     }
-                                                    else
+                                                    else{
+                                                        airport =  manager.getGraph().getMaxConnections(1,loc);
                                                         manager.airportReport(airport);
+                                                    }
                                                 }
                                                 break;
                                             }
@@ -326,7 +406,7 @@ void Menu::menuController(Manager& manager) {
 
                                                 case 2: {
                                                     x = nrFlights();
-                                                    cout << "\n***países atingiveis***\n";
+                                                    cout << "\nNumber of countries reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x,1);
                                                     cout << endl << "Press Enter to continue.\n";
                                                     system("pause > nul");
@@ -335,7 +415,7 @@ void Menu::menuController(Manager& manager) {
 
                                                 case 3: {
                                                     x = nrFlights();
-                                                    cout << "\n***cidades atingiveis***\n";
+                                                    cout << "\nNumber of cities reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x, 2);
                                                     cout << endl << "Press Enter to continue.\n";
                                                     system("pause > nul");
@@ -344,7 +424,7 @@ void Menu::menuController(Manager& manager) {
 
                                                 case 4: {
                                                     x = nrFlights();
-                                                    cout << "\n***aeroportos atingiveis***\n";
+                                                    cout << "\nNumber of airports reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x, 3);
                                                     cout << endl << "Press Enter to continue.\n";
                                                     system("pause > nul");
