@@ -213,8 +213,8 @@ int Manager::getNumberDestinationsCountries(std::string airportCode){
 void Manager::calculateGlobalStatsNetwork(){
     int nrAirports = airports.size() , nrFlights = graph.getNrTotalFlights() , nrAirlines = airlines.size();
     cout << "This network consists of " << nrAirports << " airports , " << nrAirlines << " airlines and " << nrFlights  << " flights." << endl;
-    string inp;
-    while (inp != "b"){cout << endl << endl << "Press b to continue:"; cin >> inp; }
+    int inp = -1;
+    while (inp != 0){cout << endl << endl << "Press 0 to continue: "; cin >> inp; }
     return;
 }
 
@@ -290,7 +290,7 @@ void Manager::airportReport(std::string airportCode) {
         cout << "This airport has " << getNumberFlights(airportCode) << " flights , " << getDepartures(airportCode) <<" of these are departures and " <<
         getArrivals(airportCode) << " are arrivals, to " << getNumberDestinations(airportCode)
         << " cities in " << getNumberDestinationsCountries(airportCode) << " countries." << endl;
-        cout << "On top of that, there exists " << getNumberAirlinesAirport(airportCode) << " airlines operating in it." << endl;
+        cout << "On top of that, there exists " << getNumberAirlinesAirport(airportCode) << " airlines operating in it." << endl << endl;
         cout << "Do you wish to list all airlines operating on this airport?(Y/n): ";
         string input;
         cin >> input;
@@ -306,8 +306,10 @@ void Manager::airportReport(std::string airportCode) {
         for (auto p : am){
             cout << ++x << ". " << setw(30) << p.second.getName() << setw(30) << p.second.getLocation().getCountry() << endl;
         }
-        cout << endl << "Press Enter to continue.\n";
-        system("pause > nul");
+        int inp = -1;
+        while (inp != 0){cout << endl << endl << "Press 0 to continue: "; cin >> inp; }
+        return;
+
     }
 }
 
@@ -395,8 +397,8 @@ void Manager::printAirports(int k,int opt){
                 Airport a = airports.at(elem.first);
                 cout << i++ << ". " << left << setw(40) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
             }
-            string inp;
-            while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
+            int inp = -1;
+            while (inp != 0){cout << endl << endl << "Press 0 to leave: "; cin >> inp; }
             break;
         }
         case 2:
@@ -413,13 +415,11 @@ void Manager::printAirports(int k,int opt){
                 Airport a = airports.at(elem.first);
                 cout << i++ << ". " << left << setw(25) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
             }
-            string inp;
-            while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
-            break;
+            int inp = -1;
+            while (inp != 0){cout << endl << endl << "Press 0 to leave: "; cin >> inp; }
+            return;
         }
-            break;
     }
-
 }
 
 void Manager::printArticulationPoints(){
@@ -430,8 +430,9 @@ void Manager::printArticulationPoints(){
                     "An airport that is an articulation point in the flight network is one that, if removed, would cause the network to become disconnected. In other words, it is an airport that plays a crucial role in connecting different groups of airports.\n"
                     "\n"
                     "Articulation points are important in a flight network because they can help to identify the airports that are most critical to the connectivity of the network. This information can be useful for a variety of purposes, such as identifying potential bottlenecks or points of failure in the network. For example, if an airport that is an articulation point in the network were to be closed for some reason, it could have a significant impact on the ability of the network to function properly. Understanding the role of articulation points in a flight network can help to inform decisions about how to maintain and improve the network's connectivity.";
-    string inp;
-    while (inp != "b"){cout << endl << endl << "Press b to continue:"; cin >> inp; }
+    int inp = -1;
+    while (inp != 0){cout << endl << endl << "Press 0 to leave: "; cin >> inp; }
+    return;
 }
 
 void Manager::printConnectedComponents(){
@@ -441,17 +442,17 @@ void Manager::printConnectedComponents(){
             "\n"
             "The connected components of the flight network can help to identify the different routes that are possible between airports. For example, if there is a connected component consisting of airports A, B, C, and D, it means that there is a series of flights connecting these airports and it is possible to fly from any of these airports to any of the others. On the other hand, if there is a separate connected component consisting of airports E and F, it means that it is not possible to fly directly between airports A, B, C, and D and airports E and F.\n"
             "\n"
-            "Connected components are important in a flight network because they can help to identify the different groups of airports that are connected to one another and the routes that are possible between them. In this case, there are " << getConnectedComponents() << ". This information can be useful for a variety of purposes, such as planning flights or analyzing the efficiency of a flight network." << endl;
-    string inp;
-    while (inp != "b"){cout << endl << endl << "Press b to continue:"; cin >> inp; }
+            "Connected components are important in a flight network because they can help to identify the different groups of airports that are connected to one another and the routes that are possible between them. In this case, there are " << getConnectedComponents() << " connected components. This information can be useful for a variety of purposes, such as planning flights or analyzing the efficiency of a flight network." << endl;
+    int inp = -1;
+    while (inp != 0){cout << endl << endl << "Press 0 to leave: "; cin >> inp; }
 }
 
 void Manager::printDiameter() {
     cout << endl << "This may take a while to calculate, please dont press any key" << endl;
     cout << "The diameter of a graph is the length of the shortest path between the most distanced nodes" << endl;
     cout << "The diameter of the network is: " << graph.diameter() << endl;
-    string inp;
-    while (inp != "b"){cout << endl << "Press b to continue:"; cin >> inp; }
+    int inp = -1;
+    while (inp != 0){cout << endl << "Press 0 to leave: "; cin >> inp; }
 }
 
 int Manager::maxFlightsStats(string src, int maxFlights, int opt) {

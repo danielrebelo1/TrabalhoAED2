@@ -32,7 +32,7 @@ void Graph::dfs(int v) {
 
 
 int Graph::dfs_cc(){
-    int counter = 0 , temp = 1;
+    int counter = 0 ;
     for (Node &node : nodes) node.visited = false;
     for (int i = 0; i < n; i++){
         if (!nodes[i].visited){

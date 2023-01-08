@@ -28,9 +28,9 @@ int Menu::auxMenu(int maxOption, int minOption){
 int Menu::mainMenu() {
     cout << "\n";
     cout << "MAIN MENU\n\n";
-    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.Network Stats" << '\n' << "4.City Report" << '\n' << "5.Country Report" << '\n' << "6.About us" << '\n' << "0.Quit" << "\n\n";
+    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.Network Stats" << '\n' << "4.Country Report" << '\n' << "5.About us" << '\n' << "0.Quit" << "\n\n";
     cout << "Choose an option: ";
-    return auxMenu(6, 0);
+    return auxMenu(5, 0);
 }
 
 int Menu::AboutUsMenu(){
@@ -558,15 +558,15 @@ void Menu::menuController(Manager& manager) {
                     break;
                 }
 
-                case 4:{
+                /*case 4:{
                     string city;
                     cityReportMenu(city);
                     manager.cityReport(city);
                     temp = 0;
                     break;
-                }
+                }*/
 
-                case 5:{
+                case 4:{
                     string country;
                     countryReportMenu(country);
                     manager.countryReport(country);
@@ -575,7 +575,7 @@ void Menu::menuController(Manager& manager) {
                 }
 
 
-                case 6:{
+                case 5:{
                     temp = AboutUsMenu();
                     break;
                 }
