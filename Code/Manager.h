@@ -218,7 +218,7 @@ public:
      * Complexity: O(n)
      * @param city City's name
      */
-    void cityReport(std::string city);
+    void cityReport(std::string &city);
 
     /**
      * Prints the path of a flight.
@@ -290,6 +290,7 @@ public:
      * @return Transformed string
      */
     std::string toupperString(std::string s);
+    void countryReport(std::string &country);
 };
 
 

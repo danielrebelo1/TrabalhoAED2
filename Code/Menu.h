@@ -140,6 +140,8 @@ public:
      * @return User's choice
      */
     int networkReportMenu();
+    std::string cityReportMenu(std::string &city);
+    std::string countryReportMenu(std::string &country);
 };
 
 
