@@ -55,7 +55,7 @@ std::string Manager::get_airport_by_country(std::string country){
     bool airportSelected = false;
     int i = 1;
     map <int,string> m;
-    cout << endl << "Airports in " << country << endl;
+    cout << endl << "Airports in " << airportsCountry.begin()->second.getLocation().getCountry() << endl;
     int input;
     while(!airportSelected) {
         int j = 1;

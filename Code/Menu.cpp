@@ -375,10 +375,10 @@ void Menu::menuController(Manager& manager) {
                                                 }
                                                 else{
                                                     string loc;
-                                                    cout << endl << "What is the country/city\n";
+                                                    cout << endl << "What is the country/city: ";
                                                     cin.sync();
                                                     cin.clear();
-                                                    cin.ignore();
+                                                    // cin.ignore();
                                                     getline(cin, loc);
                                                     airport = manager.getGraph().getMaxConnections(1,loc);
                                                     if(!manager.checkAirportExists(airport)){
