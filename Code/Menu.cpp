@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "Menu.h"
 #include "Manager.h"
-#include <conio.h>
+
 
 using namespace std;
 
@@ -378,13 +378,14 @@ void Menu::menuController(Manager& manager) {
                                                     cout << endl << "What is the country/city\n";
                                                     cin.sync();
                                                     cin.clear();
+                                                    cin.ignore();
                                                     getline(cin, loc);
+                                                    airport = manager.getGraph().getMaxConnections(1,loc);
                                                     if(!manager.checkAirportExists(airport)){
                                                         temp3 = 0, control = 0;
                                                     }
                                                     else{
-                                                        airport =  manager.getGraph().getMaxConnections(1,loc);
-                                                        manager.airportReport(airport);
+                                                         manager.airportReport(airport);
                                                     }
                                                 }
                                                 break;
