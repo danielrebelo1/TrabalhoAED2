@@ -58,9 +58,10 @@ int Menu::typeInfoChoiceMenu(){
     cout << "2.Top-k airports\n";
     cout << "3.Network articulation points" << endl;
     cout << "4.Network connected components/routes" << endl;
+    cout << "5.Network diameter" << endl;
     cout << "0.Return to main menu\n";
     cout << endl << "Choose an option: ";
-    return auxMenu(4,0);
+    return auxMenu(5,0);
 }
 
 
@@ -213,8 +214,6 @@ void Menu::menuController(Manager& manager) {
             switch (op) {
                 case 1:{
                     string origin, dest;
-                    //cout << "What is the flight origin:"; cin >> origin;
-                    //cout << "What is the flight destination:"; cin >> dest;
                     int control = airportChoiceMenu1();
                     do{
                         switch (control) {
@@ -222,6 +221,7 @@ void Menu::menuController(Manager& manager) {
                             {
                                 origin = findByCode(manager);
                                 control = 0;
+                                ex = 1;
                                 break;
                             }
                             case 2:
@@ -485,6 +485,12 @@ void Menu::menuController(Manager& manager) {
                                 case 4:
                                 {
                                     manager.printConnectedComponents();
+                                    break;
+                                }
+
+                                case 5:
+                                {
+                                    manager.printDiameter();
                                     break;
                                 }
                                 

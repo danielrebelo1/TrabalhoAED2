@@ -355,3 +355,40 @@ vector<int> Graph::getArticulationPoints() {
     }
     return vec;
 }
+
+int Graph::diameter() {
+    int maxDistance = 0;
+
+    for(int i = 0; i < n; i++) {
+        vector<int> distance(n, -1);
+        queue<int> q;
+        q.push(i);
+        distance[i] = 0;
+        nodes[i].visited = true;
+
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+            for (const Edge &edge: nodes[u].adj) {
+                int v = edge.dest;
+                if (!nodes[v].visited) {
+                    distance[v] = distance[u] + 1;
+                    nodes[v].visited = true;
+                    q.push(v);
+                }
+            }
+        }
+
+        for (int j = 0; j < n; j++) {
+            maxDistance = max(maxDistance, distance[j]);
+        }
+
+        for (int j = 0; j < n; j++) {
+            nodes[j].visited = false;
+        }
+
+    }
+
+    return maxDistance;
+
+}
