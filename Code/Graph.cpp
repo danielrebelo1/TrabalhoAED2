@@ -75,7 +75,7 @@ int Graph::getWeight(int src, Edge edge) {
 }
 
 vector<Node> Graph::bfs(int start, int end) {
-    for (int v=0; v<n; v++) nodes[v].visited = false;
+    for (int v=0; v<n; v++) { nodes[v].visited = false; nodes[v].dist = 0;}
 
     vector<Node> path;
     queue<int> q; // queue of unvisited nodes
@@ -347,7 +347,7 @@ vector<int> Graph::getArticulationPoints() {
         node.low = 0;
         node.num = 0;
     }
-    int order = 1;
+    int order = 0;
     for (int i = 0; i < n; i++){
         if(!nodes[i].visited){
             dfs_articulationPoints(i,order,vec);

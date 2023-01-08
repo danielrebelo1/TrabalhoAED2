@@ -28,18 +28,19 @@ int Menu::auxMenu(int maxOption, int minOption){
 int Menu::mainMenu() {
     cout << "\n";
     cout << "MAIN MENU\n\n";
-    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.About us" << '\n' << "0.Quit" << "\n\n";
+    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.Network Info" << '\n' << "4.About us" << '\n' << "0.Quit" << "\n\n";
     cout << "Choose an option: ";
-    return auxMenu(3, 0);
+    return auxMenu(4, 0);
 }
 
 int Menu::AboutUsMenu(){
     cout << "\nHelp platform for the use of air transports created in favor of the Algorithms and Data Structure course\n" << endl;
     cout << "Meet the team: \n";
-    cout << left << setw(16) <<  "Carlos Daniel Rebelo\t" << "Student number: " << setw(9) << "202108885\n";
-    cout << left << setw(20)  << "Hélder Costa\t" << setw(20) << "Student number: " << setw(9) << "202108719\n";
-    cout << left << setw(20)  << "Jaime Fonseca\t" << setw(20) << "Student number: " << setw(9) << "202108789\n";
-    cout << "0.Return to main menu\n" << endl;
+    cout << left << setw(30) <<  "Student Name\t" << setw(18) << "Student number" << setw(9) << endl;
+    cout << left << setw(30) <<  "Carlos Daniel Rebelo\t" << setw(18) << "202108885" << endl;
+    cout << left << setw(30)  << "Hélder Costa\t"  << setw(18) << " 202108719" << endl;
+    cout << left << setw(30)  << "Jaime Fonseca\t" << setw(18) << " 202108789" << endl;
+    cout << endl << "0.Return to main menu: ";
     return auxMenu(0,0);
 }
 
@@ -90,8 +91,8 @@ string Menu::findByCode(Manager& manager){
     string airport;
     cout << endl << "Insert airport code: ";
     cin >> airport;
-    while(!manager.checkAirportExists(airport)){
-        cin >>airport;
+    if(!manager.checkAirportExists(airport)){
+        return "";
     }
     string s;
     for (char c : airport){
@@ -200,6 +201,17 @@ int Menu::airportChoiceMenu2(){
     cout << "0. Return to main menu" << endl;
     cout << endl << "Choose an option: ";
     return auxMenu(3,0);
+}
+
+int Menu::networkReportMenu(){
+    cout << endl << "Select network stat\n" << endl;
+    cout << "1. Network Report" << endl;
+    cout << "2. Network articulation points" << endl;
+    cout << "3. Network connected components/routes" << endl;
+    cout << "4. Network diameter" << endl;
+    cout << "0. Return to main menu" << endl;
+    cout << endl << "Choose an option: ";
+    return auxMenu(4,0);
 }
 
 void Menu::menuController(Manager& manager) {
@@ -506,6 +518,36 @@ void Menu::menuController(Manager& manager) {
                 }
 
                 case 3:{
+                    int temp2 = networkReportMenu();
+                    int temp3 = 1;
+                    do{
+                        switch (temp2) {
+                            case 1:
+                                manager.calculateGlobalStatsNetwork();
+                                temp3 = 0;
+                                break;
+                            case 2:
+                                manager.printArticulationPoints();
+                                temp3 = 0;
+                                break;
+                            case 3:
+                                manager.printConnectedComponents();
+                                temp3 = 0;
+                                break;
+                            case 4:
+                                manager.printDiameter();
+                                temp3 = 0;
+                                break;
+                            case 0:
+                                temp = 0;
+                                temp3 = 0;
+                                break;
+                        }
+                        }while (temp3 != 0);
+                    break;
+                }
+
+                case 4:{
                     temp = AboutUsMenu();
                     break;
                 }

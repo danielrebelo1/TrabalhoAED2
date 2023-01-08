@@ -121,6 +121,7 @@ public:
     int choiceK();
     int airportChoiceMenu1();
     int airportChoiceMenu2();
+    int networkReportMenu();
 };
 
 
