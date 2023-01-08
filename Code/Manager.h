@@ -218,7 +218,7 @@ public:
      * Complexity: O(n)
      * @param city City's name
      */
-    void cityReport(std::string city);
+    void cityReport(std::string &city);
 
     /**
      * Prints the path of a flight.
@@ -272,6 +272,7 @@ public:
 
     bool checkSameAirport(std::string origin, std::string dest);
     std::string toupperString(std::string s);
+    void countryReport(std::string &country);
 };
 
 

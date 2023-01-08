@@ -138,7 +138,7 @@ vector<Node> Graph::bfsMD(int start, int maxDistance) {
     }
 
     for(int i = 0; i < n; i++){
-        if(nodes[i].dist <= maxDistance)
+        if(nodes[i].dist <= maxDistance && nodes[i].dist > 0)
             path.push_back(nodes[i]);
     }
     return path;

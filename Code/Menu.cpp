@@ -28,9 +28,9 @@ int Menu::auxMenu(int maxOption, int minOption){
 int Menu::mainMenu() {
     cout << "\n";
     cout << "MAIN MENU\n\n";
-    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.Network Info" << '\n' << "4.About us" << '\n' << "0.Quit" << "\n\n";
+    cout << "1.Route selection helper" << '\n' << "2.Airport information" << '\n' << "3.Network Stats" << '\n' << "4.City Report" << '\n' << "5.Country Report" << '\n' << "6.About us" << '\n' << "0.Quit" << "\n\n";
     cout << "Choose an option: ";
-    return auxMenu(4, 0);
+    return auxMenu(6, 0);
 }
 
 int Menu::AboutUsMenu(){
@@ -57,12 +57,9 @@ int Menu::typeInfoChoiceMenu(){
     cout << endl << "INFORMATION MENU\n";
     cout << endl << "1.Get information about a specific airport\n";
     cout << "2.Top-k airports\n";
-    cout << "3.Network articulation points" << endl;
-    cout << "4.Network connected components/routes" << endl;
-    cout << "5.Network diameter" << endl;
     cout << "0.Return to main menu\n";
     cout << endl << "Choose an option: ";
-    return auxMenu(5,0);
+    return auxMenu(2,0);
 }
 
 
@@ -214,6 +211,20 @@ int Menu::networkReportMenu(){
     return auxMenu(4,0);
 }
 
+string Menu::cityReportMenu(std::string &city){
+    cout << endl << "Insert the city: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, city);
+    return city;
+}
+
+string Menu::countryReportMenu(std::string &country){
+    cout << endl << "Insert the country: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, country);
+    return country;
+}
+
 void Menu::menuController(Manager& manager) {
     int op;
     cout << endl << "Welcome to the support platform for the use of air transports!\n";
@@ -360,7 +371,7 @@ void Menu::menuController(Manager& manager) {
                                                 int x = subMenu();
                                                 if(x == 1){
                                                     airport = manager.getGraph().getMaxConnections(2);
-                                                    manager.airportReport(airport);
+                                                    manager.airportReport(manager.toupperString(airport));
                                                 }
                                                 else{
                                                     string loc;
@@ -417,7 +428,7 @@ void Menu::menuController(Manager& manager) {
                                             switch (temp) {
                                                 int x;
                                                 case 1: {
-                                                    manager.airportReport(airport);
+                                                    manager.airportReport(manager.toupperString(airport));
                                                     break;
                                                 }
 
@@ -425,7 +436,7 @@ void Menu::menuController(Manager& manager) {
                                                     x = nrFlights();
                                                     cout << "\nNumber of countries reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x,1);
-                                                    cout << endl << "Press 0 to continue.\n";
+                                                    cout << endl << "Press 0 to continue: ";
                                                     auxMenu(0,0);
                                                     // system("pause > nul");
                                                     break;
@@ -435,7 +446,7 @@ void Menu::menuController(Manager& manager) {
                                                     x = nrFlights();
                                                     cout << "\nNumber of cities reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x, 2);
-                                                    cout << endl << "Press 0 to continue.\n";
+                                                    cout << endl << "Press 0 to continue: ";
                                                     auxMenu(0,0);
                                                     // system("pause > nul");
                                                     break;
@@ -445,7 +456,7 @@ void Menu::menuController(Manager& manager) {
                                                     x = nrFlights();
                                                     cout << "\nNumber of airports reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x, 3);
-                                                    cout << endl << "Press 0 to continue.\n";
+                                                    cout << endl << "Press 0 to continue: ";
                                                     auxMenu(0,0);
                                                     // system("pause > nul");
                                                     break;
@@ -548,6 +559,23 @@ void Menu::menuController(Manager& manager) {
                 }
 
                 case 4:{
+                    string city;
+                    cityReportMenu(city);
+                    manager.cityReport(city);
+                    temp = 0;
+                    break;
+                }
+
+                case 5:{
+                    string country;
+                    countryReportMenu(country);
+                    manager.countryReport(country);
+                    temp = 0;
+                    break;
+                }
+
+
+                case 6:{
                     temp = AboutUsMenu();
                     break;
                 }

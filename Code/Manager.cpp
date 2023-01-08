@@ -311,10 +311,10 @@ void Manager::airportReport(std::string airportCode) {
     }
 }
 
-void Manager::cityReport(std::string city){
+void Manager::cityReport(std::string &city){
     if (checkCityExists(city)){
         airportMap am = airports_filter_by_city(city);
-        cout << "The beautiful city of " << city << " in " << am.begin()->second.getLocation().getCountry() << " has " << am.size() << " airports." << endl;
+        cout << endl << "The beautiful city of " << am.begin()->second.getLocation().getCity() << " in " << am.begin()->second.getLocation().getCountry() << " has " << am.size() << " airports." << endl;
         cout << "These are:" << endl;
         map<int,string> m;
         int x = 1;
@@ -323,18 +323,43 @@ void Manager::cityReport(std::string city){
             m.insert({x,p.second.getCode()});
         }
 
-        cout << "Enter the airport number above for an airport report or enter 0 to leave this menu: ";
+        cout << endl << "Enter 0 to leave: ";
         int input;
         cin >> input;
-        while (input > m.size()) {
-            cout << "Index not valid.Try again: " << endl;
+        while (input != 0) {
+            cout << endl << "Enter 0 to leave: ";
             cin >> input;
         }
-        if (input == 0) return;
-        airportReport(m.at(input));
+        return;
     }
-
 }
+
+void Manager::countryReport(string &country){
+    if (checkCountryExists(country)){
+        airportMap am = airports_filter_by_country(country);
+        cout << "The beautiful country of " << am.begin()->second.getLocation().getCountry() << " has " << am.size() << " airports." << endl;
+        cout << "These are:" << endl;
+        int departures = 0 , arrivals = 0 , airlines = 0;
+        map<int,string> m;
+        int x = 1;
+        for (auto p : am){
+            cout << x++ << ". " << p.second.getName() << " in " << p.second.getLocation().getCity() << endl;
+            // m.insert({x,p.second.getCode()});
+            departures += getDepartures(p.second.getCode());
+            arrivals += getArrivals(p.second.getCode());
+        }
+        cout << "In all of these combined, there are " << departures + arrivals << " flights, " << departures << " of these are departures and " << arrivals << " are arrivals." << endl;
+        cout << endl << "Enter 0 to leave: ";
+        int input;
+        cin >> input;
+        while (input != 0) {
+            cout << endl << "Enter 0 to leave: ";
+            cin >> input;
+        }
+        return;
+    }
+}
+
 
 void Manager::printPath(vector<Node> path) {
     if (path.empty()) cout << "Unable to find a route between your origin and the destination desired!" << endl;

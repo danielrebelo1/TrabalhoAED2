@@ -122,6 +122,8 @@ public:
     int airportChoiceMenu1();
     int airportChoiceMenu2();
     int networkReportMenu();
+    std::string cityReportMenu(std::string &city);
+    std::string countryReportMenu(std::string &country);
 };
 
 
