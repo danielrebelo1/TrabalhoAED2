@@ -19,8 +19,6 @@ airport\+Map \mbox{\hyperlink{classManager_ad869a53adcf140e6d7060820e15eec8f}{ai
 \item 
 airport\+Map \mbox{\hyperlink{classManager_af4e1f54c79b1c73eb6d9f2d6cc0d066f}{airports\+\_\+filter\+\_\+by\+\_\+city}} (std\+::string city)
 \item 
-airline\+Map \mbox{\hyperlink{classManager_a82ea90d91c36ac7a343d1bd9142dd4c2}{airlines\+\_\+filter\+\_\+by\+\_\+country}} (std\+::string country)
-\item 
 airline\+Map \mbox{\hyperlink{classManager_a58238570d2d18ec97f0b6df7198d07f6}{airlines\+\_\+filter\+\_\+by\+\_\+airport}} (std\+::string airport\+Code)
 \item 
 void \mbox{\hyperlink{classManager_a72dc8e217052b67b2a722b370537b9ff}{airport\+With\+Most\+Connections}} (int opt, std\+::string country)
@@ -41,10 +39,6 @@ int \mbox{\hyperlink{classManager_a318e361811de000f5d6ed80a929cd899}{max\+Flight
 \item 
 void \mbox{\hyperlink{classManager_a92b66a523cacbc31c7767f6ab99cb1e3}{calculate\+Global\+Stats\+Network}} ()
 \item 
-void \mbox{\hyperlink{classManager_ae49bd0ad1508f892130b49f23f67cf1e}{calculate\+Departures\+Country}} (std\+::string country)
-\item 
-void \mbox{\hyperlink{classManager_a8dcf3f73b95e06981da3ae197d4d80bf}{calculate\+Flights\+Airline}} (std\+::string airline\+Code)
-\item 
 bool \mbox{\hyperlink{classManager_a6b6a748005171f784589de4e30d70a26}{check\+Airport\+Exists}} (std\+::string airport\+Code)
 \item 
 bool \mbox{\hyperlink{classManager_a39f3258a8a9f7d0168c4668516758671}{check\+Airline\+Exists}} (std\+::string airline\+Code)
@@ -54,8 +48,6 @@ bool \mbox{\hyperlink{classManager_af604e6d3b85a684ec60c96f537cc2ca8}{check\+Cou
 bool \mbox{\hyperlink{classManager_ab942c3fc9c5ca2d026ba6ed726a09159}{check\+City\+Exists}} (std\+::string city)
 \item 
 void \mbox{\hyperlink{classManager_afff3efe215b692273a3b9ff4c01abdd7}{airport\+Report}} (std\+::string airport\+Code)
-\item 
-void \mbox{\hyperlink{classManager_a780c9522069333cb70d02359bb54a9da}{city\+Report}} (std\+::string \&city)
 \item 
 void \mbox{\hyperlink{classManager_ac856dba9d911dd2e141c893d4755406b}{print\+Path}} (std\+::vector$<$ \mbox{\hyperlink{structNode}{Node}} $>$ airports)
 \item 
@@ -100,20 +92,6 @@ Default constructor for the manager class. Complexity\+: O(1)
 Gets all the airlines operating in an airport 
 \begin{DoxyParams}{Parameters}
 {\em airport\+Code} & \mbox{\hyperlink{classAirport}{Airport}} code (user chosen) \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-All the airlines 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classManager_a82ea90d91c36ac7a343d1bd9142dd4c2}\label{classManager_a82ea90d91c36ac7a343d1bd9142dd4c2}} 
-\index{Manager@{Manager}!airlines\_filter\_by\_country@{airlines\_filter\_by\_country}}
-\index{airlines\_filter\_by\_country@{airlines\_filter\_by\_country}!Manager@{Manager}}
-\doxysubsubsection{\texorpdfstring{airlines\_filter\_by\_country()}{airlines\_filter\_by\_country()}}
-{\footnotesize\ttfamily airline\+Map Manager\+::airlines\+\_\+filter\+\_\+by\+\_\+country (\begin{DoxyParamCaption}\item[{std\+::string}]{country }\end{DoxyParamCaption})}
-
-Gets all the airlines in a country. Complexity\+: O(n) 
-\begin{DoxyParams}{Parameters}
-{\em country} & Country (user chosen) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -169,28 +147,6 @@ Prints the airport with the most connections. Complexity\+: O(n²)
 {\em opt} & User option \\
 \hline
 {\em country} & Country restriction if needed \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{classManager_ae49bd0ad1508f892130b49f23f67cf1e}\label{classManager_ae49bd0ad1508f892130b49f23f67cf1e}} 
-\index{Manager@{Manager}!calculateDeparturesCountry@{calculateDeparturesCountry}}
-\index{calculateDeparturesCountry@{calculateDeparturesCountry}!Manager@{Manager}}
-\doxysubsubsection{\texorpdfstring{calculateDeparturesCountry()}{calculateDeparturesCountry()}}
-{\footnotesize\ttfamily void Manager\+::calculate\+Departures\+Country (\begin{DoxyParamCaption}\item[{std\+::string}]{country }\end{DoxyParamCaption})}
-
-Prints the number of departures in a specific country. Complexity\+: O(n²) 
-\begin{DoxyParams}{Parameters}
-{\em country} & Country\textquotesingle{}s name \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{classManager_a8dcf3f73b95e06981da3ae197d4d80bf}\label{classManager_a8dcf3f73b95e06981da3ae197d4d80bf}} 
-\index{Manager@{Manager}!calculateFlightsAirline@{calculateFlightsAirline}}
-\index{calculateFlightsAirline@{calculateFlightsAirline}!Manager@{Manager}}
-\doxysubsubsection{\texorpdfstring{calculateFlightsAirline()}{calculateFlightsAirline()}}
-{\footnotesize\ttfamily void Manager\+::calculate\+Flights\+Airline (\begin{DoxyParamCaption}\item[{std\+::string}]{airline\+Code }\end{DoxyParamCaption})}
-
-Prints the number of flights associated in an airline. Complexity\+: O(n) 
-\begin{DoxyParams}{Parameters}
-{\em airline\+Code} & \mbox{\hyperlink{classAirline}{Airline}}\textquotesingle{}s code \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classManager_a92b66a523cacbc31c7767f6ab99cb1e3}\label{classManager_a92b66a523cacbc31c7767f6ab99cb1e3}} 
@@ -271,17 +227,6 @@ Checks if two airports are the same. Complexity\+: O(1)
 \begin{DoxyReturn}{Returns}
 True or false. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classManager_a780c9522069333cb70d02359bb54a9da}\label{classManager_a780c9522069333cb70d02359bb54a9da}} 
-\index{Manager@{Manager}!cityReport@{cityReport}}
-\index{cityReport@{cityReport}!Manager@{Manager}}
-\doxysubsubsection{\texorpdfstring{cityReport()}{cityReport()}}
-{\footnotesize\ttfamily void Manager\+::city\+Report (\begin{DoxyParamCaption}\item[{std\+::string \&}]{city }\end{DoxyParamCaption})}
-
-Prints the report of a city with various details. Complexity\+: O(n) 
-\begin{DoxyParams}{Parameters}
-{\em city} & City\textquotesingle{}s name \\
-\hline
-\end{DoxyParams}
 \mbox{\Hypertarget{classManager_ad68ec4973e486a0aa97159f9de639507}\label{classManager_ad68ec4973e486a0aa97159f9de639507}} 
 \index{Manager@{Manager}!countryReport@{countryReport}}
 \index{countryReport@{countryReport}!Manager@{Manager}}
