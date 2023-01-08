@@ -2,10 +2,6 @@
 // Created by Daniel Rebelo on 30/12/2022.
 //
 
-#include <fstream>
-#include <algorithm>
-#include <set>
-#include <map>
 #include "Manager.h"
 using namespace std;
 
@@ -143,31 +139,6 @@ airportMap Manager::airports_filter_by_city(std::string city){
     return airportsCity;
 }
 
-airlineMap Manager::airlines_filter_by_country(std::string country){
-    airlineMap airlinesCountry;
-    bool noMoreFound = true;
-    auto it = airlines.begin();
-    while (noMoreFound){
-        it = find_if(it,airlines.end(),[&country]
-                (auto p) {return p.second.getLocation().getCountry() == country;});
-        if (it != airlines.end()){
-            airlinesCountry.insert(*it);
-            it++;
-        }
-        else{
-            noMoreFound = false;
-        }
-    }
-    if (airlinesCountry.empty()) { cout << "There are no airlines from the selected country;" << endl; return airlinesCountry; };
-
-    cout << "There are " << airlinesCountry.size() << " airlines from " << country << endl;
-    cout << "These are:" << endl;
-    int x = 0;
-    for (auto a : airlinesCountry){
-        cout << ++x << ". " << a.second.getName() << "    " << a.second.getLocation().getCity() << endl;
-    }
-    return airlinesCountry;
-}
 
 airlineMap Manager::airlines_filter_by_airport(std::string airportCode){
     airlineMap am;
@@ -180,11 +151,6 @@ airlineMap Manager::airlines_filter_by_airport(std::string airportCode){
     return am;
 }
 
-
-void Manager::airportWithMostConnections(int opt, string country){
-    string code = graph.getMaxConnections(opt, country);// podemos também retornar o aeroporto fazendo simplesmente airportMap[code]
-    cout << "The airport with the most connections is " << airports.at(code).getName() << " from " << airports.at(code).getLocation().getCity() << "," << airports.at(code).getLocation().getCountry() << "." << endl;
-}
 
 int Manager::getDepartures(std::string airportCode){
     return graph.getDeparturesAirport(airportCode);
@@ -218,21 +184,7 @@ void Manager::calculateGlobalStatsNetwork(){
     return;
 }
 
-void Manager::calculateDeparturesCountry(std::string country){
-    int nrDepartures = 0;
-    airportMap am = airports_filter_by_country(country);
-    if (am.empty()) {cout << "No airports in that country" << endl;}
-    for (auto p : am){
-        nrDepartures += graph.getDeparturesAirport(p.second.getCode());
-    }
-    cout << "Number of departures in " << country << ": " << nrDepartures;
-    return;
-}
 
-void Manager::calculateFlightsAirline(std::string airlineCode){
-    cout << "This airline has " << graph.getFlightsAirline(airlineCode) << " flights";
-    return;
-}
 
 bool Manager::checkAirportExists(std::string airportCode) {
     auto it = std::find_if(airports.begin(), airports.end(),[&airportCode, this](pair<string,Airport> ap){return tolowerString(ap.second.getCode()) == tolowerString(airportCode);});
@@ -313,28 +265,7 @@ void Manager::airportReport(std::string airportCode) {
     }
 }
 
-void Manager::cityReport(std::string &city){
-    if (checkCityExists(city)){
-        airportMap am = airports_filter_by_city(city);
-        cout << endl << "The beautiful city of " << am.begin()->second.getLocation().getCity() << " in " << am.begin()->second.getLocation().getCountry() << " has " << am.size() << " airports." << endl;
-        cout << "These are:" << endl;
-        map<int,string> m;
-        int x = 1;
-        for (auto p : am){
-            cout << x << ". " << p.second.getName() << endl;
-            m.insert({x,p.second.getCode()});
-        }
 
-        cout << endl << "Enter 0 to leave: ";
-        int input;
-        cin >> input;
-        while (input != 0) {
-            cout << endl << "Enter 0 to leave: ";
-            cin >> input;
-        }
-        return;
-    }
-}
 
 void Manager::countryReport(string &country){
     if (checkCountryExists(country)){
@@ -372,6 +303,7 @@ void Manager::printPath(vector<Node> path) {
                 << ")" << ", you go to" << "\n";
     }
 }
+
 int Manager::getConnectedComponents() {
     return graph.dfs_cc();
 }
@@ -391,14 +323,14 @@ void Manager::printAirports(int k,int opt){
             sort(v.begin(),v.end(),[] ( pair<string,int> &p1 , pair<string,int> &p2) {return p1.second > p2.second;});
             v.resize(k);
             int i = 1;
-            cout << endl;
+            cout << endl << "TOP "<< k << " AIRPORTS WITH MOST FLIGHTS\n" << endl;
             cout << left << setw(40) << "    Airport" << setw(23) << setfill(' ') << "Number of Flights" << setw(20) << "City" << setw(20) << "Country" << endl;
             for (auto elem : v){
                 Airport a = airports.at(elem.first);
                 cout << i++ << ". " << left << setw(40) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
             }
             int inp = -1;
-            while (inp != 0){cout << endl << endl << "Press 0 to leave: "; cin >> inp; }
+            while (inp != 0){cout << endl << "Press 0 to leave: "; cin >> inp; }
             break;
         }
         case 2:
@@ -409,14 +341,14 @@ void Manager::printAirports(int k,int opt){
             sort(v.begin(),v.end(),[] ( pair<string,int> &p1 , pair<string,int> &p2) {return p1.second > p2.second;});
             v.resize(k);
             int i = 1;
-            cout << endl;
+            cout << endl << "TOP "<< k << " AIRPORTS WITH MOST AIRLINES\n" << endl;
             cout << left << setw(25) << "    Airport" << setw(23) << setfill(' ') << "Number of Airlines" << setw(20) << "City" << setw(20) << "Country" << endl;
             for (auto elem : v){
                 Airport a = airports.at(elem.first);
                 cout << i++ << ". " << left << setw(25) << a.getName() << setw(20) << setfill(' ') << elem.second << setw(20) << a.getLocation().getCity() << setw(20) << a.getLocation().getCountry() << endl;
             }
             int inp = -1;
-            while (inp != 0){cout << endl << endl << "Press 0 to leave: "; cin >> inp; }
+            while (inp != 0){cout << endl << "Press 0 to leave: "; cin >> inp; }
             return;
         }
     }

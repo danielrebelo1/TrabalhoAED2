@@ -2,8 +2,6 @@
 // Created by helde on 04/01/2023.
 //
 
-#include <map>
-#include <algorithm>
 #include "Menu.h"
 #include "Manager.h"
 
@@ -209,13 +207,6 @@ int Menu::networkReportMenu(){
     cout << "0. Return to main menu" << endl;
     cout << endl << "Choose an option: ";
     return auxMenu(4,0);
-}
-
-string Menu::cityReportMenu(std::string &city){
-    cout << endl << "Insert the city: ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::getline(std::cin, city);
-    return city;
 }
 
 string Menu::countryReportMenu(std::string &country){
@@ -486,6 +477,7 @@ void Menu::menuController(Manager& manager) {
                                         case 1:
                                         {
                                             int k = choiceK();
+                                            cout << endl << "This might take a while, please wait" << endl;
                                             manager.printAirports(k,1);
                                             break;
                                         }
@@ -558,14 +550,6 @@ void Menu::menuController(Manager& manager) {
                     break;
                 }
 
-                /*case 4:{
-                    string city;
-                    cityReportMenu(city);
-                    manager.cityReport(city);
-                    temp = 0;
-                    break;
-                }*/
-
                 case 4:{
                     string country;
                     countryReportMenu(country);
@@ -592,6 +576,5 @@ void Menu::menuController(Manager& manager) {
     } while (op != 0);
     cout << "\n";
     cout << "Thank you for using our platform! :) " << endl;
-
 }
 

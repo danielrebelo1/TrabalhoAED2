@@ -8,6 +8,10 @@
 #include "FileReader.h"
 #include <list>
 #include <iomanip>
+#include <fstream>
+#include <algorithm>
+#include <set>
+#include <map>
 
 class Manager {
 
@@ -72,14 +76,6 @@ public:
      * @return All the airports
      */
     airportMap airports_filter_by_city(std::string city);
-
-    /**
-     * Gets all the airlines in a country.
-     * Complexity: O(n)
-     * @param country Country (user chosen)
-     * @return All the airlines
-     */
-    airlineMap airlines_filter_by_country(std::string country);
 
     /**
      * Gets all the airlines operating in an airport
@@ -160,19 +156,6 @@ public:
      */
     void calculateGlobalStatsNetwork();
 
-    /**
-     * Prints the number of departures in a specific country.
-     * Complexity: O(n²)
-     * @param country Country's name
-     */
-    void calculateDeparturesCountry(std::string country);
-
-    /**
-     * Prints the number of flights associated in an airline.
-     * Complexity: O(n)
-     * @param airlineCode Airline's code
-     */
-    void calculateFlightsAirline(std::string airlineCode);
 
     /**
      * Checks if the airport exists.
@@ -213,12 +196,6 @@ public:
      */
     void airportReport(std::string airportCode);
 
-    /**
-     * Prints the report of a city with various details.
-     * Complexity: O(n)
-     * @param city City's name
-     */
-    void cityReport(std::string &city);
 
     /**
      * Prints the path of a flight.

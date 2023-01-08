@@ -66,12 +66,6 @@ double Graph::haversine(string source, string dest) {
 
 int Graph::getWeight(int src, Edge edge) {
     return(haversine(posToCode[src], posToCode[edge.dest]));
-
-    /*A medida que vamos metendo novos criterios de pesquisa o peso pode ser diferente. Por exemplo se quisermos o caminho
-     * com a menor distãncia absoluta este metodo vai retornar a distancia entre os dois aeroportos usando o metodo harvesine
-     * por enquanto apenas queremos o que muda menos vezes de aeroporto. Podemos especificar qual das "pesos" queremos com uma
-     * varivael choice que o metodo dijkstra recebe como argumento */
-
 }
 
 vector<Node> Graph::bfs(int start, int end) {
