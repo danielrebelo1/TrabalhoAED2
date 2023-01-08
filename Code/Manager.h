@@ -268,6 +268,7 @@ public:
      */
     void printConnectedComponents();
     bool checkSameAirport(std::string origin, std::string dest);
+    std::string toupperString(std::string s);
 };
 
 

@@ -263,6 +263,14 @@ string Manager::tolowerString(string s){
     return newstr;
 }
 
+string Manager::toupperString(string s){
+    string newstr;
+    for (auto c : s){
+        newstr.push_back(::toupper(c));
+    }
+    return newstr;
+}
+
 bool Manager::checkCityExists(std::string city) {
     tolowerString(city);
     auto it = std::find_if(airports.begin(), airports.end(),[&city, this](pair<string,Airport> ap){
@@ -326,8 +334,9 @@ void Manager::cityReport(std::string city){
 
 }
 
-void Manager::printPath(vector<Node> airports) {
-    for(Node node : airports){
+void Manager::printPath(vector<Node> path) {
+    if (path.empty()) cout << "Unable to find a route between your origin and the destination desired!" << endl;
+    for(Node &node : path){
         cout << node.airport.getCode() << " " << node.airport.getName() << "\n";
         if(node.airlineUsed != "")
            cout << "Using airline: " << node.airlineUsed << "(" << airlines.at(node.airlineUsed).getName()
@@ -435,5 +444,5 @@ int Manager::maxFlightsStats(string src, int maxFlights, int opt) {
 }
 
 bool Manager::checkSameAirport(string origin, string dest){
-    return airports.at(origin).getCode() == airports.at(dest).getCode();
+    return airports.at(toupperString(origin)).getCode() == airports.at(toupperString(dest)).getCode();
 }

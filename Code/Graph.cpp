@@ -66,7 +66,6 @@ double Graph::haversine(string source, string dest) {
 
 int Graph::getWeight(int src, Edge edge) {
     return(haversine(posToCode[src], posToCode[edge.dest]));
-    return 0;
 
     /*A medida que vamos metendo novos criterios de pesquisa o peso pode ser diferente. Por exemplo se quisermos o caminho
      * com a menor distãncia absoluta este metodo vai retornar a distancia entre os dois aeroportos usando o metodo harvesine

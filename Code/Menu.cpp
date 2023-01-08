@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "Menu.h"
 #include "Manager.h"
+#include <conio.h>
 
 using namespace std;
 
@@ -274,18 +275,19 @@ void Menu::menuController(Manager& manager) {
                     do{
                         switch(temp){
                             case 1:{
-                                vector<Node> res = manager.getGraph().bfs(manager.getGraph().codeToPos[origin], manager.getGraph().codeToPos[dest]);
+                                vector<Node> res = manager.getGraph().bfs(manager.getGraph().codeToPos[manager.toupperString(origin)], manager.getGraph().codeToPos[manager.toupperString(dest)]);
                                 manager.printPath(res);
-                                cout << endl << "Press Enter to continue.\n";
-                                system("pause > nul");
+                                cout << endl << "Press 0 to continue.\n";
+                                auxMenu(0,0);
+                                // system("pause > nul");
                                 temp = 0;
                                 break;
                             }
                             case 2:{
-                                vector<Node> res = manager.getGraph().dijkstraPathNodes(manager.getGraph().codeToPos[origin], manager.getGraph().codeToPos[dest]);
+                                vector<Node> res = manager.getGraph().dijkstraPathNodes(manager.getGraph().codeToPos[manager.toupperString(origin)], manager.getGraph().codeToPos[manager.toupperString(dest)]);
                                 manager.printPath(res);
-                                cout << endl << "Press Enter to continue.\n";
-                                system("pause > nul");
+                                cout << endl << "Press 0 to continue.\n";
+                                auxMenu(0,0);
                                 temp = 0;
                                 break;
                             }
@@ -408,8 +410,9 @@ void Menu::menuController(Manager& manager) {
                                                     x = nrFlights();
                                                     cout << "\nNumber of countries reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x,1);
-                                                    cout << endl << "Press Enter to continue.\n";
-                                                    system("pause > nul");
+                                                    cout << endl << "Press 0 to continue.\n";
+                                                    auxMenu(0,0);
+                                                    // system("pause > nul");
                                                     break;
                                                 }
 
@@ -417,8 +420,9 @@ void Menu::menuController(Manager& manager) {
                                                     x = nrFlights();
                                                     cout << "\nNumber of cities reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x, 2);
-                                                    cout << endl << "Press Enter to continue.\n";
-                                                    system("pause > nul");
+                                                    cout << endl << "Press 0 to continue.\n";
+                                                    auxMenu(0,0);
+                                                    // system("pause > nul");
                                                     break;
                                                 }
 
@@ -426,8 +430,9 @@ void Menu::menuController(Manager& manager) {
                                                     x = nrFlights();
                                                     cout << "\nNumber of airports reachable with "<< x << " flights\n";
                                                     cout << manager.maxFlightsStats(airport, x, 3);
-                                                    cout << endl << "Press Enter to continue.\n";
-                                                    system("pause > nul");
+                                                    cout << endl << "Press 0 to continue.\n";
+                                                    auxMenu(0,0);
+                                                    // system("pause > nul");
                                                     break;
                                                 }
 
