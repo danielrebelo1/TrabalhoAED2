@@ -119,8 +119,26 @@ public:
      * @return User's choice
      */
     int choiceK();
+
+    /**
+     * Allows the user to choose the way to search for an airport (origin).
+     * Complexity: O(1)
+     * @return User's choice
+     */
     int airportChoiceMenu1();
+
+    /**
+     * Allows the user to choose the way to seach for an airport (destination).
+     * Complexity: O(1)
+     * @return User's choice
+     */
     int airportChoiceMenu2();
+
+    /**
+     * Allows the user to choose the type of information about the entire network.
+     * Complexity: O(1)
+     * @return User's choice
+     */
     int networkReportMenu();
 };
 

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['coordinates_2',['Coordinates',['../classCoordinates.html',1,'Coordinates'],['../classCoordinates.html#a89dd10af87d803fd51dfd9987f32e8cd',1,'Coordinates::Coordinates()'],['../classCoordinates.html#a008a2acb31c4606eac1969bc5f1892f0',1,'Coordinates::Coordinates(double latitude, double longitude)']]]
+  ['bfs_14',['bfs',['../classGraph.html#a41c6e73ff76b74f5cc012a820a6f6d4c',1,'Graph']]],
+  ['bfsmd_15',['bfsMD',['../classGraph.html#a02228af1332cb129aae7f88d6d36b0f6',1,'Graph']]]
 ];
