@@ -1,0 +1,110 @@
+\hypertarget{classManager}{}\doxysection{Manager Class Reference}
+\label{classManager}\index{Manager@{Manager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classManager_a5e70b531d3af13c1a6af84dcc84fa225}\label{classManager_a5e70b531d3af13c1a6af84dcc84fa225}} 
+void {\bfseries init} ()
+\item 
+\mbox{\Hypertarget{classManager_a77f6906a340165eb1632525781041398}\label{classManager_a77f6906a340165eb1632525781041398}} 
+airport\+Map {\bfseries get\+Airports} ()
+\item 
+\mbox{\Hypertarget{classManager_aebb37e63c4f0fb53d001cbaf704fb734}\label{classManager_aebb37e63c4f0fb53d001cbaf704fb734}} 
+airline\+Map {\bfseries get\+Airlines} ()
+\item 
+\mbox{\Hypertarget{classManager_acb45e8f6b16727951a4d21a223409785}\label{classManager_acb45e8f6b16727951a4d21a223409785}} 
+\mbox{\hyperlink{classGraph}{Graph}} {\bfseries get\+Graph} ()
+\item 
+\mbox{\Hypertarget{classManager_aa6c230385e803cfbcf95c348ce929721}\label{classManager_aa6c230385e803cfbcf95c348ce929721}} 
+std\+::string {\bfseries get\+\_\+airport\+\_\+by\+\_\+country} (std\+::string country)
+\item 
+\mbox{\Hypertarget{classManager_ad869a53adcf140e6d7060820e15eec8f}\label{classManager_ad869a53adcf140e6d7060820e15eec8f}} 
+airport\+Map {\bfseries airports\+\_\+filter\+\_\+by\+\_\+country} (std\+::string country)
+\item 
+\mbox{\Hypertarget{classManager_af4e1f54c79b1c73eb6d9f2d6cc0d066f}\label{classManager_af4e1f54c79b1c73eb6d9f2d6cc0d066f}} 
+airport\+Map {\bfseries airports\+\_\+filter\+\_\+by\+\_\+city} (std\+::string city)
+\item 
+\mbox{\Hypertarget{classManager_a82ea90d91c36ac7a343d1bd9142dd4c2}\label{classManager_a82ea90d91c36ac7a343d1bd9142dd4c2}} 
+airline\+Map {\bfseries airlines\+\_\+filter\+\_\+by\+\_\+country} (std\+::string country)
+\item 
+\mbox{\Hypertarget{classManager_a58238570d2d18ec97f0b6df7198d07f6}\label{classManager_a58238570d2d18ec97f0b6df7198d07f6}} 
+airline\+Map {\bfseries airlines\+\_\+filter\+\_\+by\+\_\+airport} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a72dc8e217052b67b2a722b370537b9ff}\label{classManager_a72dc8e217052b67b2a722b370537b9ff}} 
+void {\bfseries airport\+With\+Most\+Connections} (int opt, std\+::string country)
+\item 
+\mbox{\Hypertarget{classManager_aea73e6016ab8663365dfe16689da3060}\label{classManager_aea73e6016ab8663365dfe16689da3060}} 
+int {\bfseries get\+Departures} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_ad835b82a2cd42e4d52d6d29fe1702505}\label{classManager_ad835b82a2cd42e4d52d6d29fe1702505}} 
+int {\bfseries get\+Arrivals} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_ad57e3f6188c2e3eb9109f27ec7431bc5}\label{classManager_ad57e3f6188c2e3eb9109f27ec7431bc5}} 
+int {\bfseries get\+Number\+Flights} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a67b88b005771dfce233b70a59d18d0c8}\label{classManager_a67b88b005771dfce233b70a59d18d0c8}} 
+int {\bfseries get\+Number\+Airlines\+Airport} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a56715c1e208226cc2355d49478d83843}\label{classManager_a56715c1e208226cc2355d49478d83843}} 
+int {\bfseries get\+Number\+Destinations} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a3479041710ef950f3aab3ded73a30694}\label{classManager_a3479041710ef950f3aab3ded73a30694}} 
+int {\bfseries get\+Number\+Destinations\+Countries} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a318e361811de000f5d6ed80a929cd899}\label{classManager_a318e361811de000f5d6ed80a929cd899}} 
+int {\bfseries max\+Flights\+Stats} (std\+::string airport, int max\+Flights, int opt)
+\item 
+\mbox{\Hypertarget{classManager_a92b66a523cacbc31c7767f6ab99cb1e3}\label{classManager_a92b66a523cacbc31c7767f6ab99cb1e3}} 
+void {\bfseries calculate\+Global\+Stats\+Network} ()
+\item 
+\mbox{\Hypertarget{classManager_ae49bd0ad1508f892130b49f23f67cf1e}\label{classManager_ae49bd0ad1508f892130b49f23f67cf1e}} 
+void {\bfseries calculate\+Departures\+Country} (std\+::string country)
+\item 
+\mbox{\Hypertarget{classManager_a8dcf3f73b95e06981da3ae197d4d80bf}\label{classManager_a8dcf3f73b95e06981da3ae197d4d80bf}} 
+void {\bfseries calculate\+Flights\+Airline} (std\+::string airline\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a6b6a748005171f784589de4e30d70a26}\label{classManager_a6b6a748005171f784589de4e30d70a26}} 
+bool {\bfseries check\+Airport\+Exists} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_a39f3258a8a9f7d0168c4668516758671}\label{classManager_a39f3258a8a9f7d0168c4668516758671}} 
+bool {\bfseries check\+Airline\+Exists} (std\+::string airline\+Code)
+\item 
+\mbox{\Hypertarget{classManager_af604e6d3b85a684ec60c96f537cc2ca8}\label{classManager_af604e6d3b85a684ec60c96f537cc2ca8}} 
+bool {\bfseries check\+Country\+Exists} (std\+::string country)
+\item 
+\mbox{\Hypertarget{classManager_ab942c3fc9c5ca2d026ba6ed726a09159}\label{classManager_ab942c3fc9c5ca2d026ba6ed726a09159}} 
+bool {\bfseries check\+City\+Exists} (std\+::string city)
+\item 
+\mbox{\Hypertarget{classManager_afff3efe215b692273a3b9ff4c01abdd7}\label{classManager_afff3efe215b692273a3b9ff4c01abdd7}} 
+void {\bfseries airport\+Report} (std\+::string airport\+Code)
+\item 
+\mbox{\Hypertarget{classManager_ae2f769993d4177c8afbab7ab43a77f77}\label{classManager_ae2f769993d4177c8afbab7ab43a77f77}} 
+void {\bfseries city\+Report} (std\+::string city)
+\item 
+\mbox{\Hypertarget{classManager_ac856dba9d911dd2e141c893d4755406b}\label{classManager_ac856dba9d911dd2e141c893d4755406b}} 
+void {\bfseries print\+Path} (std\+::vector$<$ \mbox{\hyperlink{structNode}{Node}} $>$ airports)
+\item 
+\mbox{\Hypertarget{classManager_a4ddb18540e6a4a31c5c23a6cdf2f65dc}\label{classManager_a4ddb18540e6a4a31c5c23a6cdf2f65dc}} 
+std\+::string {\bfseries tolower\+String} (std\+::string str)
+\item 
+\mbox{\Hypertarget{classManager_ab58118301e734a2ef03a0c043707b7a6}\label{classManager_ab58118301e734a2ef03a0c043707b7a6}} 
+int {\bfseries get\+Connected\+Components} ()
+\item 
+\mbox{\Hypertarget{classManager_aa897d3ab66edb49b33012d2bdad7f069}\label{classManager_aa897d3ab66edb49b33012d2bdad7f069}} 
+int {\bfseries get\+Articulation\+Points} ()
+\item 
+\mbox{\Hypertarget{classManager_ae70bddfdb4733ea1cd1605022064a5c4}\label{classManager_ae70bddfdb4733ea1cd1605022064a5c4}} 
+void {\bfseries print\+Airports} (int k, int opt)
+\item 
+\mbox{\Hypertarget{classManager_aa2c84725cd7e7660add111e76377cd49}\label{classManager_aa2c84725cd7e7660add111e76377cd49}} 
+void {\bfseries print\+Articulation\+Points} ()
+\item 
+\mbox{\Hypertarget{classManager_aab543760242833c030bf0088b4e90823}\label{classManager_aab543760242833c030bf0088b4e90823}} 
+void {\bfseries print\+Connected\+Components} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Code/Manager.\+h\item 
+Code/Manager.\+cpp\end{DoxyCompactItemize}

@@ -18,18 +18,72 @@ private:
     std::string callSign;
     Location location;
 public:
+    /**
+     * Constructor for the Airline class.
+     * Complexity: O(1)
+     * @param code Airline code
+     * @param name Airline name
+     * @param callSign Airline call sign
+     * @param location Airline location (city and country)
+     */
     Airline(std::string code, std::string name, std::string callSign, Location location);
+
+    /**
+     * Setter for the airline's code.
+     * Complexity: O(1)
+     * @param code Airline code
+     */
     void setCode(std::string code) ;
+
+    /**
+     * Setter for the airline's name.
+     * Complexity: O(1)
+     * @param name Airline name
+     */
     void setName( std::string name) ;
+
+    /**
+     * Setter for the airline's call sign.
+     * Complexity: O(1)
+     * @param callSign Airline call sign
+     */
     void setCallSign(std::string callSign) ;
-    void setCountry(std::string country) ;
+
+    /**
+     * Setter for the airline's location.
+     * Complexity: O(1)
+     * @param location Airline location
+     */
     void setLocation(Location location);
 
+    /**
+     * Getter for the airline's location.
+     * Complexity: O(1)
+     * @return Airline's location
+     */
     Location getLocation() const;
+
+    /**
+     * Getter for the airline's code.
+     * Complexity: O(1)
+     * @return Airline's code
+     */
     std::string getCode() const;
+
+    /**
+     * Getter for the airline's name.
+     * Complexity: O(1)
+     * @return Airline's name
+     */
     std::string getName() const;
+
+    /**
+     * Getter for the airline's call sign.
+     * Complexity: O(1)
+     * @return Airline's call sign.
+     */
     std::string getCallSign() const;
-    std::string getCountry() const;
+
 };
 
 struct HashF {
