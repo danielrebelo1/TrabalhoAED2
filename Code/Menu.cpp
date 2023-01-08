@@ -187,7 +187,7 @@ int Menu::airportChoiceMenu1(){
     cout << "2. Select airport by city" << endl;
     cout << "3. Select airport by country" << endl;
     cout << "0. Return to main menu" << endl;
-    cout << "Choose an option: ";
+    cout << endl << "Choose an option: ";
     return auxMenu(3,0);
 }
 
@@ -197,7 +197,7 @@ int Menu::airportChoiceMenu2(){
     cout << "2. Select airport by city" << endl;
     cout << "3. Select airport by country" << endl;
     cout << "0. Return to main menu" << endl;
-    cout << "Choose an option: ";
+    cout << endl << "Choose an option: ";
     return auxMenu(3,0);
 }
 
@@ -241,7 +241,8 @@ void Menu::menuController(Manager& manager) {
                             };
                         }
                     }while(control != 0);
-                    if(!ex) break;
+                    if(!ex || origin == "") break;
+                    cout << endl << "Airport of origin: " << origin << endl;
                     int var = airportChoiceMenu2();
                     int ex = 1;
                     do{
@@ -269,8 +270,9 @@ void Menu::menuController(Manager& manager) {
                             };
                         }
                     }while(var != 0);
-                    if (!ex) break;
+                    if (!ex || dest == "") break;
                     if (manager.checkSameAirport(origin,dest)) { cout << endl << "Cant travel to same airport" << endl; break; }
+                    cout << endl << "You want to travel from " << manager.toupperString(origin) << "-" << manager.toupperString(dest) << endl;
                     temp = flightMenu();
                     do{
                         switch(temp){
