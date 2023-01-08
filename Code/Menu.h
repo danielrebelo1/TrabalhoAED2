@@ -140,7 +140,21 @@ public:
      * @return User's choice
      */
     int networkReportMenu();
+
+    /**
+     * Allows the user to choose the city.
+     * Complexity: O(1)
+     * @param city City
+     * @return The desired city
+     */
     std::string cityReportMenu(std::string &city);
+
+    /**
+     * Allows the user to choose the country.
+     * Complexity: O(1)
+     * @param country Country
+     * @return The desired country
+     */
     std::string countryReportMenu(std::string &country);
 };
 

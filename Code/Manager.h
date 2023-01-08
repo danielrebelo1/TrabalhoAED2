@@ -290,6 +290,12 @@ public:
      * @return Transformed string
      */
     std::string toupperString(std::string s);
+
+    /**
+     * Prints the report on a certain country
+     * Complexity: O(n)
+     * @param country Country on which to report
+     */
     void countryReport(std::string &country);
 };
 
