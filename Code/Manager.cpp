@@ -60,11 +60,11 @@ std::string Manager::get_airport_by_country(std::string country){
     while(!airportSelected) {
         int j = 1;
         cout << endl;
-        for (auto a: airportsCountry) {
-            cout << i << ". " << a.second.getCode() << " - " << a.second.getName() << " in "
-                 << a.second.getLocation().getCity() << endl;
-            m.insert({i, a.second.getCode()});
-            airportsCountry.erase(a.first);
+        for (auto itr = airportsCountry.begin(); itr != airportsCountry.end();) {
+            cout << i << ". " << itr->second.getCode() << " - " << itr->second.getName() << " in "
+                 << itr->second.getLocation().getCity() << endl;
+            m.insert({i, itr->second.getCode()});
+            itr = airportsCountry.erase(itr);
             i++;j++;
             if(j == 11)break;
         }
